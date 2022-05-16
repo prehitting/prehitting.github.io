@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="不利索の鸣">
 <meta property="og:description" content="概述 作用 实现了创建者和调用者的分离 详细分类 简单工厂模式 工厂方法模式 抽象工厂模式     OOP满足 开闭原则 依赖倒转 迪米特   核心本质 实例化对象不使用new，用工厂方法代替 将选择实现类，创建对象统一管理和控制，从而将调用者跟实现类解耦   三种模式 简单（静态）工厂模式 用来生产同一等级结构中的任意产品（对于增加的新的产品，需要覆盖已有的代码）   工厂方法模式 用来生产同一">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://prehitting.github.io/image-20220508111631047.png">
-<meta property="og:image" content="http://prehitting.github.io/image-20220508113730740.png">
+<meta property="og:image" content="http://prehitting.github.io/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20220508111631047.png">
+<meta property="og:image" content="http://prehitting.github.io/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20220508113730740.png">
 <meta property="article:published_time" content="2022-05-08T02:41:45.000Z">
-<meta property="article:modified_time" content="2022-05-08T14:56:15.799Z">
+<meta property="article:modified_time" content="2022-05-16T07:57:54.250Z">
 <meta property="article:author" content="YiMing">
 <meta property="article:tag" content="设计模式">
 <meta property="article:tag" content="工厂模式">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://prehitting.github.io/image-20220508111631047.png">
+<meta name="twitter:image" content="http://prehitting.github.io/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20220508111631047.png">
   
   
   <title>工厂模式 - 不利索の鸣</title>
@@ -256,7 +256,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：8 天前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
@@ -344,7 +344,7 @@
 <td>根据传入不同参数从而创建不同具体产品类的实例</td>
 </tr>
 </tbody></table>
-<h4 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h4><p><img src="/image-20220508111631047.png" srcset="/img/loading.gif" lazyload alt="image-20220508111631047"></p>
+<h4 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h4><p><img src="/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20220508111631047.png" srcset="/img/loading.gif" lazyload alt="image-20220508111631047"></p>
 <h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
 <li>将创建实例的工作和使用实例的工作分开，使用者不必关心对象如何创建，实现解耦</li>
 <li>将初始化实例时的工作放到工厂进行，使代码更易于维护，更符合面向对象的原则&amp;面向接口编程，而不是面向实现编程</li>
@@ -400,7 +400,7 @@
 <td>实现了抽象产品角色所定义的接口，由具体工厂来创建，它同具体工厂之间一一对应。</td>
 </tr>
 </tbody></table>
-<h3 id="UML类图-1"><a href="#UML类图-1" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="/image-20220508113730740.png" srcset="/img/loading.gif" lazyload alt="image-20220508113730740"></p>
+<h3 id="UML类图-1"><a href="#UML类图-1" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20220508113730740.png" srcset="/img/loading.gif" lazyload alt="image-20220508113730740"></p>
 <blockquote>
 <p>简单工厂模式违背了开闭原则，而工厂方法模式是对简单工厂模式的进一步抽象化，其好处是可以使系统在不修改原来代码的情况下引进新的产品，即满足开闭原则</p>
 </blockquote>
