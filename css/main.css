@@ -294,7 +294,7 @@ sup > a::before,
   color: #ff4500;
 }
 html {
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: 0.02em;
 }
 html,
@@ -369,7 +369,7 @@ img[lazyload] {
   --post-link-color: #0366d6;
   --link-hover-color: #30a9de;
   --link-hover-bg-color: #f8f9fa;
-  --navbar-bg-color: #2f4154;
+  --navbar-bg-color: #447EA5;
   --navbar-text-color: #fff;
   --scrollbar-color: #c4c6c9;
   --scrollbar-hover-color: #a6a6a6;

@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#447EA5">
+  <meta name="author" content="YiMing">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基于SpringMVC的文件上传1 MultipartFile接口MultipartFile接口常用的的API见下表：    方法 功能描述    String getOriginalFilename() 获取上传文件的原始文件名，即该文件在客户端中的文件名   boolean isEmpty() 判断上传的文件是否为空，当没有选择文件就直接上传，或者选中的文件是0字节的空文件时，返回true，否">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于SpringMVC文件上传功能">
+<meta property="og:url" content="http://prehitting.github.io/2022/05/06/%E5%9F%BA%E4%BA%8ESpringMVC%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%8A%9F%E8%83%BD/index.html">
+<meta property="og:site_name" content="不利索の鸣">
+<meta property="og:description" content="基于SpringMVC的文件上传1 MultipartFile接口MultipartFile接口常用的的API见下表：    方法 功能描述    String getOriginalFilename() 获取上传文件的原始文件名，即该文件在客户端中的文件名   boolean isEmpty() 判断上传的文件是否为空，当没有选择文件就直接上传，或者选中的文件是0字节的空文件时，返回true，否">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-06T05:26:08.000Z">
+<meta property="article:modified_time" content="2022-05-06T14:13:43.733Z">
+<meta property="article:author" content="YiMing">
+<meta property="article:tag" content="SpringMVC">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>基于SpringMVC文件上传功能 - 不利索の鸣</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"prehitting.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/article_banner.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="基于SpringMVC文件上传功能">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      YiMing
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-06 13:26" pubdate>
+        2022年5月6日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      18k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      151 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于SpringMVC文件上传功能</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：10 天前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="基于SpringMVC的文件上传"><a href="#基于SpringMVC的文件上传" class="headerlink" title="基于SpringMVC的文件上传"></a>基于SpringMVC的文件上传</h2><h3 id="1-MultipartFile接口"><a href="#1-MultipartFile接口" class="headerlink" title="1 MultipartFile接口"></a>1 MultipartFile接口</h3><p>MultipartFile接口常用的的API见下表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">String getOriginalFilename()</td>
+<td>获取上传文件的原始文件名，即该文件在客户端中的文件名</td>
+</tr>
+<tr>
+<td align="left">boolean isEmpty()</td>
+<td>判断上传的文件是否为空，当没有选择文件就直接上传，或者选中的文件是0字节的空文件时，返回true，否则返回false</td>
+</tr>
+<tr>
+<td align="left">long getSize()</td>
+<td>获取上传的文件大小，以字节为单位</td>
+</tr>
+<tr>
+<td align="left">String getContentType()</td>
+<td>根据所上传的文件的扩展名决定该文件的MIME类型，例如上传.jpg格式的图片，将返回image&#x2F;jpeg</td>
+</tr>
+<tr>
+<td align="left">InputStream getInputStream()</td>
+<td>获取上传文件的输入字节流，通常用于自定义读取所上传的文件的过程，该方法与transferTo()方法不可以同时使用</td>
+</tr>
+<tr>
+<td align="left">void transferTo(File dest)</td>
+<td>保存上传的文件，该方法与getInputStream()方法不可以同时使用</td>
+</tr>
+</tbody></table>
+<h3 id="2-MultipartResolver接口"><a href="#2-MultipartResolver接口" class="headerlink" title="2 MultipartResolver接口"></a>2 MultipartResolver接口</h3><p>1.MultipartResolver可以将上传过程中产生的数据封装为MultipartFile类型的对象中。</p>
+<p>2.在配置MultipartResovler时，可以为其中的几个属性注入值：</p>
+<ul>
+<li>maxUploadSize：上传文件的最大大小，假设设置值为10M，一次性上传5个文件，则5个文件的大小总和不允许超过10M。</li>
+<li>maxUploadSizePerFile：每个上传文件的最大大小，假设设置值为10M，一次性上传5个文件，则每个文件的大小都不可以超过10M，但是5个文件的大小总和可以接近50M。</li>
+<li>defaultEncoding：默认编码。</li>
+</ul>
+<h3 id="3-基于SpringMVC的文件上传案例"><a href="#3-基于SpringMVC的文件上传案例" class="headerlink" title="3 基于SpringMVC的文件上传案例"></a>3 基于SpringMVC的文件上传案例</h3><h4 id="3-1-创建项目"><a href="#3-1-创建项目" class="headerlink" title="3.1 创建项目"></a>3.1 创建项目</h4><p>1.创建Java Enterprise项目，设置Name为springmvc-upload，Group为com.cy，Artifact为controller的Java企业级项目。</p>
+<p>2.将项目com.cy.controller包下自动生成的HelloServlet类删除，并删除webapp下自动生成的index.jsp文件。</p>
+<p>3.添加文件上传jar包依赖（关于文件上传需要添加spring-webmvc和commons-fileupload依赖）。</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-webmvc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.3.6.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 文件上传 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>commons-fileupload<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>commons-fileupload<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.4<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>4.在src\main\resources文件夹下创建spring配置文件，并将文件命名为spring-upload.xml。</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="hljs-tag">	   <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="hljs-tag">	   <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">	   <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="hljs-string"><span class="hljs-tag">	   http://www.springframework.org/schema/beans/spring-beans-4.3.xsd</span></span><br><span class="hljs-string"><span class="hljs-tag">	   http://www.springframework.org/schema/context</span></span><br><span class="hljs-string"><span class="hljs-tag">	   http://www.springframework.org/schema/context/spring-context-4.3.xsd&quot;</span>&gt;</span><br>	<br><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="3-2-前端页面设计"><a href="#3-2-前端页面设计" class="headerlink" title="3.2 前端页面设计"></a>3.2 前端页面设计</h4><p>在webapp目录下创建upload.html页面，并在页面中添加如下代码。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>文件上传<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>文件上传<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- enctype属性：规定表单中数据在提交给服务器之前如何进行编码。默认表单数据的编码是&quot;application/x-www-form-urlencoded&quot;。</span><br><span class="hljs-comment">         application/x-www-form-urlencoded：提交前表单中所有数据都会进行编码；编码的规则是：空格转换为&quot;+&quot;加号，特殊符号转换为ASCII HEX值</span><br><span class="hljs-comment">         text/plain：提交前表单中数据空格转换为&quot;+&quot;加号，但不对特殊字符进行编码。</span><br><span class="hljs-comment">         multipart/form-data：提交前表单中不对字符进行编码；在使用包含文件上传控件的表单中，必须使用该值</span><br><span class="hljs-comment">    --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;upload.do&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">&quot;multipart/form-data&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">border</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">cellspacing</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">cellpadding</span>=<span class="hljs-string">&quot;0&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>文件名(N)：<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;file&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;file&quot;</span>/&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">colspan</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;center&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;上传&quot;</span>/&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：form表单的请求方式必须设置为POST，并配置属性enctype&#x3D;”multipart&#x2F;form-data”，文件上传input控件的name属性值需设置为file值。</p>
+</blockquote>
+<h4 id="3-3-后台功能实现"><a href="#3-3-后台功能实现" class="headerlink" title="3.3 后台功能实现"></a>3.3 后台功能实现</h4><p>1.在web.xml文件中配置前端控制器和过滤器，并指定DispatcherServlet加载的配置文件springmvc-upload.xml的位置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>springmvc<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>contextConfigLocation<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>classpath:springmvc-upload.xml<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>springmvc<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>*.do<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>encoding<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>utf-8<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">filter-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">filter-mapping</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>2.创建com.cy.controller.UploadController控制器类，在类的声明之前添加@Controller注解，并在控制器中添加处理请求的upload()方法，为此方法添加类型为MultipartFile接口的参数，并为该参数添加@RequestParam注解，表示客户端上传的文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.cy.controller;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestParam;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;<br><span class="hljs-keyword">import</span> org.springframework.web.multipart.MultipartFile;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.util.UUID;<br><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UploadController</span> &#123;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">    @RequestMapping(&quot;upload.do&quot;)</span><br><span class="hljs-comment">    @ResponseBody</span><br><span class="hljs-comment">    public String upload(@RequestParam(&quot;file&quot;) MultipartFile file) &#123;</span><br><span class="hljs-comment">        System.out.println(&quot;UploadController.upload()...&quot;);</span><br><span class="hljs-comment">        File dest = new File(&quot;D:/1.png&quot;);</span><br><span class="hljs-comment">        try &#123;</span><br><span class="hljs-comment">            // 调用MultipartFile参数对象的transferTo()方法即可保存上传的文件</span><br><span class="hljs-comment">            file.transferTo(dest);</span><br><span class="hljs-comment">        &#125; catch (IOException e) &#123;</span><br><span class="hljs-comment">            e.printStackTrace();</span><br><span class="hljs-comment">        &#125;</span><br><span class="hljs-comment">        return &quot;OK&quot;;</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">    */</span><br>    <br>    <span class="hljs-meta">@RequestMapping(&quot;upload.do&quot;)</span><br>    <span class="hljs-meta">@ResponseBody</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">upload</span><span class="hljs-params">(HttpServletRequest request, <span class="hljs-meta">@RequestParam(&quot;file&quot;)</span> MultipartFile file)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-comment">// 获取上传文件的原始文件名</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">originalFilename</span> <span class="hljs-operator">=</span> file.getOriginalFilename();<br>        <span class="hljs-comment">// 获取上下文的绝对路径</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">realPath</span> <span class="hljs-operator">=</span> request.getServletContext().getRealPath(<span class="hljs-string">&quot;upload&quot;</span>);<br>        System.out.println(realPath);<br>        <span class="hljs-comment">// 创建File文件对象</span><br>        <span class="hljs-type">File</span> <span class="hljs-variable">dir</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(realPath);<br>        <span class="hljs-keyword">if</span> (!dir.exists()) &#123;<br>            dir.mkdirs();<br>        &#125;<br>        <span class="hljs-comment">// 自定义上传文件名</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> UUID.randomUUID().toString();<br>        <span class="hljs-comment">// 获取上传文件扩展名</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">suffix</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">beginIndex</span> <span class="hljs-operator">=</span> originalFilename.lastIndexOf(<span class="hljs-string">&quot;.&quot;</span>);<br>        <span class="hljs-keyword">if</span> (beginIndex &gt; <span class="hljs-number">0</span>) &#123;<br>            suffix = originalFilename.substring(beginIndex);<br>        &#125;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">fullFilename</span> <span class="hljs-operator">=</span> fileName + suffix;<br>        <span class="hljs-comment">// 调用MultipartFile参数对象的transferTo()方法即可保存上传的文件</span><br>        file.transferTo(<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(dir, fullFilename));<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>3.在springmvc-upload.xml配置文件中添加组件扫描和CommonsMultipartResolver类的bean标签配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 组件扫描 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.cy&quot;</span> /&gt;</span><br><br><span class="hljs-comment">&lt;!-- CommonsMultipartResolver --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;multipartResolver&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：CommonsMultipartResolver类在配置时，id值必须设置成multipartResolver。</p>
+</blockquote>
+<p>4.启动项目，访问<a target="_blank" rel="noopener" href="http://localhost:8080/springmvc_upload_war_exploded/upload.html%E7%BD%91%E5%9D%80%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6%E6%8F%90%E4%BA%A4%E3%80%82">http://localhost:8080/springmvc_upload_war_exploded/upload.html网址测试文件提交。</a></p>
+<h2 id="上传头像"><a href="#上传头像" class="headerlink" title="上传头像"></a>上传头像</h2><h3 id="1-用户-上传头像-持久层"><a href="#1-用户-上传头像-持久层" class="headerlink" title="1 用户-上传头像-持久层"></a>1 用户-上传头像-持久层</h3><h4 id="1-1-规划需要执行的SQL语句"><a href="#1-1-规划需要执行的SQL语句" class="headerlink" title="1.1 规划需要执行的SQL语句"></a>1.1 规划需要执行的SQL语句</h4><p>上传文件的操作其实是：先将用户上传的文件保存到服务器端的某个位置，然后将保存文件的路径记录在数据库中。当后续需要使用该文件时，从数据库中读出文件的路径，即可实现在线访问该文件。</p>
+<p>在持久层处理数据库中的数据时，只需要关心如何记录头像文件的路径，并不需要考虑上传时保存文件的过程。所以，需要执行的SQL语句大致是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">update t_user set avatar=?, modified_user=?, modified_time=? where uid=?<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="1-2-接口与抽象方法"><a href="#1-2-接口与抽象方法" class="headerlink" title="1.2 接口与抽象方法"></a>1.2 接口与抽象方法</h4><p>在UserMapper接口中添加updateAvatarByUid()抽象方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 根据uid更新用户的头像</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> uid 用户的id</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> avatar 新头像的路径</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> modifiedUser 修改执行人</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> modifiedTime 修改时间</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> 受影响的行数</span><br><span class="hljs-comment"> */</span><br>Integer <span class="hljs-title function_">updateAvatarByUid</span><span class="hljs-params">(</span><br><span class="hljs-params">		<span class="hljs-meta">@Param(&quot;uid&quot;)</span> Integer uid,</span><br><span class="hljs-params">		<span class="hljs-meta">@Param(&quot;avatar&quot;)</span> String avatar,</span><br><span class="hljs-params">		<span class="hljs-meta">@Param(&quot;modifiedUser&quot;)</span> String modifiedUser,</span><br><span class="hljs-params">		<span class="hljs-meta">@Param(&quot;modifiedTime&quot;)</span> Date modifiedTime)</span>;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="1-3-配置SQL映射"><a href="#1-3-配置SQL映射" class="headerlink" title="1.3 配置SQL映射"></a>1.3 配置SQL映射</h4><p>1.在UserMapper.xml中配置updateAvatarByUid()抽象方法的映射。</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 根据uid更新用户的头像</span><br><span class="hljs-comment">	 Integer updateAvatarByUid(</span><br><span class="hljs-comment">		@Param(&quot;uid&quot;) Integer uid,</span><br><span class="hljs-comment">		@Param(&quot;avatar&quot;) String avatar,</span><br><span class="hljs-comment">		@Param(&quot;modifiedUser&quot;) String modifiedUser,</span><br><span class="hljs-comment">		@Param(&quot;modifiedTime&quot;) Date modifiedTime) --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">update</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;updateAvatarByUid&quot;</span>&gt;</span><br>	UPDATE<br>		t_user<br>	SET<br>		avatar = #&#123;avatar&#125;,<br>		modified_user = #&#123;modifiedUser&#125;,<br>		modified_time = #&#123;modifiedTime&#125;<br>	WHERE<br>		uid = #&#123;uid&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">update</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>2.在UserMapperTests中编写并执行单元测试。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateAvatarByUid</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">Integer</span> <span class="hljs-variable">uid</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">avatar</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;/upload/avatar.png&quot;</span>;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">modifiedUser</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;超级管理员&quot;</span>;<br>    <span class="hljs-type">Date</span> <span class="hljs-variable">modifiedTime</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();<br>    <span class="hljs-type">Integer</span> <span class="hljs-variable">rows</span> <span class="hljs-operator">=</span> userMapper.updateAvatarByUid(uid, avatar, modifiedUser, modifiedTime);<br>    System.out.println(<span class="hljs-string">&quot;rows=&quot;</span> + rows);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-用户-上传头像-业务层"><a href="#2-用户-上传头像-业务层" class="headerlink" title="2 用户-上传头像-业务层"></a>2 用户-上传头像-业务层</h3><h4 id="2-1-规划异常"><a href="#2-1-规划异常" class="headerlink" title="2.1 规划异常"></a>2.1 规划异常</h4><p>在修改头像值前先检查用户数据状态，可能抛UserNotFoundException异常；由于最终执行的是修改操作还可能抛UpdateException异常。</p>
+<h4 id="2-2-接口与抽象方法"><a href="#2-2-接口与抽象方法" class="headerlink" title="2.2 接口与抽象方法"></a>2.2 接口与抽象方法</h4><p>在IUserService中添加changeAvatar(Integer uid, String username, String avatar)抽象方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 修改用户头像</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> uid 当前登录的用户的id</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> username 当前登录的用户名</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> avatar 用户的新头像的路径</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">changeAvatar</span><span class="hljs-params">(Integer uid, String username, String avatar)</span>;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-3-实现抽象方法"><a href="#2-3-实现抽象方法" class="headerlink" title="2.3 实现抽象方法"></a>2.3 实现抽象方法</h4><p>1.在UserServiceImpl类中实现changeAvatar(Integer uid, String username, String avatar)方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">changeAvatar</span><span class="hljs-params">(Integer uid, String username, String avatar)</span> &#123;<br>    <span class="hljs-comment">// 调用userMapper的findByUid()方法，根据参数uid查询用户数据</span><br>    <span class="hljs-comment">// 检查查询结果是否为null</span><br>    <span class="hljs-comment">// 是：抛出UserNotFoundException</span><br><br>    <span class="hljs-comment">// 检查查询结果中的isDelete是否为1</span><br>    <span class="hljs-comment">// 是：抛出UserNotFoundException</span><br><br>    <span class="hljs-comment">// 创建当前时间对象</span><br>    <span class="hljs-comment">// 调用userMapper的updateAvatarByUid()方法执行更新，并获取返回值</span><br>    <span class="hljs-comment">// 判断以上返回的受影响行数是否不为1</span><br>    <span class="hljs-comment">// 是：抛了UpdateException</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>2.changeAvatar(Integer uid, String username, String avatar)方法中代码的具体实现为。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">changeAvatar</span><span class="hljs-params">(Integer uid, String username, String avatar)</span> &#123;<br>	<span class="hljs-comment">// 调用userMapper的findByUid()方法，根据参数uid查询用户数据</span><br>	<span class="hljs-type">User</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> userMapper.findByUid(uid);<br>	<span class="hljs-comment">// 检查查询结果是否为null</span><br>	<span class="hljs-keyword">if</span> (result == <span class="hljs-literal">null</span>) &#123;<br>		<span class="hljs-comment">// 是：抛出UserNotFoundException</span><br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserNotFoundException</span>(<span class="hljs-string">&quot;用户数据不存在&quot;</span>);<br>	&#125;<br>	<br>	<span class="hljs-comment">// 检查查询结果中的isDelete是否为1</span><br>	<span class="hljs-keyword">if</span> (result.getIsDelete().equals(<span class="hljs-number">1</span>)) &#123;<br>		<span class="hljs-comment">// 是：抛出UserNotFoundException</span><br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserNotFoundException</span>(<span class="hljs-string">&quot;用户数据不存在&quot;</span>);<br>	&#125;<br>	<br>	<span class="hljs-comment">// 创建当前时间对象</span><br>	<span class="hljs-type">Date</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();<br>	<span class="hljs-comment">// 调用userMapper的updateAvatarByUid()方法执行更新，并获取返回值</span><br>	<span class="hljs-type">Integer</span> <span class="hljs-variable">rows</span> <span class="hljs-operator">=</span> userMapper.updateAvatarByUid(uid, avatar, username, now);<br>	<span class="hljs-comment">// 判断以上返回的受影响行数是否不为1</span><br>	<span class="hljs-keyword">if</span> (rows != <span class="hljs-number">1</span>) &#123;<br>		<span class="hljs-comment">// 是：抛出UpdateException</span><br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UpdateException</span>(<span class="hljs-string">&quot;更新用户数据时出现未知错误，请联系系统管理员&quot;</span>);<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>3.在UserServiceTests类中进行单元测试。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">changeAvatar</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-type">Integer</span> <span class="hljs-variable">uid</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">username</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;头像管理员&quot;</span>;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">avatar</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;/upload/avatar.png&quot;</span>;<br>        userService.changeAvatar(uid, username, avatar);<br>        System.out.println(<span class="hljs-string">&quot;OK.&quot;</span>);<br>    &#125; <span class="hljs-keyword">catch</span> (ServiceException e) &#123;<br>        System.out.println(e.getClass().getSimpleName());<br>        System.out.println(e.getMessage());<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-用户-上传头像-控制器"><a href="#3-用户-上传头像-控制器" class="headerlink" title="3 用户-上传头像-控制器"></a>3 用户-上传头像-控制器</h3><h4 id="3-1-处理异常"><a href="#3-1-处理异常" class="headerlink" title="3.1 处理异常"></a>3.1 处理异常</h4><p>1.在处理上传文件的过程中，用户可能会选择错误的文件上传，此时就应该抛出对应的异常并进行处理。所以需要创建文件上传相关异常的基类，即在com.cy.store.controller.ex包下创建FileUploadException类，并继承自RuntimeException类。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.cy.store.service.ex;<br><br><span class="hljs-comment">/** 文件上传相关异常的基类 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileUploadException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">RuntimeException</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">FileUploadException</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-built_in">super</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">FileUploadException</span><span class="hljs-params">(String message)</span> &#123;<br>        <span class="hljs-built_in">super</span>(message);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">FileUploadException</span><span class="hljs-params">(String message, Throwable cause)</span> &#123;<br>        <span class="hljs-built_in">super</span>(message, cause);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">FileUploadException</span><span class="hljs-params">(Throwable cause)</span> &#123;<br>        <span class="hljs-built_in">super</span>(cause);<br>    &#125;<br><br>    <span class="hljs-keyword">protected</span> <span class="hljs-title function_">FileUploadException</span><span class="hljs-params">(String message, Throwable cause, <span class="hljs-type">boolean</span> enableSuppression, <span class="hljs-type">boolean</span> writableStackTrace)</span> &#123;<br>        <span class="hljs-built_in">super</span>(message, cause, enableSuppression, writableStackTrace);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>2.在处理上传的文件过程中，经分析可能会产生以下异常。这些异常类都需要继承自FileUploadException类。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 上传的文件为空</span><br>cn.tedu.store.controller.ex.FileEmptyException<br><span class="hljs-comment">// 上传的文件大小超出了限制值</span><br>cn.tedu.store.controller.ex.FileSizeException<br><span class="hljs-comment">// 上传的文件类型超出了限制</span><br>cn.tedu.store.controller.ex.FileTypeException<br><span class="hljs-comment">// 上传的文件状态异常</span><br>cn.tedu.store.controller.ex.FileStateException<br><span class="hljs-comment">// 上传文件时读写异常</span><br>cn.tedu.store.controller.ex.FileUploadIOException<br></code></pre></div></td></tr></table></figure>
+
+<p>3.创建FileEmptyException异常类，并继承FileUploadException类。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.cy.store.service.ex;<br><br><span class="hljs-comment">/** 上传的文件为空的异常，例如没有选择上传的文件就提交了表单，或选择的文件是0字节的空文件 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileEmptyException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">FileUploadException</span> &#123;<br>    <span class="hljs-comment">// Override Methods...</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>4.创建FileSizeException异常类，并继承FileUploadException类。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.cy.store.service.ex;<br><br><span class="hljs-comment">/** 上传的文件的大小超出了限制值 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileSizeException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">FileUploadException</span> &#123;<br>    <span class="hljs-comment">// Override Methods...</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>5.创建FileTypeException异常类，并继承FileUploadException类。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.cy.store.service.ex;<br><br><span class="hljs-comment">/** 上传的文件类型超出了限制 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileTypeException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">FileUploadException</span> &#123;<br>    <span class="hljs-comment">// Override Methods...</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>6.创建FileStateException异常类，并继承FileUploadException类。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.cy.store.service.ex;<br><br><span class="hljs-comment">/** 上传的文件状态异常 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileStateException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">FileUploadException</span> &#123;<br>    <span class="hljs-comment">// Override Methods...</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>7.创建FileUploadIOException异常类，并继承FileUploadException类。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.cy.store.service.ex;<br><br><span class="hljs-comment">/** 上传文件时读写异常 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileUploadIOException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">FileUploadException</span> &#123;<br>    <span class="hljs-comment">// Override Methods...</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>8.然后在BaseController的handleException()的@ExceptionHandler注解中添加FileUploadException.class异常的处理；最后在方法中处理这些异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@ExceptionHandler(&#123;ServiceException.class, FileUploadException.class&#125;)</span><br><span class="hljs-keyword">public</span> JsonResult&lt;Void&gt; <span class="hljs-title function_">handleException</span><span class="hljs-params">(Throwable e)</span> &#123;<br>	JsonResult&lt;Void&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonResult</span>&lt;Void&gt;(e);<br>	<span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> UsernameDuplicateException) &#123;<br>		result.setState(<span class="hljs-number">4000</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> UserNotFoundException) &#123;<br>		result.setState(<span class="hljs-number">4001</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> PasswordNotMatchException) &#123;<br>		result.setState(<span class="hljs-number">4002</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> InsertException) &#123;<br>		result.setState(<span class="hljs-number">5000</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> UpdateException) &#123;<br>		result.setState(<span class="hljs-number">5001</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> FileEmptyException) &#123;<br>		result.setState(<span class="hljs-number">6000</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> FileSizeException) &#123;<br>		result.setState(<span class="hljs-number">6001</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> FileTypeException) &#123;<br>		result.setState(<span class="hljs-number">6002</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> FileStateException) &#123;<br>		result.setState(<span class="hljs-number">6003</span>);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> FileUploadIOException) &#123;<br>		result.setState(<span class="hljs-number">6004</span>);<br>	&#125;<br>	<br>	<span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="3-2-设计请求"><a href="#3-2-设计请求" class="headerlink" title="3.2 设计请求"></a>3.2 设计请求</h4><p>设计用户提交的请求，并设计响应的方式：</p>
+<div class="hljs code-wrapper"><pre><code class="hljs">请求路径：/users/change_avatar
+请求参数：MultipartFile file, HttpSession session
+请求类型：POST
+响应结果：JsonResult&lt;String&gt;
+</code></pre></div>
+<h4 id="3-3-处理请求"><a href="#3-3-处理请求" class="headerlink" title="3.3 处理请求"></a>3.3 处理请求</h4><p>1.在UserController类中添加处理请求的changeAvatar(@RequestParam(“file”) MultipartFile file, HttpSession session)方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;change_avatar&quot;)</span><br><span class="hljs-keyword">public</span> JsonResult&lt;String&gt; <span class="hljs-title function_">changeAvatar</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(&quot;file&quot;)</span> MultipartFile file, HttpSession session)</span> &#123;<br>	<span class="hljs-comment">// 判断上传的文件是否为空</span><br>	<span class="hljs-comment">// 是：抛出异常</span><br>	<br>	<span class="hljs-comment">// 判断上传的文件大小是否超出限制值</span><br>	<span class="hljs-comment">// 是：抛出异常</span><br>	<br>	<span class="hljs-comment">// 判断上传的文件类型是否超出限制</span><br>	<span class="hljs-comment">// 是：抛出异常</span><br>	<br>	<span class="hljs-comment">// 获取当前项目的绝对磁盘路径</span><br>	<span class="hljs-comment">// 保存头像文件的文件夹</span><br>	<br>	<span class="hljs-comment">// 保存的头像文件的文件名</span><br>			<br>	<span class="hljs-comment">// 创建文件对象，表示保存的头像文件</span><br>	<span class="hljs-comment">// 执行保存头像文件</span><br>	<span class="hljs-comment">// 如果产生异常则抛出</span><br><br>	<span class="hljs-comment">// 头像路径</span><br>	<span class="hljs-comment">// 从Session中获取uid和username</span><br>	<span class="hljs-comment">// 将头像写入到数据库中</span><br>	<br>	<span class="hljs-comment">// 返回成功和头像路径</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>2.changeAvatar(@RequestParam(“file”) MultipartFile file, HttpSession session)方法中具体代码实现为。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/** 头像文件大小的上限值(10MB) */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">AVATAR_MAX_SIZE</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>;<br><span class="hljs-comment">/** 允许上传的头像的文件类型 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> List&lt;String&gt; AVATAR_TYPES = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br><br><span class="hljs-comment">/** 初始化允许上传的头像的文件类型 */</span><br><span class="hljs-keyword">static</span> &#123;<br>	AVATAR_TYPES.add(<span class="hljs-string">&quot;image/jpeg&quot;</span>);<br>	AVATAR_TYPES.add(<span class="hljs-string">&quot;image/png&quot;</span>);<br>	AVATAR_TYPES.add(<span class="hljs-string">&quot;image/bmp&quot;</span>);<br>	AVATAR_TYPES.add(<span class="hljs-string">&quot;image/gif&quot;</span>);<br>&#125;<br><br><span class="hljs-meta">@PostMapping(&quot;change_avatar&quot;)</span><br><span class="hljs-keyword">public</span> JsonResult&lt;String&gt; <span class="hljs-title function_">changeAvatar</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(&quot;file&quot;)</span> MultipartFile file, HttpSession session)</span> &#123;<br>	<span class="hljs-comment">// 判断上传的文件是否为空</span><br>	<span class="hljs-keyword">if</span> (file.isEmpty()) &#123;<br>		<span class="hljs-comment">// 是：抛出异常</span><br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileEmptyException</span>(<span class="hljs-string">&quot;上传的头像文件不允许为空&quot;</span>);<br>	&#125;<br>	<br>	<span class="hljs-comment">// 判断上传的文件大小是否超出限制值</span><br>	<span class="hljs-keyword">if</span> (file.getSize() &gt; AVATAR_MAX_SIZE) &#123; <span class="hljs-comment">// getSize()：返回文件的大小，以字节为单位</span><br>		<span class="hljs-comment">// 是：抛出异常</span><br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileSizeException</span>(<span class="hljs-string">&quot;不允许上传超过&quot;</span> + (AVATAR_MAX_SIZE / <span class="hljs-number">1024</span>) + <span class="hljs-string">&quot;KB的头像文件&quot;</span>);<br>	&#125;<br>	<br>	<span class="hljs-comment">// 判断上传的文件类型是否超出限制</span><br>	<span class="hljs-type">String</span> <span class="hljs-variable">contentType</span> <span class="hljs-operator">=</span> file.getContentType();<br>	<span class="hljs-comment">// public boolean list.contains(Object o)：当前列表若包含某元素，返回结果为true；若不包含该元素，返回结果为false。</span><br>	<span class="hljs-keyword">if</span> (!AVATAR_TYPES.contains(contentType)) &#123;<br>		<span class="hljs-comment">// 是：抛出异常</span><br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileTypeException</span>(<span class="hljs-string">&quot;不支持使用该类型的文件作为头像，允许的文件类型：\n&quot;</span> + AVATAR_TYPES);<br>	&#125;<br>	<br>	<span class="hljs-comment">// 获取当前项目的绝对磁盘路径</span><br>	<span class="hljs-type">String</span> <span class="hljs-variable">parent</span> <span class="hljs-operator">=</span> session.getServletContext().getRealPath(<span class="hljs-string">&quot;upload&quot;</span>);<br>	<span class="hljs-comment">// 保存头像文件的文件夹</span><br>	<span class="hljs-type">File</span> <span class="hljs-variable">dir</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(parent);<br>	<span class="hljs-keyword">if</span> (!dir.exists()) &#123;<br>		dir.mkdirs();<br>	&#125;<br>	<br>	<span class="hljs-comment">// 保存的头像文件的文件名</span><br>	<span class="hljs-type">String</span> <span class="hljs-variable">suffix</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>	<span class="hljs-type">String</span> <span class="hljs-variable">originalFilename</span> <span class="hljs-operator">=</span> file.getOriginalFilename();<br>	<span class="hljs-type">int</span> <span class="hljs-variable">beginIndex</span> <span class="hljs-operator">=</span> originalFilename.lastIndexOf(<span class="hljs-string">&quot;.&quot;</span>);<br>	<span class="hljs-keyword">if</span> (beginIndex &gt; <span class="hljs-number">0</span>) &#123;<br>		suffix = originalFilename.substring(beginIndex);<br>	&#125;<br>	<span class="hljs-type">String</span> <span class="hljs-variable">filename</span> <span class="hljs-operator">=</span> UUID.randomUUID().toString() + suffix;<br>	<br>	<span class="hljs-comment">// 创建文件对象，表示保存的头像文件</span><br>	<span class="hljs-type">File</span> <span class="hljs-variable">dest</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(dir, filename);<br>	<span class="hljs-comment">// 执行保存头像文件</span><br>	<span class="hljs-keyword">try</span> &#123;<br>		file.transferTo(dest);<br>	&#125; <span class="hljs-keyword">catch</span> (IllegalStateException e) &#123;<br>		<span class="hljs-comment">// 抛出异常</span><br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileStateException</span>(<span class="hljs-string">&quot;文件状态异常，可能文件已被移动或删除&quot;</span>);<br>	&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>		<span class="hljs-comment">// 抛出异常</span><br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileUploadIOException</span>(<span class="hljs-string">&quot;上传文件时读写错误，请稍后重尝试&quot;</span>);<br>	&#125;<br>	<br>	<span class="hljs-comment">// 头像路径</span><br>	<span class="hljs-type">String</span> <span class="hljs-variable">avatar</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;/upload/&quot;</span> + filename;<br>	<span class="hljs-comment">// 从Session中获取uid和username</span><br>	<span class="hljs-type">Integer</span> <span class="hljs-variable">uid</span> <span class="hljs-operator">=</span> getUidFromSession(session);<br>	<span class="hljs-type">String</span> <span class="hljs-variable">username</span> <span class="hljs-operator">=</span> getUsernameFromSession(session);<br>	<span class="hljs-comment">// 将头像写入到数据库中</span><br>	userService.changeAvatar(uid, username, avatar);<br>	<br>	<span class="hljs-comment">// 返回成功头像路径</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonResult</span>&lt;String&gt;(OK, avatar);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="4-用户-上传头像-设置上传文件大小"><a href="#4-用户-上传头像-设置上传文件大小" class="headerlink" title="4 用户-上传头像-设置上传文件大小"></a>4 用户-上传头像-设置上传文件大小</h3><p>1.SpringBoot中默认MultipartResolver的最大文件大小值为1M。如果上传的文件的大小超过1M，会抛FileSizeLimitExceededException异常。</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-bRrqkhoI-1650868471285)(img&#x2F;2.png)]</p>
+<p>2.如果需要调整上传的限制值，直接在启动类中添加getMultipartConfigElement()方法，并且在启动类之前添加@Configuration注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.cy.store;<br><span class="hljs-keyword">import</span> org.mybatis.spring.annotation.MapperScan;<br><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;<br><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;<br><span class="hljs-keyword">import</span> org.springframework.boot.web.servlet.MultipartConfigFactory;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> org.springframework.util.unit.DataSize;<br><span class="hljs-keyword">import</span> org.springframework.util.unit.DataUnit;<br><span class="hljs-keyword">import</span> javax.servlet.MultipartConfigElement;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-meta">@MapperScan(&quot;com.cy.store.mapper&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StoreApplication</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(StoreApplication.class, args);<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> MultipartConfigElement <span class="hljs-title function_">getMultipartConfigElement</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">MultipartConfigFactory</span> <span class="hljs-variable">factory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MultipartConfigFactory</span>();<br>        <span class="hljs-comment">// DataSize dataSize = DataSize.ofMegabytes(10);</span><br>        <span class="hljs-comment">// 设置文件最大10M，DataUnit提供5中类型B,KB,MB,GB,TB</span><br>        factory.setMaxFileSize(DataSize.of(<span class="hljs-number">10</span>, DataUnit.MEGABYTES));<br>        factory.setMaxRequestSize(DataSize.of(<span class="hljs-number">10</span>, DataUnit.MEGABYTES));<br>        <span class="hljs-comment">// 设置总上传数据总大小10M</span><br>        <span class="hljs-keyword">return</span> factory.createMultipartConfig();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>3.除了以上编写方法配置上传的上限值以外，还可以通过在application.properties或application.yml中添加配置来实现。</p>
+<p>(1) 低版本：1.X</p>
+<figure class="highlight properties"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs properties"><span class="hljs-attr">spring.http.multipart.max-file-size</span>=<span class="hljs-string">10MB</span><br><span class="hljs-attr">spring.http.multipart.max-request-size</span>=<span class="hljs-string">10MB</span><br></code></pre></div></td></tr></table></figure>
+
+<p>(2) 高版本：2.X</p>
+<figure class="highlight properties"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs properties"><span class="hljs-comment">#方式1</span><br><span class="hljs-attr">spring.servlet.multipart.max-file-size</span>=<span class="hljs-string">10MB</span><br><span class="hljs-attr">spring.servlet.multipart.max-request-size</span>=<span class="hljs-string">10MB</span><br><span class="hljs-comment">#方式2</span><br><span class="hljs-attr">spring.servlet.multipart.maxFileSize</span>=<span class="hljs-string">10MB</span><br><span class="hljs-attr">spring.servlet.multipart.maxRequestSize</span>=<span class="hljs-string">10MB</span><br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/SpringMVC/">SpringMVC</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/SpringMVC/">SpringMVC</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/06/SpringBoot%E5%A4%84%E7%90%86%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SpringBoot处理跨域请求的几种方法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/06/Swagger%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">Swagger配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
