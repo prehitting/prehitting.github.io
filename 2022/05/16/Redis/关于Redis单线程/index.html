@@ -19,7 +19,7 @@
     <meta name="description" content="基础知识 Redis是单线程的  为什么Redis单线程却支持高并发 纯内存操作 核心是基于非阻塞的IO 多路复用机制 单线程反而避免了多线程的频繁上下文切换问题  Redis高并发和快速的原因1.redis是基于内存的，内存的读写速度非常快（纯内存）; 数据存在内存中，数据结构用HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)。 2.redis是单线程的，省去了很多上下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于Redis的单线程问题">
-<meta property="og:url" content="http://prehitting.gitee.io/2022/05/16/Redis/%E5%85%B3%E4%BA%8ERedis%E5%8D%95%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:url" content="http://prehitting.github.io/2022/05/16/Redis/%E5%85%B3%E4%BA%8ERedis%E5%8D%95%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="不利索の鸣">
 <meta property="og:description" content="基础知识 Redis是单线程的  为什么Redis单线程却支持高并发 纯内存操作 核心是基于非阻塞的IO 多路复用机制 单线程反而避免了多线程的频繁上下文切换问题  Redis高并发和快速的原因1.redis是基于内存的，内存的读写速度非常快（纯内存）; 数据存在内存中，数据结构用HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)。 2.redis是单线程的，省去了很多上下">
 <meta property="og:locale" content="zh_CN">
@@ -67,7 +67,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"prehitting.gitee.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"prehitting.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
