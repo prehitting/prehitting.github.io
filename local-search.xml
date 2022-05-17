@@ -139,6 +139,33 @@
   
   
   <entry>
+    <title>Redis命令_字符串(String)</title>
+    <link href="/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4_%E5%AD%97%E7%AC%A6%E4%B8%B2(String)/"/>
+    <url>/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4_%E5%AD%97%E7%AC%A6%E4%B8%B2(String)/</url>
+    
+    <content type="html"><![CDATA[<h2 id="String命令"><a href="#String命令" class="headerlink" title="String命令"></a>String命令</h2><ol><li>获取(设定)值</li></ol><figure class="highlight gauss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gauss"><span class="hljs-built_in">set</span> (<span class="hljs-built_in">key</span>) (value)<br><span class="hljs-built_in">get</span> (<span class="hljs-built_in">key</span>)<br><span class="hljs-built_in">getrange</span> (<span class="hljs-built_in">key</span>) start <span class="hljs-keyword">end</span> <span class="hljs-meta">#范围获取</span><br><span class="hljs-built_in">getset</span> (keyvalue) <span class="hljs-meta">#获取并设定，返回原值</span><br></code></pre></div></td></tr></table></figure><ol start="2"><li>对 key 所储存的字符串值，获取（设定）指定偏移量上的位(bit)。</li></ol><figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">getbit key <span class="hljs-built_in">offset</span><br>setbit key <span class="hljs-built_in">offset</span> value<br></code></pre></div></td></tr></table></figure><ol start="3"><li>获取一个或多个给定key的值</li></ol><figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">mget key1<span class="hljs-selector-attr">[key2..]</span><br></code></pre></div></td></tr></table></figure><ol start="4"><li>更改</li></ol><figure class="highlight lsl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lsl">incr <span class="hljs-type">key</span> #将 <span class="hljs-type">key</span> 中储存的数字值增<br>incrby <span class="hljs-type">key</span> increament#将 <span class="hljs-type">key</span> 所储存的值加上给定的增量值（increment）<br>incrbyfloat <span class="hljs-type">key</span> increament#将 <span class="hljs-type">key</span> 所储存的值加上给定的浮点增量值<br>decr <span class="hljs-type">key</span> #将 <span class="hljs-type">key</span> 中储存的数字值减一<br>decrby <span class="hljs-type">key</span> decrement#<span class="hljs-type">key</span> 所储存的值减去给定的减量值<br>append <span class="hljs-type">key</span> value#如果 <span class="hljs-type">key</span> 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 <span class="hljs-type">key</span> 原来值（value）的末尾<br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Redis</category>
+      
+      <category>Redis命令</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Redis命令_服务器</title>
     <link href="/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4_%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     <url>/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4_%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
@@ -160,33 +187,6 @@
       <tag>Redis</tag>
       
       <tag>Redis命令</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Redis命令_字符串(String)</title>
-    <link href="/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4_%E5%AD%97%E7%AC%A6%E4%B8%B2(String)/"/>
-    <url>/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4_%E5%AD%97%E7%AC%A6%E4%B8%B2(String)/</url>
-    
-    <content type="html"><![CDATA[<h2 id="String命令"><a href="#String命令" class="headerlink" title="String命令"></a>String命令</h2><ol><li>获取(设定)值</li></ol><figure class="highlight gauss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gauss"><span class="hljs-built_in">set</span> (<span class="hljs-built_in">key</span>) (value)<br><span class="hljs-built_in">get</span> (<span class="hljs-built_in">key</span>)<br><span class="hljs-built_in">getrange</span> (<span class="hljs-built_in">key</span>) start <span class="hljs-keyword">end</span> <span class="hljs-meta">#范围获取</span><br><span class="hljs-built_in">getset</span> (keyvalue) <span class="hljs-meta">#获取并设定，返回原值</span><br></code></pre></div></td></tr></table></figure><ol start="2"><li>对 key 所储存的字符串值，获取（设定）指定偏移量上的位(bit)。</li></ol><figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">getbit key <span class="hljs-built_in">offset</span><br>setbit key <span class="hljs-built_in">offset</span> value<br></code></pre></div></td></tr></table></figure><ol start="3"><li>获取一个或多个给定key的值</li></ol><figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">mget key1<span class="hljs-selector-attr">[key2..]</span><br></code></pre></div></td></tr></table></figure><ol start="4"><li>更改</li></ol><figure class="highlight lsl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lsl">incr <span class="hljs-type">key</span> #将 <span class="hljs-type">key</span> 中储存的数字值增<br>incrby <span class="hljs-type">key</span> increament#将 <span class="hljs-type">key</span> 所储存的值加上给定的增量值（increment）<br>incrbyfloat <span class="hljs-type">key</span> increament#将 <span class="hljs-type">key</span> 所储存的值加上给定的浮点增量值<br>decr <span class="hljs-type">key</span> #将 <span class="hljs-type">key</span> 中储存的数字值减一<br>decrby <span class="hljs-type">key</span> decrement#<span class="hljs-type">key</span> 所储存的值减去给定的减量值<br>append <span class="hljs-type">key</span> value#如果 <span class="hljs-type">key</span> 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 <span class="hljs-type">key</span> 原来值（value）的末尾<br></code></pre></div></td></tr></table></figure>]]></content>
-    
-    
-    <categories>
-      
-      <category>Redis</category>
-      
-      <category>Redis命令</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Redis</tag>
       
     </tags>
     
@@ -265,9 +265,9 @@
     
     <tags>
       
-      <tag>动态代理模式</tag>
-      
       <tag>设计模式</tag>
+      
+      <tag>动态代理模式</tag>
       
     </tags>
     
