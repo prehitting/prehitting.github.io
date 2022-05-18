@@ -16,21 +16,21 @@
   <meta name="author" content="YiMing">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Redis命令_有序集合（SortedList）">
+    <meta name="description" content="BitMap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis命令_有序集合（SortedList）">
-<meta property="og:url" content="http://prehitting.gitee.io/2022/05/17/Redis/Redis%E5%91%BD%E4%BB%A4-%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%EF%BC%88SortedList%EF%BC%89/index.html">
+<meta property="og:title" content="BitMap">
+<meta property="og:url" content="http://prehitting.gitee.io/2022/05/18/Redis/BitMap/index.html">
 <meta property="og:site_name" content="不利索の鸣">
-<meta property="og:description" content="Redis命令_有序集合（SortedList）">
+<meta property="og:description" content="BitMap">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-17T09:17:46.000Z">
-<meta property="article:modified_time" content="2022-05-18T03:38:19.338Z">
+<meta property="article:published_time" content="2022-05-18T03:28:33.000Z">
+<meta property="article:modified_time" content="2022-05-18T03:36:17.730Z">
 <meta property="article:author" content="YiMing">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>Redis命令_有序集合（SortedList） - 不利索の鸣</title>
+  <title>BitMap - 不利索の鸣</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,7 +176,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Redis命令_有序集合（SortedList）">
+            <span class="h2" id="subtitle" title="BitMap">
               
             </span>
 
@@ -191,8 +191,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-17 17:17" pubdate>
-        2022年5月17日 下午
+      <time datetime="2022-05-18 11:28" pubdate>
+        2022年5月18日 上午
       </time>
     </span>
   
@@ -202,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      209 字
     </span>
   
 
@@ -211,7 +211,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      2 分钟
     </span>
   
 
@@ -240,99 +240,31 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Redis命令_有序集合（SortedList）</h1>
+            <h1 style="display: none">BitMap</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：3 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="SortedList"><a href="#SortedList" class="headerlink" title="SortedList"></a>SortedList</h2><table>
-<thead>
-<tr>
-<th>1</th>
-<th>[ZADD key score1 member1 <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zadd.html">score2 member2]</a> 向有序集合添加一个或多个成员，或者更新已存在成员的分数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zcard.html">ZCARD key</a> 获取有序集合的成员数</td>
-</tr>
-<tr>
-<td>3</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zcount.html">ZCOUNT key min max</a> 计算在有序集合中指定区间分数的成员数</td>
-</tr>
-<tr>
-<td>4</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zincrby.html">ZINCRBY key increment member</a> 有序集合中对指定成员的分数加上增量 increment</td>
-</tr>
-<tr>
-<td>5</td>
-<td>[ZINTERSTORE destination numkeys key <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zinterstore.html">key …]</a> 计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合 destination 中</td>
-</tr>
-<tr>
-<td>6</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zlexcount.html">ZLEXCOUNT key min max</a> 在有序集合中计算指定字典区间内成员数量</td>
-</tr>
-<tr>
-<td>7</td>
-<td>[ZRANGE key start stop <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zrange.html">WITHSCORES]</a> 通过索引区间返回有序集合指定区间内的成员</td>
-</tr>
-<tr>
-<td>8</td>
-<td>[ZRANGEBYLEX key min max <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zrangebylex.html">LIMIT offset count]</a> 通过字典区间返回有序集合的成员</td>
-</tr>
-<tr>
-<td>9</td>
-<td>[ZRANGEBYSCORE key min max <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zrangebyscore.html">WITHSCORES] [LIMIT]</a> 通过分数返回有序集合指定区间内的成员</td>
-</tr>
-<tr>
-<td>10</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zrank.html">ZRANK key member</a> 返回有序集合中指定成员的索引</td>
-</tr>
-<tr>
-<td>11</td>
-<td>[ZREM key member <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zrem.html">member …]</a> 移除有序集合中的一个或多个成员</td>
-</tr>
-<tr>
-<td>12</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zremrangebylex.html">ZREMRANGEBYLEX key min max</a> 移除有序集合中给定的字典区间的所有成员</td>
-</tr>
-<tr>
-<td>13</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zremrangebyrank.html">ZREMRANGEBYRANK key start stop</a> 移除有序集合中给定的排名区间的所有成员</td>
-</tr>
-<tr>
-<td>14</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zremrangebyscore.html">ZREMRANGEBYSCORE key min max</a> 移除有序集合中给定的分数区间的所有成员</td>
-</tr>
-<tr>
-<td>15</td>
-<td>[ZREVRANGE key start stop <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zrevrange.html">WITHSCORES]</a> 返回有序集中指定区间内的成员，通过索引，分数从高到低</td>
-</tr>
-<tr>
-<td>16</td>
-<td>[ZREVRANGEBYSCORE key max min <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zrevrangebyscore.html">WITHSCORES]</a> 返回有序集中指定分数区间内的成员，分数从高到低排序</td>
-</tr>
-<tr>
-<td>17</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zrevrank.html">ZREVRANK key member</a> 返回有序集合中指定成员的排名，有序集成员按分数值递减(从大到小)排序</td>
-</tr>
-<tr>
-<td>18</td>
-<td><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zscore.html">ZSCORE key member</a> 返回有序集中，成员的分数值</td>
-</tr>
-<tr>
-<td>19</td>
-<td>[ZUNIONSTORE destination numkeys key <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zunionstore.html">key …]</a> 计算给定的一个或多个有序集的并集，并存储在新的 key 中</td>
-</tr>
-<tr>
-<td>20</td>
-<td>[ZSCAN key cursor <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/sorted-sets-zscan.html">MATCH pattern] [COUNT count]</a> 迭代有序集合中的元素（包括元素成员和元素分值）</td>
-</tr>
-</tbody></table>
+              <h2 id="BitMaps"><a href="#BitMaps" class="headerlink" title="BitMaps"></a>BitMaps</h2><p>相当于map&lt;Integer,Byte&gt;</p>
+<blockquote>
+<p>位存储</p>
+</blockquote>
+<p>统计用户信息，活跃or不活跃，登录or未登录，凡是只有两个状态的，都可以使用BitMaps</p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight xquery"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xquery">setbit <span class="hljs-built_in">（key</span>） （offset） （<span class="hljs-keyword">value</span>）<br>getbit <span class="hljs-built_in">(key</span>) (offset)<br>bitcount <span class="hljs-built_in">(key</span>) [<span class="hljs-keyword">start</span>,<span class="hljs-keyword">end</span>]<br></code></pre></div></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">setbit</span> sign <span class="hljs-number">0</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">setbit</span> sign <span class="hljs-number">7</span> <span class="hljs-number">1</span><br><span class="hljs-attribute">getbit</span> sign <span class="hljs-number">7</span><br><span class="hljs-attribute">bitcount</span> sign<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
 
             </div>
             <hr>
@@ -344,7 +276,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Redis/">Redis</a>
                     
-                      <a class="hover-with-bg" href="/categories/Redis/Redis%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Redis基本数据类型</a>
+                      <a class="hover-with-bg" href="/categories/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Redis特殊数据类型</a>
                     
                   </div>
                 
@@ -369,18 +301,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/17/Redis/Redis%E5%91%BD%E4%BB%A4-%E5%88%97%E8%A1%A8%EF%BC%88List%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Redis命令_列表（List）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/17/Redis/Redis%E5%91%BD%E4%BB%A4-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89/">
-                        <span class="hidden-mobile">Redis命令_集合（Set）</span>
+                      <a href="/2022/05/17/Redis/HyperLogLog/">
+                        <span class="hidden-mobile">HyperLogLog</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

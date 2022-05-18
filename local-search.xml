@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>BitMap</title>
+    <link href="/2022/05/18/Redis/BitMap/"/>
+    <url>/2022/05/18/Redis/BitMap/</url>
+    
+    <content type="html"><![CDATA[<h2 id="BitMaps"><a href="#BitMaps" class="headerlink" title="BitMaps"></a>BitMaps</h2><p>相当于map&lt;Integer,Byte&gt;</p><blockquote><p>位存储</p></blockquote><p>统计用户信息，活跃or不活跃，登录or未登录，凡是只有两个状态的，都可以使用BitMaps</p><h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight xquery"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xquery">setbit <span class="hljs-built_in">（key</span>） （offset） （<span class="hljs-keyword">value</span>）<br>getbit <span class="hljs-built_in">(key</span>) (offset)<br>bitcount <span class="hljs-built_in">(key</span>) [<span class="hljs-keyword">start</span>,<span class="hljs-keyword">end</span>]<br></code></pre></div></td></tr></table></figure><p>实例：</p><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">setbit</span> sign <span class="hljs-number">0</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">setbit</span> sign <span class="hljs-number">7</span> <span class="hljs-number">1</span><br><span class="hljs-attribute">getbit</span> sign <span class="hljs-number">7</span><br><span class="hljs-attribute">bitcount</span> sign<br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Redis</category>
+      
+      <category>Redis特殊数据类型</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>HyperLogLog</title>
+    <link href="/2022/05/17/Redis/HyperLogLog/"/>
+    <url>/2022/05/17/Redis/HyperLogLog/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>什么是基数</p></blockquote><p>一个集合中不重复的元素个数，可以接收误差</p><blockquote><p>简介</p></blockquote><ul><li>Redis 在 2.8.9 版本添加了HyperLogLog结构</li><li>基数统计算法</li><li>优点：占用内存固定，2^64不同的元素只需要12KB内存！如果要从内存角度来比较，Hyperloglog首选</li><li>存在0.81%的错误率，如果不允许容错，使用set即可</li><li>网站的UV（一个人访问一个网站多次，但算作一个人）<ul><li>传统统计方式：set存储用户id，然后就可以统计set中的元素作为标准判断</li><li>用传统方式保存大量用户id会比较麻烦</li></ul></li></ul><blockquote><p>命令</p></blockquote><table><thead><tr><th>1</th><th>[PFADD key element [element …]]添加指定元素到 HyperLogLog 中。</th><th></th></tr></thead><tbody><tr><td>2</td><td>[PFCOUNT key [key …]] 返回给定 HyperLogLog 的基数估算值。</td><td></td></tr><tr><td>3</td><td>[PFMERGE destkey sourcekey [sourcekey …]]将多个 HyperLogLog 合并为一个 HyperLogLog</td><td></td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>Redis</category>
+      
+      <category>Redis特殊数据类型</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Redis命令_列表（List）</title>
     <link href="/2022/05/17/Redis/Redis%E5%91%BD%E4%BB%A4-%E5%88%97%E8%A1%A8%EF%BC%88List%EF%BC%89/"/>
     <url>/2022/05/17/Redis/Redis%E5%91%BD%E4%BB%A4-%E5%88%97%E8%A1%A8%EF%BC%88List%EF%BC%89/</url>
@@ -15,7 +69,7 @@
       
       <category>Redis</category>
       
-      <category>Redis命令</category>
+      <category>Redis基本数据类型</category>
       
     </categories>
     
@@ -42,7 +96,7 @@
       
       <category>Redis</category>
       
-      <category>Redis命令</category>
+      <category>Redis基本数据类型</category>
       
     </categories>
     
@@ -69,34 +123,7 @@
       
       <category>Redis</category>
       
-      <category>Redis命令</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Redis</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Redis命令_服务器</title>
-    <link href="/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4/"/>
-    <url>/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4/</url>
-    
-    <content type="html"><![CDATA[<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><ol><li>在远程Redis服务上执行命令</li></ol><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">redis-cli -h host -p port -a password</span><br></code></pre></div></td></tr></table></figure><p><strong>实例</strong></p><p>连接到主机127.0.0.1，端口为6379，密码为mypass的redis服务上</p><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">$ redis-cli -h <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-number">6379</span> -<span class="hljs-selector-tag">a</span>  <span class="hljs-string">&quot;mypass&quot;</span><br></code></pre></div></td></tr></table></figure>]]></content>
-    
-    
-    <categories>
-      
-      <category>Redis</category>
-      
-      <category>Redis命令</category>
+      <category>Redis基本数据类型</category>
       
     </categories>
     
@@ -123,7 +150,7 @@
       
       <category>Redis</category>
       
-      <category>Redis命令</category>
+      <category>Redis基本数据类型</category>
       
     </categories>
     
@@ -150,7 +177,7 @@
       
       <category>Redis</category>
       
-      <category>Redis命令</category>
+      <category>Redis基本数据类型</category>
       
     </categories>
     
