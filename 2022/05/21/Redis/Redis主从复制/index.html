@@ -16,22 +16,26 @@
   <meta name="author" content="YiMing">
   <meta name="keywords" content="">
   
-    <meta name="description" content="PBP&#x2F;OBP&#x2F;OOP的特征 PBP（基于过程）：函数、域与生命周期的概念、函数重载、函数模板、异常处理、范型算法。 OBP（基于对象）：类（接口）、类的生命周期、类模板。 OOP（面向对象）：继承、多态。 三个概念步步深入，后者包括前者。其目的是实现软件开发的可重用性，解决软件危机（软件工程思想未引入之前）。 OOP不可避免设计原则的发展与设计模式的产生，这是OOP独具的特">
+    <meta name="description" content="Redis主从复制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OOP七大原则">
-<meta property="og:url" content="http://prehitting.gitee.io/2022/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/OOP%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/index.html">
+<meta property="og:title" content="Redis主从复制">
+<meta property="og:url" content="http://prehitting.gitee.io/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/index.html">
 <meta property="og:site_name" content="不利索の鸣">
-<meta property="og:description" content="PBP&#x2F;OBP&#x2F;OOP的特征 PBP（基于过程）：函数、域与生命周期的概念、函数重载、函数模板、异常处理、范型算法。 OBP（基于对象）：类（接口）、类的生命周期、类模板。 OOP（面向对象）：继承、多态。 三个概念步步深入，后者包括前者。其目的是实现软件开发的可重用性，解决软件危机（软件工程思想未引入之前）。 OOP不可避免设计原则的发展与设计模式的产生，这是OOP独具的特">
+<meta property="og:description" content="Redis主从复制">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-06T14:12:48.000Z">
-<meta property="article:modified_time" content="2022-05-08T04:04:12.880Z">
+<meta property="og:image" content="http://prehitting.gitee.io/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20220521101305709.png">
+<meta property="og:image" content="http://prehitting.gitee.io/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20220521101705547.png">
+<meta property="og:image" content="http://prehitting.gitee.io/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/1K00M955-0.gif">
+<meta property="og:image" content="http://prehitting.gitee.io/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/1K00HQ5-1.gif">
+<meta property="article:published_time" content="2022-05-21T01:18:52.000Z">
+<meta property="article:modified_time" content="2022-05-21T03:12:44.138Z">
 <meta property="article:author" content="YiMing">
-<meta property="article:tag" content="设计模式">
-<meta property="article:tag" content="OOP">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://prehitting.gitee.io/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20220521101305709.png">
   
   
-  <title>OOP七大原则 - 不利索の鸣</title>
+  <title>Redis主从复制 - 不利索の鸣</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -177,7 +181,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="OOP七大原则">
+            <span class="h2" id="subtitle" title="Redis主从复制">
               
             </span>
 
@@ -192,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-06 22:12" pubdate>
-        2022年5月6日 晚上
+      <time datetime="2022-05-21 09:18" pubdate>
+        2022年5月21日 上午
       </time>
     </span>
   
@@ -203,7 +207,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      2.8k 字
     </span>
   
 
@@ -212,7 +216,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16 分钟
+      24 分钟
     </span>
   
 
@@ -241,69 +245,103 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">OOP七大原则</h1>
+            <h1 style="display: none">Redis主从复制</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：13 天前
+                  本文最后更新于：27 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <blockquote>
-<p>PBP&#x2F;OBP&#x2F;OOP的特征 PBP（基于过程）：函数、域与生命周期的概念、函数重载、函数模板、异常处理、范型算法。 OBP（基于对象）：类（接口）、类的生命周期、类模板。 OOP（面向对象）：继承、多态。 三个概念步步深入，后者包括前者。其目的是实现软件开发的可重用性，解决软件危机（软件工程思想未引入之前）。 OOP不可避免设计原则的发展与设计模式的产生，这是OOP独具的特征决定的（正如前面所说，特征的产生是由其产生目的决定的）。</p>
-</blockquote>
-<blockquote>
-<p>OOP的方法论：高内聚，低耦合，易复用</p>
-</blockquote>
-<h2 id="OOP七大原则"><a href="#OOP七大原则" class="headerlink" title="OOP七大原则"></a>OOP七大原则</h2><h3 id="开闭原则-OCP"><a href="#开闭原则-OCP" class="headerlink" title="开闭原则(OCP)"></a>开闭原则(OCP)</h3><blockquote>
-<p>对扩展开放，对修改关闭</p>
-</blockquote>
-<p>根据开闭原则，在设计一个软件系统模块（类，方法）的时候，应该可以在不修改原有的模块（修改关闭）的基础上，能扩展其功能（扩展开放）。</p>
-<p><strong>扩展开放</strong>：某模块的功能是可扩展的，则该模块是扩展开放的。软件系统的功能上的可扩展性要求模块是扩展开放的。</p>
-<p><strong>修改关闭</strong>：某模块被其他模块调用，如果该模块的源代码不允许修改，则该模块修改关闭的。软件系统的功能上的稳定性，持续性要求模块是修改关闭的。</p>
-<h3 id="里氏替换原则-LSP"><a href="#里氏替换原则-LSP" class="headerlink" title="里氏替换原则(LSP)"></a>里氏替换原则(LSP)</h3><blockquote>
-<p>所有引用基类的地方必须能透明地使用其子类的对象</p>
-</blockquote>
-<blockquote>
-<p>里式替换原则的引申意义：子类可以扩展父类的功能，但不能改变父类原有的功能。</p>
-</blockquote>
-<p>​	也就是说，只有满足以下2个条件的OO设计才可被认为是满足了LSP原则：</p>
-<p>​	1. 不应该在代码中出现if&#x2F;else之类对派生类类型进行判断的条件。</p>
-<p>​	2. 派生类应当可以替换基类并出现在基类能够出现的任何地方，或者说如果我们把代码中使用基类的地方用它的派生类所代替，代码还能正常工作。</p>
-<h3 id="依赖倒置原则-DIP"><a href="#依赖倒置原则-DIP" class="headerlink" title="依赖倒置原则(DIP)"></a>依赖倒置原则(DIP)</h3><blockquote>
-<p>高层模块不应该依赖底层模块，它们都应该依赖抽象。抽象不应该依赖于细节，细节应该依赖于抽象。</p>
-</blockquote>
-<p>面向接口编程，不要面向实现编程</p>
-<h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><blockquote>
-<p>控制类的粒度大小，将对象解耦，提高其内聚性</p>
-</blockquote>
-<p>单一职责原则：<strong><em>一个对象应该只包含单一的职责，并且该职责被完整地封装在一个类中</em>。</strong><br>单一职责原则的另一种定义方式：<strong><em>就一个类而言，应该仅有一个引起它变化的原因</em>。</strong></p>
-<h3 id="接口隔离原则（ISP）"><a href="#接口隔离原则（ISP）" class="headerlink" title="接口隔离原则（ISP）"></a>接口隔离原则（ISP）</h3><blockquote>
-<p><strong>使用多个专门的接口，而不使用单一 的总接口，即客户端不应该依赖那些它不需要的接口。</strong></p>
-</blockquote>
-<p>​	换句话说，使用多个专门的接口比使用单一的总接口总要好。</p>
-<p>它包含了2层意思：</p>
+              <h2 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h2><p>主从复制，是指将一台Redis服务器的数据，复制到其他Redis服务器，前者称为主节点(master&#x2F;leader),后者称为从节点(slave&#x2F;follower),数据的复制是单向的，只能由主节点到从节点，<strong>Master以写为主，slave以读为主</strong></p>
+<p><strong>主从复制的作用：</strong></p>
 <ol>
-<li><p>接口的设计原则：接口的设计应该遵循最小接口原则，不要把用户不使用的方法塞进同一个接口里。如果一个接口的方法没有被使用到，则说明该接口过胖，应该将其分割成几个功能专一的接口。</p>
-</li>
-<li><p>接口的依赖（继承）原则：如果一个接口a继承另一个接口b，则接口a相当于继承了接口b的方法，那么继承了接口b后的接口a也应该遵循上述原则：不应该包含用户不使用的方法。 反之，则说明接口a被b给污染了，应该重新设计它们的关系。</p>
-</li>
+<li>数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式</li>
+<li>故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余</li>
+<li>负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写Redis数据时应用连接主节点，读Redis数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个结点分担读负载，可以大大提高Redis服务器的并发量。</li>
+<li>高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是Redis高可用的基础</li>
 </ol>
-<p>​	根据接口隔离原则，当一个接口太大时，我们需要将它分割成一些更细小的接口，使用该接 口的客户端仅需知道与之相关的方法即可。</p>
-<h3 id="迪米特法则-LoD"><a href="#迪米特法则-LoD" class="headerlink" title="迪米特法则(LoD)"></a>迪米特法则(LoD)</h3><p>也叫<font color="red">最少知道原则</font></p>
+<p>一般来说，要将Redis应用于工程项目中，只使用一台Redis是玩玩不可的，原因如下</p>
+<ol>
+<li>从结构上，单个Redis服务器会发生单点 故障，并且一台服务器需要处理所有的请求负载，压力较大；</li>
+<li>从容量上，单个Redis服务器内存容量有限，就算一台Redis服务器内存容量为256G，也不能将所有内存用作Redis存储内存，一般来说，单台Redis最大使用内存不应该超过20G</li>
+</ol>
+<p>电商网站上的商品，一般都是一次上传，数次浏览，也就是多读少写</p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">127.0.0.1:6379&gt; info replication #查看当前库的信息<br><span class="hljs-meta prompt_"># </span><span class="language-bash">Replication</span><br>role:master # 角色<br>connected_slaves:0 # 从机数量<br>master_replid:12673735635e5cedc1e668b27e7a83855086ab0c<br>master_replid2:0000000000000000000000000000000000000000<br>master_repl_offset:0<br>second_repl_offset:-1<br>repl_backlog_active:0<br>repl_backlog_size:1048576<br>repl_backlog_first_byte_offset:0<br>repl_backlog_histlen:0<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="windows环境下配置"><a href="#windows环境下配置" class="headerlink" title="windows环境下配置"></a>windows环境下配置</h3><ul>
+<li>复制Redis安装主文件夹</li>
+<li>此处采用一主二从</li>
+</ul>
+<p><img src="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20220521101305709.png" srcset="/img/loading.gif" lazyload alt="image-20220521101305709"></p>
 <blockquote>
-<p>只与直接的朋友交谈，不和“陌生人“说话</p>
+<ol>
+<li>分别进入文件夹</li>
+</ol>
+<p>  修改 redis.windows.conf和redis.windows-service.conf中的端口信息</p>
+<p>  port 6380 </p>
+<p>  slaveof 127.0.0.1 6379</p>
+<ol start="2">
+<li>然后在cmd中安装服务</li>
+</ol>
+<p>redis-server –service-install redis.windows.conf –maxmemory 200m –service-name redis6380</p>
+<p>redis-server –service-install redis.windows.conf –maxmemory 200m –service-name redis6381</p>
 </blockquote>
-<p>​	迪米特法则可以简单说成：talk only to your immediate friends。 对于OOD来说，又被解释为下面几种方式：一个软件实体应当尽可能少的与其他实体发生相互作用。每一个软件单位对其他的单位都只有最少的知识，而且局限于那些与本单位密切相关的软件单位。</p>
-<p>​	迪米特法则的初衷在于降低类之间的耦合。由于每个类尽量减少对其他类的依赖，因此，很容易使得系统的功能模块功能独立，相互之间不存在（或很少有）依赖关系。</p>
-<p>​	迪米特法则不希望类之间建立直接的联系。如果真的有需要建立联系，也希望能通过它的友元类来转达。因此，应用迪米特法则有可能造成的一个后果就是：系统中存在大量的中介类，这些类之所以存在完全是为了传递类之间的相互调用关系——这在一定程度上增加了系统的复杂度。</p>
-<p>​	如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中的一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</p>
-<h4 id="LoD法则缺点"><a href="#LoD法则缺点" class="headerlink" title="LoD法则缺点"></a>LoD法则缺点</h4><p>​	在系统里造出大量的小方法，这些方法仅仅是传递间接的调用，与系统的业务逻辑无关。</p>
-<p>​	遵循类之间的迪米特法则会是一个系统的局部设计简化，因为每一个局部都不会和远距离的对象有直接的关联。但是，这也会造成系统的不同模块之间的通信效率降低，也会使系统的不同模块之间不容易协调。</p>
-<h3 id="合成复用原则-CARP"><a href="#合成复用原则-CARP" class="headerlink" title="合成复用原则(CARP)"></a>合成复用原则(CARP)</h3><blockquote>
-<p>尽量先使用组合或者聚合等关联关系来实现，其次考虑使用继承关系来实现</p>
+<p><img src="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20220521101705547.png" srcset="/img/loading.gif" lazyload alt="image-20220521101705547"></p>
+<h2 id="一主二从"><a href="#一主二从" class="headerlink" title="一主二从"></a>一主二从</h2><p><font color="red">默认情况下每台Redis服务器都是主节点 </font> 	配置从机</p>
+<ol>
+<li>命令 slave 127.0.0.1    6379  #配置主机</li>
+<li>改写配置文件</li>
+</ol>
+<p><strong>从机只读不写</strong></p>
+<p>如果主机宕机，从机仍然可以读到数据</p>
+<blockquote>
+<p>复制原理</p>
 </blockquote>
+<p>Slave启动成功连接到master后会发送一个sync命令</p>
+<p>Master接到命令后，启动后台的存盘进程，同时收集所有接收到的用于修改数据集命令，在后台进程执行完毕后，master将传送整个数据文件到slave，并完成一次完全同步</p>
+<p>全量复制：而slave服务在接收到数据库文件数据后，将其存盘并加载到内存中</p>
+<p>增量复制，Master继续将新的所有收集到的修改命令依次传给slave，完成同步</p>
+<p>但是只要是重新连接master，一次完全同步（全量复制）将被自动执行</p>
+<blockquote>
+<p>如果主机宕机，重新选择主句</p>
+</blockquote>
+<p>如果主机断开连接，可以使用slaveof  no one 让自己变成主机。其他的结点就可以手动连接到最新的这个主节点（手动）。</p>
+<h2 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h2><blockquote>
+<p>概述</p>
+</blockquote>
+<p>在 Redis 主从复制模式中，因为系统不具备自动恢复的功能，所以当主服务器（master）宕机后，需要手动把一台从服务器（slave）切换为主服务器。在这个过程中，不仅需要人为干预，而且还会造成一段时间内服务器处于不可用状态，同时数据安全性也得不到保障，因此主从模式的可用性较低，不适用于线上生产环境。</p>
+<p>Redis 官方推荐一种高可用方案，也就是 Redis Sentinel 哨兵模式，它弥补了主从模式的不足。Sentinel 通过监控的方式获取主机的工作状态是否正常，当主机发生故障时， Sentinel 会自动进行 Failover（即故障转移），并将其监控的从机提升主服务器（master），从而保证了系统的高可用性。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>哨兵模式是一种特殊的模式，Redis 为其提供了专属的哨兵命令，它是一个独立的进程，能够独立运行。下面使用 Sentinel 搭建 Redis 集群，基本结构图如下所示：</p>
+<p><img src="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/1K00M955-0.gif" srcset="/img/loading.gif" lazyload alt="哨兵模式"></p>
+<blockquote>
+<p>哨兵模式的作用</p>
+</blockquote>
+<ul>
+<li>第一：哨兵节点会以每秒一次的频率对每个 Redis 节点发送<code>PING</code>命令，并通过 Redis 节点的回复来判断其运行状态。</li>
+<li>第二：当哨兵监测到主服务器发生故障时，会自动在从节点中选择一台将机器，并其提升为主服务器，然后使用 PubSub 发布订阅模式，通知其他的从节点，修改配置文件，跟随新的主服务器。</li>
+</ul>
+<blockquote>
+<p>多哨兵模式</p>
+</blockquote>
+<p>在实际生产情况中，Redis Sentinel 是集群的高可用的保障，为避免 Sentinel 发生意外，它一般是由 3～5 个节点组成，这样就算挂了个别节点，该集群仍然可以正常运转。其结构图如下所示：</p>
+<p><img src="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/1K00HQ5-1.gif" srcset="/img/loading.gif" lazyload alt="Redis哨兵模式"></p>
+<p>上图所示，多个哨兵之间也存在互相监控，这就形成了多哨兵模式，现在对该模式的工作过程进行讲解，介绍如下：</p>
+<ol>
+<li><strong>主观下线</strong></li>
+</ol>
+<p>主观下线，适用于主服务器和从服务器。如果在规定的时间内(配置参数：down-after-milliseconds)，Sentinel 节点没有收到目标服务器的有效回复，则判定该服务器为“主观下线”。比如 Sentinel1 向主服务发送了<code>PING</code>命令，在规定时间内没收到主服务器<code>PONG</code>回复，则 Sentinel1 判定主服务器为“主观下线”。</p>
+<ol start="2">
+<li><strong>客观下线</strong></li>
+</ol>
+<p>客观下线，只适用于主服务器。 Sentinel1 发现主服务器出现了故障，它会通过相应的命令，询问其它 Sentinel 节点对主服务器的状态判断。如果超过半数以上的 Sentinel 节点认为主服务器 down 掉，则 Sentinel1 节点判定主服务为“客观下线”。</p>
+<ol start="3">
+<li><strong>投票选举</strong></li>
+</ol>
+<p>投票选举，所有 Sentinel 节点会通过投票机制，按照谁发现谁去处理的原则，选举 Sentinel1 为领头节点去做 Failover（故障转移）操作。Sentinel1 节点则按照一定的规则在所有从节点中选择一个最优的作为主服务器，然后通过发布订功能通知其余的从节点（slave）更改配置文件，跟随新上任的主服务器（master）。至此就完成了主从切换的操作。</p>
 
             </div>
             <hr>
@@ -313,7 +351,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                      <a class="hover-with-bg" href="/categories/Redis/">Redis</a>
                     
                   </div>
                 
@@ -321,9 +359,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-                    
-                      <a class="hover-with-bg" href="/tags/OOP/">OOP</a>
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
                     
                   </div>
                 
@@ -340,9 +376,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+                      <a href="/2022/05/21/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">单例模式</span>
+                        <span class="hidden-mobile">Redis缓存穿透与雪崩</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +386,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/">
-                        <span class="hidden-mobile">设计模式概述</span>
+                      <a href="/2022/05/21/Redis/Redis%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
+                        <span class="hidden-mobile">Redis发布订阅</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -4,6 +4,81 @@
   
   
   <entry>
+    <title>Redis缓存穿透与雪崩</title>
+    <link href="/2022/05/21/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/"/>
+    <url>/2022/05/21/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Redis缓存穿透与雪崩"><a href="#Redis缓存穿透与雪崩" class="headerlink" title="Redis缓存穿透与雪崩"></a>Redis缓存穿透与雪崩</h2><p>Redis缓存的使用，极大的提升了应用程序的性能和效率，特别是数据查询仿麦呢，但同时，它也带来了，它也带来了一些问题。其中，最要害的问题，就是数据一致性问题，从严格意义上讲，这个问题无解，如果对数据的一致性要求很高，那么就不能使用缓存</p><p>另外的一些经典问题就是，缓存穿透，缓存雪崩和缓存击穿，目前，业界也有一些比较流行的解决方案</p><h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><blockquote><p>概念</p></blockquote><p>用户想要查询一个数据，发现redis内存数据库没有，也就是缓存没有命中，于是向持久层数据库查询，发现也没有，于是本次查询失败，当用户很多的时候，缓存都没有命中，于是都去请求了持久层数据库，这会给数据库造成很大压力，相当于缓存穿透</p><blockquote><p>解决方案</p></blockquote><ul><li>布隆过滤器</li></ul><p>布隆过滤器是一种数据结构，对所有可能查询的参数以hash形式存储，在控制层先进行校验，不符合则丢弃，从而避免了对底层存储系统的查询压力</p><p><img src="/2022/05/21/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAWlpZU1l-,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"></p><ul><li>缓存空对象</li></ul><p>当存储层不命中后，即使返回的空对象也将其缓存起来，同时会设置一个过期时间，之后再访问这个数据将会从缓存中获取，保护了后端数据源</p><p><img src="/2022/05/21/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAWlpZU1l-,size_20,color_FFFFFF,t_70,g_se,x_16-16531038930102.png" alt="在这里插入图片描述"></p><p><strong>但是这种方法会存在两个问题：</strong></p><ol><li>如果空值能够被缓存起来，这就意味着缓存需要更多的空间存储更多的键，因为这当中可能会有很多的空值的键;</li><li>即使对空值设置了过期时间，还是会存在缓存层和存储层的数据会有一段时间窗口的不一致，这对于需要保持一致性的业务会有影响。</li></ol><h3 id="缓存击穿（量太大，缓存过期）"><a href="#缓存击穿（量太大，缓存过期）" class="headerlink" title="缓存击穿（量太大，缓存过期）"></a>缓存击穿（量太大，缓存过期）</h3><blockquote><p>概念</p></blockquote><p>这里需要注意和缓存击穿的区别，缓存击穿，是指一个key非常热点，在不停的扛着大并发，大并发集中对这一个点进行访问，当这个key在失效的瞬间，持续的大并发就穿破缓存，直接请求数据库，就像在一个屏障上凿开了一个洞<br>当某个key在过期的瞬间，有大量的请求并发访问，这类数据一般是热点数据，由于缓存过期，会同时访问数据库来查询最新数据，并且回写缓存，会导使数据库瞬间压力过大。</p><blockquote><p>解决方案</p></blockquote><ul><li>设置热点数据永不过期</li></ul><p>从缓存层面来看，没有设置过期时间，所以不会出现热点key过期后产生的问题。</p><ul><li>加互斥锁</li></ul><p>分布式锁∶使用分布式锁，保证对于每个key同时只有一个线程去查询后端服务，其他线程没有获得分布式锁的权限，因此只需要等待即可。这种方式将高并发的压力转移到了分布式锁，因此对分布式锁的考验很大。</p><p><img src="/2022/05/21/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAWlpZU1l-,size_20,color_FFFFFF,t_70,g_se,x_16-16531040925354.png" alt="在这里插入图片描述"></p><h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><blockquote><p>概念</p></blockquote><p>缓存雪崩，是指在某一个时间段，缓存集中过期失效。Redis宕机</p><p>产生雪崩的原因之一，比如在写本文的时候，马上就要到双十二零点，很快就会迎来一波抢购，这波商品时间比较集中的放入了缓存，假设缓存一个小时。那么到了凌晨一点钟的时候，这批商品的缓存就都过期了。而对这批商品的访问查询，都落到了数据库上，对于数据库而言，就会产生周期性的压力波峰。于是所有的请求都会达到存储层，存储层的调用量会暴增，造成存储层也会挂掉的情况</p><p><img src="/2022/05/21/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAWlpZU1l-,size_20,color_FFFFFF,t_70,g_se,x_16-16531041697446.png" alt="在这里插入图片描述"></p><p>其实集中过期，倒不是非常致命，比较致命的缓存雪崩，是缓存服务器某个节点宕机或断网。因为自然形成的缓存雪崩，一定是在某个时间段集中创建缓存，这个时候，数据库也是可以顶住压力的。无非就是对数据库产生周期性的压力而已。而缓存服务节点的宕机，对数据库服务器造成的压力是不可预知的，很有可能瞬间就把数据库压垮。<br><strong>（双十一：停掉一些服务，保证主要服务可用）</strong></p><blockquote><p>解决方案</p></blockquote><ul><li>redis高可用</li></ul><p>这个思想的含义是，既然redis有可能挂掉，那我多增设几台redis，这样一台挂掉之后其他的还可以继续工作，其实就是搭建的集群。（异地多活）</p><ul><li>限流降级</li></ul><p>这个解决方案的思想是，在缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个key只允许一个线程查询数据和写缓存，其他线程等待。</p><ul><li>数据预热</li></ul><p>数据加热的含义就是在正式部署之前，我先把可能的数据先预先访问一遍，这样部分可能大量访问的数据就会加载到缓存中。在即将发生大并发访问前手动触发加载缓存不同的key，设置不同的过期时间，让缓存失效的时间点尽量均匀。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Redis</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Redis主从复制</title>
+    <link href="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"/>
+    <url>/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h2><p>主从复制，是指将一台Redis服务器的数据，复制到其他Redis服务器，前者称为主节点(master&#x2F;leader),后者称为从节点(slave&#x2F;follower),数据的复制是单向的，只能由主节点到从节点，<strong>Master以写为主，slave以读为主</strong></p><p><strong>主从复制的作用：</strong></p><ol><li>数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式</li><li>故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余</li><li>负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写Redis数据时应用连接主节点，读Redis数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个结点分担读负载，可以大大提高Redis服务器的并发量。</li><li>高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是Redis高可用的基础</li></ol><p>一般来说，要将Redis应用于工程项目中，只使用一台Redis是玩玩不可的，原因如下</p><ol><li>从结构上，单个Redis服务器会发生单点 故障，并且一台服务器需要处理所有的请求负载，压力较大；</li><li>从容量上，单个Redis服务器内存容量有限，就算一台Redis服务器内存容量为256G，也不能将所有内存用作Redis存储内存，一般来说，单台Redis最大使用内存不应该超过20G</li></ol><p>电商网站上的商品，一般都是一次上传，数次浏览，也就是多读少写</p><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">127.0.0.1:6379&gt; info replication #查看当前库的信息<br><span class="hljs-meta prompt_"># </span><span class="language-bash">Replication</span><br>role:master # 角色<br>connected_slaves:0 # 从机数量<br>master_replid:12673735635e5cedc1e668b27e7a83855086ab0c<br>master_replid2:0000000000000000000000000000000000000000<br>master_repl_offset:0<br>second_repl_offset:-1<br>repl_backlog_active:0<br>repl_backlog_size:1048576<br>repl_backlog_first_byte_offset:0<br>repl_backlog_histlen:0<br></code></pre></div></td></tr></table></figure><h3 id="windows环境下配置"><a href="#windows环境下配置" class="headerlink" title="windows环境下配置"></a>windows环境下配置</h3><ul><li>复制Redis安装主文件夹</li><li>此处采用一主二从</li></ul><p><img src="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20220521101305709.png" alt="image-20220521101305709"></p><blockquote><ol><li>分别进入文件夹</li></ol><p>  修改 redis.windows.conf和redis.windows-service.conf中的端口信息</p><p>  port 6380 </p><p>  slaveof 127.0.0.1 6379</p><ol start="2"><li>然后在cmd中安装服务</li></ol><p>redis-server –service-install redis.windows.conf –maxmemory 200m –service-name redis6380</p><p>redis-server –service-install redis.windows.conf –maxmemory 200m –service-name redis6381</p></blockquote><p><img src="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20220521101705547.png" alt="image-20220521101705547"></p><h2 id="一主二从"><a href="#一主二从" class="headerlink" title="一主二从"></a>一主二从</h2><p><font color="red">默认情况下每台Redis服务器都是主节点 </font> 配置从机</p><ol><li>命令 slave 127.0.0.1    6379  #配置主机</li><li>改写配置文件</li></ol><p><strong>从机只读不写</strong></p><p>如果主机宕机，从机仍然可以读到数据</p><blockquote><p>复制原理</p></blockquote><p>Slave启动成功连接到master后会发送一个sync命令</p><p>Master接到命令后，启动后台的存盘进程，同时收集所有接收到的用于修改数据集命令，在后台进程执行完毕后，master将传送整个数据文件到slave，并完成一次完全同步</p><p>全量复制：而slave服务在接收到数据库文件数据后，将其存盘并加载到内存中</p><p>增量复制，Master继续将新的所有收集到的修改命令依次传给slave，完成同步</p><p>但是只要是重新连接master，一次完全同步（全量复制）将被自动执行</p><blockquote><p>如果主机宕机，重新选择主句</p></blockquote><p>如果主机断开连接，可以使用slaveof  no one 让自己变成主机。其他的结点就可以手动连接到最新的这个主节点（手动）。</p><h2 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h2><blockquote><p>概述</p></blockquote><p>在 Redis 主从复制模式中，因为系统不具备自动恢复的功能，所以当主服务器（master）宕机后，需要手动把一台从服务器（slave）切换为主服务器。在这个过程中，不仅需要人为干预，而且还会造成一段时间内服务器处于不可用状态，同时数据安全性也得不到保障，因此主从模式的可用性较低，不适用于线上生产环境。</p><p>Redis 官方推荐一种高可用方案，也就是 Redis Sentinel 哨兵模式，它弥补了主从模式的不足。Sentinel 通过监控的方式获取主机的工作状态是否正常，当主机发生故障时， Sentinel 会自动进行 Failover（即故障转移），并将其监控的从机提升主服务器（master），从而保证了系统的高可用性。</p><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>哨兵模式是一种特殊的模式，Redis 为其提供了专属的哨兵命令，它是一个独立的进程，能够独立运行。下面使用 Sentinel 搭建 Redis 集群，基本结构图如下所示：</p><p><img src="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/1K00M955-0.gif" alt="哨兵模式"></p><blockquote><p>哨兵模式的作用</p></blockquote><ul><li>第一：哨兵节点会以每秒一次的频率对每个 Redis 节点发送<code>PING</code>命令，并通过 Redis 节点的回复来判断其运行状态。</li><li>第二：当哨兵监测到主服务器发生故障时，会自动在从节点中选择一台将机器，并其提升为主服务器，然后使用 PubSub 发布订阅模式，通知其他的从节点，修改配置文件，跟随新的主服务器。</li></ul><blockquote><p>多哨兵模式</p></blockquote><p>在实际生产情况中，Redis Sentinel 是集群的高可用的保障，为避免 Sentinel 发生意外，它一般是由 3～5 个节点组成，这样就算挂了个别节点，该集群仍然可以正常运转。其结构图如下所示：</p><p><img src="/2022/05/21/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/1K00HQ5-1.gif" alt="Redis哨兵模式"></p><p>上图所示，多个哨兵之间也存在互相监控，这就形成了多哨兵模式，现在对该模式的工作过程进行讲解，介绍如下：</p><ol><li><strong>主观下线</strong></li></ol><p>主观下线，适用于主服务器和从服务器。如果在规定的时间内(配置参数：down-after-milliseconds)，Sentinel 节点没有收到目标服务器的有效回复，则判定该服务器为“主观下线”。比如 Sentinel1 向主服务发送了<code>PING</code>命令，在规定时间内没收到主服务器<code>PONG</code>回复，则 Sentinel1 判定主服务器为“主观下线”。</p><ol start="2"><li><strong>客观下线</strong></li></ol><p>客观下线，只适用于主服务器。 Sentinel1 发现主服务器出现了故障，它会通过相应的命令，询问其它 Sentinel 节点对主服务器的状态判断。如果超过半数以上的 Sentinel 节点认为主服务器 down 掉，则 Sentinel1 节点判定主服务为“客观下线”。</p><ol start="3"><li><strong>投票选举</strong></li></ol><p>投票选举，所有 Sentinel 节点会通过投票机制，按照谁发现谁去处理的原则，选举 Sentinel1 为领头节点去做 Failover（故障转移）操作。Sentinel1 节点则按照一定的规则在所有从节点中选择一个最优的作为主服务器，然后通过发布订功能通知其余的从节点（slave）更改配置文件，跟随新上任的主服务器（master）。至此就完成了主从切换的操作。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Redis</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Redis发布订阅</title>
+    <link href="/2022/05/21/Redis/Redis%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/"/>
+    <url>/2022/05/21/Redis/Redis%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Redis发布订阅"><a href="#Redis发布订阅" class="headerlink" title="Redis发布订阅"></a>Redis发布订阅</h2><p>Redis 发布订阅 (pub&#x2F;sub) 是一种消息通信模式：发送者 (pub) 发送消息，订阅者 (sub) 接收消息。</p><p>Redis 客户端可以订阅任意数量的频道。</p><p>下图展示了频道 channel1 ， 以及订阅这个频道的三个客户端 —— client2 、 client5 和 client1 之间的关系：</p><p><img src="/2022/05/21/Redis/Redis%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/pubsub1.png" alt="img"></p><p>当有新消息通过 PUBLISH 命令发送给频道 channel1 时， 这个消息就会被发送给订阅它的三个客户端：</p><p><img src="/2022/05/21/Redis/Redis%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/pubsub2.png" alt="img"></p><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>以下实例演示了发布订阅是如何工作的，需要开启两个 redis-cli 客户端。</p><p>在我们实例中我们创建了订阅频道名为 <strong>runoobChat</strong>:</p><p><strong>第一个 redis-cli 客户端</strong></p><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">redis <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">6379</span>&gt; SUBSCRIBE runoobChat<br><br><span class="hljs-function"><span class="hljs-title">Reading</span></span> messages... (press Ctrl-C to quit)<br><span class="hljs-number">1</span>) <span class="hljs-string">&quot;subscribe&quot;</span><br><span class="hljs-number">2</span>) <span class="hljs-string">&quot;runoobChat&quot;</span><br><span class="hljs-number">3</span>) (<span class="hljs-keyword">integer</span>) <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><p>现在，我们先重新开启个 redis 客户端，然后在同一个频道 runoobChat 发布两次消息，订阅者就能接收到消息。</p><p><strong>第二个 redis-cli 客户端</strong></p><figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><br><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; PUBLISH runoobChat <span class="hljs-string">&quot;Redis PUBLISH test&quot;</span><br><br>(integer) <span class="hljs-number">1</span><br><br>redis <span class="hljs-number">127.0.0.1:6379</span>&gt; PUBLISH runoobChat <span class="hljs-string">&quot;Learn redis by runoob.com&quot;</span><br><br>(integer) <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><p><strong>订阅者的客户端会显示如下消息</strong></p><figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c"><span class="hljs-number">1</span>) <span class="hljs-string">&quot;message&quot;</span> <span class="hljs-meta">#消息</span><br><span class="hljs-number">2</span>) <span class="hljs-string">&quot;runoobChat&quot;</span> <span class="hljs-meta">#订阅</span><br><span class="hljs-number">3</span>) <span class="hljs-string">&quot;Redis PUBLISH test&quot;</span> <span class="hljs-meta">#消息详情</span><br><span class="hljs-number">1</span>) <span class="hljs-string">&quot;message&quot;</span><br><span class="hljs-number">2</span>) <span class="hljs-string">&quot;runoobChat&quot;</span><br><span class="hljs-number">3</span>) <span class="hljs-string">&quot;Learn redis by runoob.com&quot;</span><br></code></pre></div></td></tr></table></figure><h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><ol><li>psubscribe pattern [pattern…]<ul><li>订阅一个或多个符合给定模式的频道</li></ul></li><li>pubsub subcommand [argument [argument…]]<ul><li>查看订阅与发布系统状态</li></ul></li><li>publish channel message<ul><li>将消息发送到指定的频道</li></ul></li><li>punsubscribe channel message<ul><li>将消息发送到指定的频道</li></ul></li><li>subscribe channel [channel…]<ul><li>订阅给定的一个或多个频道的消息</li></ul></li><li>unsubscribe [channel[channel…]]<ul><li>退订频道</li></ul></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Redis</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Redis持久化_AOF</title>
     <link href="/2022/05/20/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96-AOF/"/>
     <url>/2022/05/20/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96-AOF/</url>
