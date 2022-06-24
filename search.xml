@@ -4,19 +4,6 @@
   
     
     <entry>
-      <title>friends</title>
-      <link href="/2022/06/25/friends/"/>
-      <url>/2022/06/25/friends/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>SpringCache入门</title>
       <link href="/2022/06/24/springcache-ru-men/"/>
       <url>/2022/06/24/springcache-ru-men/</url>
@@ -672,6 +659,33 @@
     
     
     <entry>
+      <title>Redis命令_键(key)</title>
+      <link href="/2022/05/16/redis/redis-ming-ling/redis-ming-ling-jian-key/"/>
+      <url>/2022/05/16/redis/redis-ming-ling/redis-ming-ling-jian-key/</url>
+      
+        <content type="html"><![CDATA[<h2 id="键key命令"><a class="markdownIt-Anchor" href="#键key命令">#</a> 键（key）命令</h2><ol><li>设置键值对</li></ol><pre class="line-numbers language-none"><code class="language-none">set (keyname) (keyvalue)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="2"><li>删除键</li></ol><pre class="line-numbers language-none"><code class="language-none">del (key)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="3"><li>序列化给定 key，并返回被序列化的值</li></ol><pre class="line-numbers language-none"><code class="language-none">dump (key)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="4"><li>检查给定 key 是否存在</li></ol><pre class="line-numbers language-none"><code class="language-none">exists key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="5"><li>给 key 设置过期时间 (以秒为单位)</li></ol><pre class="line-numbers language-none"><code class="language-none">expire (key) (seconds)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">expire (key) (timestamp)EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">pexpire (key) (milliseconds)设置key过期时间(以毫秒为单位)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">PEXPIREAT (key) (milliseconds-timestamp)设置 key 过期时间的时间戳(unix timestamp) 以毫秒计<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol start="6"><li>查找所有符合给定模式 (pattern) 的 key</li></ol><pre class="line-numbers language-none"><code class="language-none">keys pattern<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>实例</strong></p><p>keys *</p><p>列出所有键</p><ol start="7"><li>移动 key 到指定数据库</li></ol><pre class="line-numbers language-none"><code class="language-none">move key db<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="8"><li>移除 key 期间，key 将长久保持</li></ol><pre class="line-numbers language-none"><code class="language-none">persist (key)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="9"><li>返回 key 剩余的过期时间</li></ol><pre class="line-numbers language-none"><code class="language-none">pttl (key)#以毫秒为单位ttl (key)#以秒为单位<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ol start="10"><li>从数据库中随机返回一个 key</li></ol><pre class="line-numbers language-none"><code class="language-none">randomkey<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="11"><li>修改 key 名称</li></ol><pre class="line-numbers language-none"><code class="language-none">rename (key) (newkey)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="12"><li>仅当 newkey 不存在时，将 key 改名为 newkey</li></ol><pre class="line-numbers language-none"><code class="language-none">renamenx (key) (newkey)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="13"><li>返回 key 所存储的值的类型</li></ol><pre class="line-numbers language-none"><code class="language-none">type key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="14"><li>迭代数据库中的数据库键</li></ol><pre class="line-numbers language-none"><code class="language-none">scan cursor [MATCH pattern] [COUNT count]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Redis </category>
+          
+          <category> Redis命令 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Redis命令_服务器</title>
       <link href="/2022/05/16/redis/redis-ming-ling/redis-ming-ling-fu-wu-qi/"/>
       <url>/2022/05/16/redis/redis-ming-ling/redis-ming-ling-fu-wu-qi/</url>
@@ -701,38 +715,11 @@
     
     
     <entry>
-      <title>Redis命令_键(key)</title>
-      <link href="/2022/05/16/redis/redis-ming-ling/redis-ming-ling-jian-key/"/>
-      <url>/2022/05/16/redis/redis-ming-ling/redis-ming-ling-jian-key/</url>
+      <title>Redis命令_字符串(String)</title>
+      <link href="/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-zi-fu-chuan-string/"/>
+      <url>/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-zi-fu-chuan-string/</url>
       
-        <content type="html"><![CDATA[<h2 id="键key命令"><a class="markdownIt-Anchor" href="#键key命令">#</a> 键（key）命令</h2><ol><li>设置键值对</li></ol><pre class="line-numbers language-none"><code class="language-none">set (keyname) (keyvalue)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="2"><li>删除键</li></ol><pre class="line-numbers language-none"><code class="language-none">del (key)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="3"><li>序列化给定 key，并返回被序列化的值</li></ol><pre class="line-numbers language-none"><code class="language-none">dump (key)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="4"><li>检查给定 key 是否存在</li></ol><pre class="line-numbers language-none"><code class="language-none">exists key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="5"><li>给 key 设置过期时间 (以秒为单位)</li></ol><pre class="line-numbers language-none"><code class="language-none">expire (key) (seconds)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">expire (key) (timestamp)EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">pexpire (key) (milliseconds)设置key过期时间(以毫秒为单位)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">PEXPIREAT (key) (milliseconds-timestamp)设置 key 过期时间的时间戳(unix timestamp) 以毫秒计<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol start="6"><li>查找所有符合给定模式 (pattern) 的 key</li></ol><pre class="line-numbers language-none"><code class="language-none">keys pattern<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>实例</strong></p><p>keys *</p><p>列出所有键</p><ol start="7"><li>移动 key 到指定数据库</li></ol><pre class="line-numbers language-none"><code class="language-none">move key db<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="8"><li>移除 key 期间，key 将长久保持</li></ol><pre class="line-numbers language-none"><code class="language-none">persist (key)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="9"><li>返回 key 剩余的过期时间</li></ol><pre class="line-numbers language-none"><code class="language-none">pttl (key)#以毫秒为单位ttl (key)#以秒为单位<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ol start="10"><li>从数据库中随机返回一个 key</li></ol><pre class="line-numbers language-none"><code class="language-none">randomkey<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="11"><li>修改 key 名称</li></ol><pre class="line-numbers language-none"><code class="language-none">rename (key) (newkey)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="12"><li>仅当 newkey 不存在时，将 key 改名为 newkey</li></ol><pre class="line-numbers language-none"><code class="language-none">renamenx (key) (newkey)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="13"><li>返回 key 所存储的值的类型</li></ol><pre class="line-numbers language-none"><code class="language-none">type key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="14"><li>迭代数据库中的数据库键</li></ol><pre class="line-numbers language-none"><code class="language-none">scan cursor [MATCH pattern] [COUNT count]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> Redis </category>
-          
-          <category> Redis命令 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Redis </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Redis命令_哈希(Hash)</title>
-      <link href="/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-ha-xi-hash/"/>
-      <url>/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-ha-xi-hash/</url>
-      
-        <content type="html"><![CDATA[<h2 id="hash命令"><a class="markdownIt-Anchor" href="#hash命令">#</a> Hash 命令</h2><ol><li>查</li></ol><pre class="line-numbers language-none"><code class="language-none">hexists key field#查看哈希表key中，指定字段是否存在hget key field#获取hgetall key#获取所有字段和值hkeys key#获取所有哈希表中的字段hlen key#获取哈希表中字段数量hmget key field1 [field2]#获取所有给定字段的值hscan key cursor [MATCH pattern] [COUNT count]#迭代键值对hvals key#获取哈希表中所有值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol start="2"><li>增</li></ol><pre class="line-numbers language-none"><code class="language-none">hincrby key field increament#为哈希表 key 中的指定字段的整数值加上增量hincrbyfloat field increament#为哈希表 key 中的指定字段的浮点数值加上增量hmset key field1 value1 [field2] value2#设置多个键值对hsetnx key field value#字段不存在时设置字段的值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ol start="3"><li>删</li></ol><pre class="line-numbers language-none"><code class="language-none">hdel key field1 [field2]#删除一个或多个字段<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="4"><li>改</li></ol><pre class="line-numbers language-none"><code class="language-none">hset key field value<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+        <content type="html"><![CDATA[<h2 id="string命令"><a class="markdownIt-Anchor" href="#string命令">#</a> String 命令</h2><ol><li>获取 (设定) 值</li></ol><pre class="line-numbers language-none"><code class="language-none">set (key) (value)get (key)getrange (key) start end #范围获取getset (keyvalue) #获取并设定，返回原值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ol start="2"><li>对 key 所储存的字符串值，获取（设定）指定偏移量上的位 (bit)。</li></ol><pre class="line-numbers language-none"><code class="language-none">getbit key offsetsetbit key offset value<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol start="3"><li>获取一个或多个给定 key 的值</li></ol><pre class="line-numbers language-none"><code class="language-none">mget key1[key2..]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="4"><li>更改</li></ol><pre class="line-numbers language-none"><code class="language-none">incr key #将 key 中储存的数字值增incrby key increament#将 key 所储存的值加上给定的增量值（increment）incrbyfloat key increament#将 key 所储存的值加上给定的浮点增量值decr key #将 key 中储存的数字值减一decrby key decrement#key 所储存的值减去给定的减量值append key value#如果 key 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       
       
       <categories>
@@ -755,11 +742,11 @@
     
     
     <entry>
-      <title>Redis命令_字符串(String)</title>
-      <link href="/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-zi-fu-chuan-string/"/>
-      <url>/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-zi-fu-chuan-string/</url>
+      <title>Redis命令_哈希(Hash)</title>
+      <link href="/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-ha-xi-hash/"/>
+      <url>/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-ha-xi-hash/</url>
       
-        <content type="html"><![CDATA[<h2 id="string命令"><a class="markdownIt-Anchor" href="#string命令">#</a> String 命令</h2><ol><li>获取 (设定) 值</li></ol><pre class="line-numbers language-none"><code class="language-none">set (key) (value)get (key)getrange (key) start end #范围获取getset (keyvalue) #获取并设定，返回原值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ol start="2"><li>对 key 所储存的字符串值，获取（设定）指定偏移量上的位 (bit)。</li></ol><pre class="line-numbers language-none"><code class="language-none">getbit key offsetsetbit key offset value<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol start="3"><li>获取一个或多个给定 key 的值</li></ol><pre class="line-numbers language-none"><code class="language-none">mget key1[key2..]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="4"><li>更改</li></ol><pre class="line-numbers language-none"><code class="language-none">incr key #将 key 中储存的数字值增incrby key increament#将 key 所储存的值加上给定的增量值（increment）incrbyfloat key increament#将 key 所储存的值加上给定的浮点增量值decr key #将 key 中储存的数字值减一decrby key decrement#key 所储存的值减去给定的减量值append key value#如果 key 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+        <content type="html"><![CDATA[<h2 id="hash命令"><a class="markdownIt-Anchor" href="#hash命令">#</a> Hash 命令</h2><ol><li>查</li></ol><pre class="line-numbers language-none"><code class="language-none">hexists key field#查看哈希表key中，指定字段是否存在hget key field#获取hgetall key#获取所有字段和值hkeys key#获取所有哈希表中的字段hlen key#获取哈希表中字段数量hmget key field1 [field2]#获取所有给定字段的值hscan key cursor [MATCH pattern] [COUNT count]#迭代键值对hvals key#获取哈希表中所有值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol start="2"><li>增</li></ol><pre class="line-numbers language-none"><code class="language-none">hincrby key field increament#为哈希表 key 中的指定字段的整数值加上增量hincrbyfloat field increament#为哈希表 key 中的指定字段的浮点数值加上增量hmset key field1 value1 [field2] value2#设置多个键值对hsetnx key field value#字段不存在时设置字段的值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ol start="3"><li>删</li></ol><pre class="line-numbers language-none"><code class="language-none">hdel key field1 [field2]#删除一个或多个字段<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="4"><li>改</li></ol><pre class="line-numbers language-none"><code class="language-none">hset key field value<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
       
       
       <categories>
