@@ -4,12 +4,12 @@
     <title>不利索の鸣 • Posts by &#34;事务&#34; category</title>
     <link href="https://prehitting.gitee.io" />
     <updated>2022-05-18T03:41:50.000Z</updated>
-    <category term="SpringBoot" />
     <category term="MybatisPlus" />
+    <category term="SpringBoot" />
     <category term="拦截器" />
-    <category term="Spring" />
     <category term="SpringCache" />
     <category term="Redis" />
+    <category term="Spring" />
     <category term="Swagger" />
     <category term="Springmvc" />
     <category term="mybatisPlus" />
@@ -31,9 +31,9 @@
     <category term="Vim" />
     <category term="Jedis" />
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/18/Redis/%E4%BA%8B%E5%8A%A1/</id>
+        <id>https://prehitting.gitee.io/2022/05/18/redis/shi-wu/</id>
         <title>事务</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/18/Redis/%E4%BA%8B%E5%8A%A1/"/>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/18/redis/shi-wu/"/>
         <content type="html">&lt;h2 id=&#34;事务&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#事务&#34;&gt;#&lt;/a&gt; 事务&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;Redis 事务的本质：一组命令的集合，一组事务中的所有命令都会被序列化，在事务执行过程中，会按照顺序进行&lt;/p&gt;
@@ -53,7 +53,14 @@
 &lt;p&gt;所有命令在事务中，并没有立即执行。只有发起执行命令时才会执行&lt;/p&gt;
 &lt;p&gt;&lt;font color=&#34;red&#34;&gt;Redis 单条命令是保持原子性的，但是事务不保证原子性&lt;/font&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;multi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;开启事务&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k1 v1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k2 v2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k3 v3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;此时并未执行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;exec&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;执行事务&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; multi
+&lt;span class=&#34;token comment&#34;&gt;#开启事务&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; k1 v1
+&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; k2 v2
+&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; k3 v3
+&lt;span class=&#34;token comment&#34;&gt;#此时并未执行&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;exec&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#执行事务&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;异常&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#异常&#34;&gt;#&lt;/a&gt; 异常&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;编译型异常&lt;/p&gt;

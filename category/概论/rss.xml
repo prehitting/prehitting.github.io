@@ -7,12 +7,12 @@
         <language>zh-CN</language>
         <pubDate>Mon, 16 May 2022 22:15:41 +0800</pubDate>
         <lastBuildDate>Mon, 16 May 2022 22:15:41 +0800</lastBuildDate>
-        <category>SpringBoot</category>
         <category>MybatisPlus</category>
+        <category>SpringBoot</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
         <category>Springmvc</category>
         <category>mybatisPlus</category>
@@ -34,9 +34,9 @@
         <category>Vim</category>
         <category>Jedis</category>
         <item>
-            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/16/Redis/%E6%A6%82%E8%AE%BA/%E5%85%B3%E4%BA%8ERedis%E5%8D%95%E7%BA%BF%E7%A8%8B/</guid>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/16/redis/gai-lun/guan-yu-redis-dan-xian-cheng/</guid>
             <title>关于Redis的单线程问题</title>
-            <link>https://prehitting.gitee.io/2022/05/16/Redis/%E6%A6%82%E8%AE%BA/%E5%85%B3%E4%BA%8ERedis%E5%8D%95%E7%BA%BF%E7%A8%8B/</link>
+            <link>https://prehitting.gitee.io/2022/05/16/redis/gai-lun/guan-yu-redis-dan-xian-cheng/</link>
             <category>Redis</category>
             <pubDate>Mon, 16 May 2022 22:15:41 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;基础知识&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基础知识&#34;&gt;#&lt;/a&gt; 基础知识&lt;/h2&gt;

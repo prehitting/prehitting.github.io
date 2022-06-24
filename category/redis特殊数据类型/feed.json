@@ -5,18 +5,18 @@
     "home_page_url": "https://prehitting.gitee.io",
     "items": [
         {
-            "id": "https://prehitting.gitee.io/2022/05/18/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/BitMap/",
-            "url": "https://prehitting.gitee.io/2022/05/18/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/BitMap/",
+            "id": "https://prehitting.gitee.io/2022/05/18/redis/redis-te-shu-shu-ju-lei-xing/bitmap/",
+            "url": "https://prehitting.gitee.io/2022/05/18/redis/redis-te-shu-shu-ju-lei-xing/bitmap/",
             "title": "BitMap",
             "date_published": "2022-05-18T03:28:33.000Z",
-            "content_html": "<h2 id=\"bitmaps\"><a class=\"markdownIt-Anchor\" href=\"#bitmaps\">#</a> BitMaps</h2>\n<p>相当于 map&lt;Integer,Byte&gt;</p>\n<blockquote>\n<p>位存储</p>\n</blockquote>\n<p>统计用户信息，活跃 or 不活跃，登录 or 未登录，凡是只有两个状态的，都可以使用 BitMaps</p>\n<h2 id=\"命令\"><a class=\"markdownIt-Anchor\" href=\"#命令\">#</a> 命令</h2>\n<figure class=\"highlight plaintext\"><table><tr><td class=\"code\"><pre><span class=\"line\">setbit （key） （offset） （value）</span><br><span class=\"line\">getbit (key) (offset)</span><br><span class=\"line\">bitcount (key) [start,end]</span><br></pre></td></tr></table></figure>\n<p>实例：</p>\n<figure class=\"highlight plaintext\"><table><tr><td class=\"code\"><pre><span class=\"line\">setbit sign 0 0</span><br><span class=\"line\">setbit sign 7 1</span><br><span class=\"line\">getbit sign 7</span><br><span class=\"line\">bitcount sign</span><br></pre></td></tr></table></figure>\n",
+            "content_html": "<h2 id=\"bitmaps\"><a class=\"markdownIt-Anchor\" href=\"#bitmaps\">#</a> BitMaps</h2>\n<p>相当于 map&lt;Integer,Byte&gt;</p>\n<blockquote>\n<p>位存储</p>\n</blockquote>\n<p>统计用户信息，活跃 or 不活跃，登录 or 未登录，凡是只有两个状态的，都可以使用 BitMaps</p>\n<h2 id=\"命令\"><a class=\"markdownIt-Anchor\" href=\"#命令\">#</a> 命令</h2>\n<pre class=\"line-numbers language-none\"><code class=\"language-none\">setbit （key） （offset） （value）\ngetbit (key) (offset)\nbitcount (key) [start,end]<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span></span></code></pre>\n<p>实例：</p>\n<pre class=\"line-numbers language-none\"><code class=\"language-none\">setbit sign 0 0\nsetbit sign 7 1\ngetbit sign 7\nbitcount sign<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span></span></code></pre>\n",
             "tags": [
                 "Redis"
             ]
         },
         {
-            "id": "https://prehitting.gitee.io/2022/05/17/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/",
-            "url": "https://prehitting.gitee.io/2022/05/17/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/",
+            "id": "https://prehitting.gitee.io/2022/05/17/redis/redis-te-shu-shu-ju-lei-xing/hyperloglog/",
+            "url": "https://prehitting.gitee.io/2022/05/17/redis/redis-te-shu-shu-ju-lei-xing/hyperloglog/",
             "title": "HyperLogLog",
             "date_published": "2022-05-17T12:41:46.000Z",
             "content_html": "<blockquote>\n<p>什么是基数</p>\n</blockquote>\n<p>一个集合中不重复的元素个数，可以接收误差</p>\n<blockquote>\n<p>简介</p>\n</blockquote>\n<ul>\n<li>Redis 在 2.8.9 版本添加了 HyperLogLog 结构</li>\n<li>基数统计算法</li>\n<li>优点：占用内存固定，2^64 不同的元素只需要 12KB 内存！如果要从内存角度来比较，Hyperloglog 首选</li>\n<li>存在 0.81% 的错误率，如果不允许容错，使用 set 即可</li>\n<li>网站的 UV（一个人访问一个网站多次，但算作一个人）\n<ul>\n<li>传统统计方式：set 存储用户 id，然后就可以统计 set 中的元素作为标准判断</li>\n<li>用传统方式保存大量用户 id 会比较麻烦</li>\n</ul>\n</li>\n</ul>\n<blockquote>\n<p>命令</p>\n</blockquote>\n<table>\n<thead>\n<tr>\n<th>1</th>\n<th>[PFADD key element [element …]] 添加指定元素到 HyperLogLog 中。</th>\n<th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2</td>\n<td>[PFCOUNT key [key …]] 返回给定 HyperLogLog 的基数估算值。</td>\n<td></td>\n</tr>\n<tr>\n<td>3</td>\n<td>[PFMERGE destkey sourcekey [sourcekey …]] 将多个 HyperLogLog 合并为一个 HyperLogLog</td>\n</tr>\n</tbody>\n</table>\n",

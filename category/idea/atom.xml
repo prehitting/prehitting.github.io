@@ -4,12 +4,12 @@
     <title>不利索の鸣 • Posts by &#34;idea&#34; category</title>
     <link href="https://prehitting.gitee.io" />
     <updated>2022-05-18T08:36:03.000Z</updated>
-    <category term="SpringBoot" />
     <category term="MybatisPlus" />
+    <category term="SpringBoot" />
     <category term="拦截器" />
-    <category term="Spring" />
     <category term="SpringCache" />
     <category term="Redis" />
+    <category term="Spring" />
     <category term="Swagger" />
     <category term="Springmvc" />
     <category term="mybatisPlus" />
@@ -31,18 +31,18 @@
     <category term="Vim" />
     <category term="Jedis" />
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/18/IDEA/java%EF%BC%9A%E6%97%A0%E6%95%88%E7%9A%84%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88/</id>
+        <id>https://prehitting.gitee.io/2022/05/18/idea/java-wu-xiao-de-mu-biao-fa-xing-ban/</id>
         <title>java：无效的目标发行版</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/18/IDEA/java%EF%BC%9A%E6%97%A0%E6%95%88%E7%9A%84%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88/"/>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/18/idea/java-wu-xiao-de-mu-biao-fa-xing-ban/"/>
         <content type="html">&lt;p&gt;使用 IDEA 开发时碰到如下错误&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;java: 错误：无效的目标发行版：16&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;解决方案：&lt;br&gt;
 灵感来源：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/348660719&#34;&gt;知乎&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/2022/05/18/IDEA/java%EF%BC%9A%E6%97%A0%E6%95%88%E7%9A%84%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88/image-20220518164104705-16528632683301.png&#34; alt=&#34;image-20220518164104705&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/05/18/idea/java-wu-xiao-de-mu-biao-fa-xing-ban/image-20220518164104705-16528632683301.png&#34; alt=&#34;image-20220518164104705&#34;&gt;&lt;/p&gt;
 &lt;p&gt;语言基本取默认值 8&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/2022/05/18/IDEA/java%EF%BC%9A%E6%97%A0%E6%95%88%E7%9A%84%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88/image-20220518164221404.png&#34; alt=&#34;image-20220518164221404&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/05/18/idea/java-wu-xiao-de-mu-biao-fa-xing-ban/image-20220518164221404.png&#34; alt=&#34;image-20220518164221404&#34;&gt;&lt;/p&gt;
 </content>
         <category term="IDEA" />
         <updated>2022-05-18T08:36:03.000Z</updated>

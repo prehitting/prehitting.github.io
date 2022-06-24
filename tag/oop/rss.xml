@@ -7,12 +7,12 @@
         <language>zh-CN</language>
         <pubDate>Fri, 06 May 2022 22:12:48 +0800</pubDate>
         <lastBuildDate>Fri, 06 May 2022 22:12:48 +0800</lastBuildDate>
-        <category>SpringBoot</category>
         <category>MybatisPlus</category>
+        <category>SpringBoot</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
         <category>Springmvc</category>
         <category>mybatisPlus</category>
@@ -34,9 +34,9 @@
         <category>Vim</category>
         <category>Jedis</category>
         <item>
-            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/OOP%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/</guid>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/06/she-ji-mo-shi/oop-qi-da-yuan-ze/</guid>
             <title>OOP七大原则</title>
-            <link>https://prehitting.gitee.io/2022/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/OOP%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/</link>
+            <link>https://prehitting.gitee.io/2022/05/06/she-ji-mo-shi/oop-qi-da-yuan-ze/</link>
             <category>设计模式</category>
             <category>OOP</category>
             <pubDate>Fri, 06 May 2022 22:12:48 +0800</pubDate>

@@ -4,12 +4,12 @@
     <title>不利索の鸣 • Posts by &#34;概论&#34; category</title>
     <link href="https://prehitting.gitee.io" />
     <updated>2022-05-16T14:15:41.000Z</updated>
-    <category term="SpringBoot" />
     <category term="MybatisPlus" />
+    <category term="SpringBoot" />
     <category term="拦截器" />
-    <category term="Spring" />
     <category term="SpringCache" />
     <category term="Redis" />
+    <category term="Spring" />
     <category term="Swagger" />
     <category term="Springmvc" />
     <category term="mybatisPlus" />
@@ -31,9 +31,9 @@
     <category term="Vim" />
     <category term="Jedis" />
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/16/Redis/%E6%A6%82%E8%AE%BA/%E5%85%B3%E4%BA%8ERedis%E5%8D%95%E7%BA%BF%E7%A8%8B/</id>
+        <id>https://prehitting.gitee.io/2022/05/16/redis/gai-lun/guan-yu-redis-dan-xian-cheng/</id>
         <title>关于Redis的单线程问题</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/16/Redis/%E6%A6%82%E8%AE%BA/%E5%85%B3%E4%BA%8ERedis%E5%8D%95%E7%BA%BF%E7%A8%8B/"/>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/16/redis/gai-lun/guan-yu-redis-dan-xian-cheng/"/>
         <content type="html">&lt;h2 id=&#34;基础知识&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基础知识&#34;&gt;#&lt;/a&gt; 基础知识&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Redis 是单线程的&lt;/p&gt;

@@ -7,12 +7,12 @@
         <language>zh-CN</language>
         <pubDate>Wed, 18 May 2022 11:28:33 +0800</pubDate>
         <lastBuildDate>Wed, 18 May 2022 11:28:33 +0800</lastBuildDate>
-        <category>SpringBoot</category>
         <category>MybatisPlus</category>
+        <category>SpringBoot</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
         <category>Springmvc</category>
         <category>mybatisPlus</category>
@@ -34,9 +34,9 @@
         <category>Vim</category>
         <category>Jedis</category>
         <item>
-            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/18/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/BitMap/</guid>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/18/redis/redis-te-shu-shu-ju-lei-xing/bitmap/</guid>
             <title>BitMap</title>
-            <link>https://prehitting.gitee.io/2022/05/18/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/BitMap/</link>
+            <link>https://prehitting.gitee.io/2022/05/18/redis/redis-te-shu-shu-ju-lei-xing/bitmap/</link>
             <category>Redis</category>
             <pubDate>Wed, 18 May 2022 11:28:33 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;bitmaps&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#bitmaps&#34;&gt;#&lt;/a&gt; BitMaps&lt;/h2&gt;
@@ -46,15 +46,20 @@
 &lt;/blockquote&gt;
 &lt;p&gt;统计用户信息，活跃 or 不活跃，登录 or 未登录，凡是只有两个状态的，都可以使用 BitMaps&lt;/p&gt;
 &lt;h2 id=&#34;命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#命令&#34;&gt;#&lt;/a&gt; 命令&lt;/h2&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;setbit （key） （offset） （value）&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;getbit (key) (offset)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bitcount (key) [start,end]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;setbit （key） （offset） （value）
+getbit (key) (offset)
+bitcount (key) [start,end]&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;实例：&lt;/p&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;setbit sign 0 0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;setbit sign 7 1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;getbit sign 7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bitcount sign&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;setbit sign 0 0
+setbit sign 7 1
+getbit sign 7
+bitcount sign&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/17/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/</guid>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/17/redis/redis-te-shu-shu-ju-lei-xing/hyperloglog/</guid>
             <title>HyperLogLog</title>
-            <link>https://prehitting.gitee.io/2022/05/17/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/</link>
+            <link>https://prehitting.gitee.io/2022/05/17/redis/redis-te-shu-shu-ju-lei-xing/hyperloglog/</link>
             <category>Redis</category>
             <pubDate>Tue, 17 May 2022 20:41:46 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;

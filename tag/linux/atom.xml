@@ -4,12 +4,12 @@
     <title>不利索の鸣 • Posts by &#34;linux&#34; tag</title>
     <link href="https://prehitting.gitee.io" />
     <updated>2022-05-10T14:27:08.000Z</updated>
-    <category term="SpringBoot" />
     <category term="MybatisPlus" />
+    <category term="SpringBoot" />
     <category term="拦截器" />
-    <category term="Spring" />
     <category term="SpringCache" />
     <category term="Redis" />
+    <category term="Spring" />
     <category term="Swagger" />
     <category term="Springmvc" />
     <category term="mybatisPlus" />
@@ -31,22 +31,24 @@
     <category term="Vim" />
     <category term="Jedis" />
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/10/Linux/Linux%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</id>
+        <id>https://prehitting.gitee.io/2022/05/10/linux/linux-huan-jing-an-zhuang/</id>
         <title>Linux环境安装</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/10/Linux/Linux%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/"/>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/10/linux/linux-huan-jing-an-zhuang/"/>
         <content type="html">&lt;h2 id=&#34;jdk安装&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#jdk安装&#34;&gt;#&lt;/a&gt; JDK 安装&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;卸载 centos7 自带的 openjdk&lt;/p&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;yum list installed |grep java&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;rpm -e --nodeps &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;yum list installed |grep java
+
+rpm -e --nodeps &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;安装 jdk&lt;/p&gt;
 &lt;p&gt;2.1 yum 安装 jdk&lt;/p&gt;
 &lt;p&gt;​	&lt;strong&gt;以下命令查找能够安装的 jdk 版本&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;yum -y list java*&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;yum -y list java*&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;​	定位到 /usr/local/java/ 安装 openJDK&lt;/p&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;yum install -y java-1.8.0-openjdk&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;yum install -y java-1.8.0-openjdk&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 </content>
@@ -54,10 +56,10 @@
         <updated>2022-05-10T14:27:08.000Z</updated>
     </entry>
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/</id>
+        <id>https://prehitting.gitee.io/2022/05/09/linux/vim-bian-ji-qi/</id>
         <title>Vim编辑器</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/"/>
-        <content type="html">&lt;p&gt;&lt;img src=&#34;/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/image-20220509163720196-16520854463721.png&#34; alt=&#34;image-20220509163720196&#34;&gt;&lt;/p&gt;
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/09/linux/vim-bian-ji-qi/"/>
+        <content type="html">&lt;p&gt;&lt;img src=&#34;/2022/05/09/linux/vim-bian-ji-qi/image-20220509163720196-16520854463721.png&#34; alt=&#34;image-20220509163720196&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;vivim-的使用&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#vivim-的使用&#34;&gt;#&lt;/a&gt; vi/vim 的使用&lt;/h2&gt;
 &lt;p&gt;基本上 vi/vim 共分为三种模式，分别是&lt;strong&gt;命令模式（Command mode）&lt;/strong&gt;，&lt;strong&gt;输入模式（Insert mode）&lt;strong&gt;和&lt;/strong&gt;底线命令模式（Last line mode）&lt;/strong&gt;。 这三种模式的作用分别是：&lt;/p&gt;
 &lt;h3 id=&#34;命令模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#命令模式&#34;&gt;#&lt;/a&gt; 命令模式：&lt;/h3&gt;
@@ -430,11 +432,11 @@
         <updated>2022-05-09T08:34:45.000Z</updated>
     </entry>
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/07/Linux/Linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</id>
+        <id>https://prehitting.gitee.io/2022/05/07/linux/linux-mu-lu-jie-gou/</id>
         <title>Linux目录结构</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/07/Linux/Linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/"/>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/07/linux/linux-mu-lu-jie-gou/"/>
         <content type="html">&lt;h2 id=&#34;目录结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#目录结构&#34;&gt;#&lt;/a&gt; 目录结构&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;/2022/05/07/Linux/Linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/image-20220507161042910-16519110450571.png&#34; alt=&#34;image-20220507161042910&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/05/07/linux/linux-mu-lu-jie-gou/image-20220507161042910-16519110450571.png&#34; alt=&#34;image-20220507161042910&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;/bin  ：&lt;/p&gt;
@@ -540,9 +542,9 @@ var 是 variable (变量) 的缩写，这个目录中存放着在不断扩充着
         <updated>2022-05-07T08:10:17.000Z</updated>
     </entry>
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/07/Linux/Linux%E5%91%BD%E4%BB%A4/</id>
+        <id>https://prehitting.gitee.io/2022/05/07/linux/linux-ming-ling/</id>
         <title>Linux命令</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/07/Linux/Linux%E5%91%BD%E4%BB%A4/"/>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/07/linux/linux-ming-ling/"/>
         <content type="html">&lt;h2 id=&#34;常用命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#常用命令&#34;&gt;#&lt;/a&gt; 常用命令&lt;/h2&gt;
 &lt;h3 id=&#34;系统关机重启&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#系统关机重启&#34;&gt;#&lt;/a&gt; 系统关机 / 重启&lt;/h3&gt;
 &lt;table&gt;
@@ -881,25 +883,25 @@ var 是 variable (变量) 的缩写，这个目录中存放着在不断扩充着
 &lt;p&gt;每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。不同 Linux 系统对用户组的规定有所不同，如 Linux 下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建。&lt;/p&gt;
 &lt;p&gt;用户组的管理涉及用户组的添加、删除和修改。组的增加、删除和修改实际上就是对 /etc/group 文件的更新。&lt;/p&gt;
 &lt;h3 id=&#34;1-增加一个新的用户组使用groupadd命令-其格式如下&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-增加一个新的用户组使用groupadd命令-其格式如下&#34;&gt;#&lt;/a&gt; 1、增加一个新的用户组使用 groupadd 命令。其格式如下：&lt;/h3&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;groupadd 选项 用户组&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;groupadd 选项 用户组&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;可以使用的选项有：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;-g GID 指定新用户组的组标识号（GID）。&lt;/li&gt;
 &lt;li&gt;-o 一般与 - g 选项同时使用，表示新用户组的 GID 可以与系统已有用户组的 GID 相同。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;实例1&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#实例1&#34;&gt;#&lt;/a&gt; 实例 1：&lt;/h4&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# groupadd group1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# groupadd group1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;此命令向系统中增加了一个新组 group1，新组的组标识号是在当前已有的最大组标识号的基础上加 1。&lt;/p&gt;
 &lt;h4 id=&#34;实例2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#实例2&#34;&gt;#&lt;/a&gt; 实例 2：&lt;/h4&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# groupadd -g 101 group2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# groupadd -g 101 group2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;此命令向系统中增加了一个新组 group2，同时指定新组的组标识号是 101。&lt;/p&gt;
 &lt;h3 id=&#34;2-如果要删除一个已有的用户组使用groupdel命令其格式如下&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-如果要删除一个已有的用户组使用groupdel命令其格式如下&#34;&gt;#&lt;/a&gt; 2、如果要删除一个已有的用户组，使用 groupdel 命令，其格式如下：&lt;/h3&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;groupdel 用户组&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;groupdel 用户组&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;例如&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#例如&#34;&gt;#&lt;/a&gt; 例如：&lt;/h4&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# groupdel group1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# groupdel group1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;此命令从系统中删除组 group1。&lt;/p&gt;
 &lt;h3 id=&#34;3-修改用户组的属性使用groupmod命令-其语法如下&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3-修改用户组的属性使用groupmod命令-其语法如下&#34;&gt;#&lt;/a&gt; 3、修改用户组的属性使用 groupmod 命令。其语法如下：&lt;/h3&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;groupmod 选项 用户组&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;groupmod 选项 用户组&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;常用的选项有：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;-g GID 为用户组指定新的组标识号。&lt;/li&gt;
@@ -907,14 +909,14 @@ var 是 variable (变量) 的缩写，这个目录中存放着在不断扩充着
 &lt;li&gt;-n 新用户组 将用户组的名字改为新名字&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;实例1-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#实例1-2&#34;&gt;#&lt;/a&gt; 实例 1：&lt;/h4&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# groupmod -g 102 group2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# groupmod -g 102 group2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;此命令将组 group2 的组标识号修改为 102。&lt;/p&gt;
 &lt;h4 id=&#34;实例2-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#实例2-2&#34;&gt;#&lt;/a&gt; 实例 2：&lt;/h4&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# groupmod –g 10000 -n group3 group2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# groupmod –g 10000 -n group3 group2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;此命令将组 group2 的标识号改为 10000，组名修改为 group3。&lt;/p&gt;
 &lt;h3 id=&#34;4-如果一个用户同时属于多个用户组那么用户可以在用户组之间切换以便具有其他用户组的权限&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#4-如果一个用户同时属于多个用户组那么用户可以在用户组之间切换以便具有其他用户组的权限&#34;&gt;#&lt;/a&gt; 4、如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。&lt;/h3&gt;
 &lt;p&gt;用户可以在登录后，使用命令 newgrp 切换到其他用户组，这个命令的参数就是目的用户组。例如：&lt;/p&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ newgrp root&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;$ newgrp root&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;这条命令将当前用户切换到 root 用户组，前提条件是 root 用户组确实是该用户的主组或附加组。类似于用户账号的管理，用户组的管理也可以通过集成的系统管理工具来完成。&lt;/p&gt;
 &lt;h2 id=&#34;磁盘管理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#磁盘管理&#34;&gt;#&lt;/a&gt; 磁盘管理&lt;/h2&gt;
 &lt;p&gt;常用命令 df，du，fdisk&lt;/p&gt;
@@ -922,7 +924,7 @@ var 是 variable (变量) 的缩写，这个目录中存放着在不断扩充着
 &lt;blockquote&gt;
 &lt;p&gt;检查文件系统的磁盘空间占用情况。可以利用该命令来获硬盘被占用了多少空间，目前还剩下多少空间等信息。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;df [-ahikHTm] [目录或文件名]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;df [-ahikHTm] [目录或文件名]&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;-a ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；&lt;/li&gt;
 &lt;li&gt;-k ：以 KBytes 的容量显示各文件系统；&lt;/li&gt;
@@ -934,7 +936,7 @@ var 是 variable (变量) 的缩写，这个目录中存放着在不断扩充着
 &lt;/ul&gt;
 &lt;h3 id=&#34;du命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#du命令&#34;&gt;#&lt;/a&gt; du 命令&lt;/h3&gt;
 &lt;p&gt;对文件和目录磁盘使用的空间的查看&lt;/p&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;du [-ahskm] 文件或目录名称&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;du [-ahskm] 文件或目录名称&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;-a ：列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。&lt;/li&gt;
 &lt;li&gt;-h ：以人们较易读的容量格式 (G/M) 显示；&lt;/li&gt;
@@ -945,14 +947,14 @@ var 是 variable (变量) 的缩写，这个目录中存放着在不断扩充着
 &lt;/ul&gt;
 &lt;h3 id=&#34;fdisk命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#fdisk命令&#34;&gt;#&lt;/a&gt; fdisk 命令&lt;/h3&gt;
 &lt;p&gt;fdisk 是 Linux 的磁盘分区表操作工具&lt;/p&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;fdisk [-l] 装置名称&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;fdisk [-l] 装置名称&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;磁盘格式化&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#磁盘格式化&#34;&gt;#&lt;/a&gt; 磁盘格式化&lt;/h3&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;mkfs [-t 文件系统格式] 装置文件名&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;mkfs [-t 文件系统格式] 装置文件名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;-t ：可以接文件系统格式，例如 ext3, ext2, vfat 等 (系统有支持才会生效)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;磁盘校验&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#磁盘校验&#34;&gt;#&lt;/a&gt; 磁盘校验&lt;/h3&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;fsck [-t 文件系统][-ACay] 装置名称&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;fsck [-t 文件系统][-ACay] 装置名称&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;-t : 给定档案系统的型式，若在 /etc/fstab 中已有定义或 kernel 本身已支援的则不需加上此参数&lt;/li&gt;
 &lt;li&gt;-s : 依序一个一个地执行 fsck 的指令来检查&lt;/li&gt;
@@ -967,8 +969,8 @@ var 是 variable (变量) 的缩写，这个目录中存放着在不断扩充着
 &lt;li&gt;-y : 选项指定检测每个文件是自动输入 yes，在不确定那些是不正常的时候，可以执行 # fsck -y 全部检查修复。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;磁盘挂载和删除&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#磁盘挂载和删除&#34;&gt;#&lt;/a&gt; 磁盘挂载和删除&lt;/h3&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;mount [-t 文件系统] [-L Label名] [-o 额外选项] [-n]  装置文件名  挂载点&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;umount [-fn] 装置文件名或挂载点&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;mount [-t 文件系统] [-L Label名] [-o 额外选项] [-n]  装置文件名  挂载点&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;umount [-fn] 装置文件名或挂载点&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;-f ：强制卸除！可用在类似网络文件系统 (NFS) 无法读取到的情况下；&lt;/li&gt;
 &lt;li&gt;-n ：不升级 /etc/mtab 情况下卸除。&lt;/li&gt;
@@ -982,7 +984,10 @@ var 是 variable (变量) 的缩写，这个目录中存放着在不断扩充着
 &lt;li&gt;-u 以用户的信息显示进程&lt;/li&gt;
 &lt;li&gt;-x 显示后台运行进程的参数&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# ps -aux  查看所有进程&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -aux | grep mysql  c&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;# | 在linux中叫做管道符&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;# grep 查找文件中符合条件的字符串&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# ps -aux  查看所有进程
+ps -aux | grep mysql  c
+# | 在linux中叫做管道符
+# grep 查找文件中符合条件的字符串&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 </content>
         <category term="Linux" />
         <updated>2022-05-07T06:03:47.000Z</updated>

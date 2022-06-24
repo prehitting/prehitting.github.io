@@ -4,12 +4,12 @@
     <title>不利索の鸣 • Posts by &#34;redis特殊数据类型&#34; category</title>
     <link href="https://prehitting.gitee.io" />
     <updated>2022-05-18T03:28:33.000Z</updated>
-    <category term="SpringBoot" />
     <category term="MybatisPlus" />
+    <category term="SpringBoot" />
     <category term="拦截器" />
-    <category term="Spring" />
     <category term="SpringCache" />
     <category term="Redis" />
+    <category term="Spring" />
     <category term="Swagger" />
     <category term="Springmvc" />
     <category term="mybatisPlus" />
@@ -31,9 +31,9 @@
     <category term="Vim" />
     <category term="Jedis" />
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/18/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/BitMap/</id>
+        <id>https://prehitting.gitee.io/2022/05/18/redis/redis-te-shu-shu-ju-lei-xing/bitmap/</id>
         <title>BitMap</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/18/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/BitMap/"/>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/18/redis/redis-te-shu-shu-ju-lei-xing/bitmap/"/>
         <content type="html">&lt;h2 id=&#34;bitmaps&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#bitmaps&#34;&gt;#&lt;/a&gt; BitMaps&lt;/h2&gt;
 &lt;p&gt;相当于 map&amp;lt;Integer,Byte&amp;gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -41,17 +41,22 @@
 &lt;/blockquote&gt;
 &lt;p&gt;统计用户信息，活跃 or 不活跃，登录 or 未登录，凡是只有两个状态的，都可以使用 BitMaps&lt;/p&gt;
 &lt;h2 id=&#34;命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#命令&#34;&gt;#&lt;/a&gt; 命令&lt;/h2&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;setbit （key） （offset） （value）&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;getbit (key) (offset)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bitcount (key) [start,end]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;setbit （key） （offset） （value）
+getbit (key) (offset)
+bitcount (key) [start,end]&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;实例：&lt;/p&gt;
-&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;setbit sign 0 0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;setbit sign 7 1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;getbit sign 7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bitcount sign&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;setbit sign 0 0
+setbit sign 7 1
+getbit sign 7
+bitcount sign&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 </content>
         <category term="Redis" />
         <updated>2022-05-18T03:28:33.000Z</updated>
     </entry>
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/17/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/</id>
+        <id>https://prehitting.gitee.io/2022/05/17/redis/redis-te-shu-shu-ju-lei-xing/hyperloglog/</id>
         <title>HyperLogLog</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/17/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/"/>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/17/redis/redis-te-shu-shu-ju-lei-xing/hyperloglog/"/>
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;什么是基数&lt;/p&gt;
 &lt;/blockquote&gt;

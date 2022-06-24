@@ -7,12 +7,12 @@
         <language>zh-CN</language>
         <pubDate>Mon, 09 May 2022 16:34:45 +0800</pubDate>
         <lastBuildDate>Mon, 09 May 2022 16:34:45 +0800</lastBuildDate>
-        <category>SpringBoot</category>
         <category>MybatisPlus</category>
+        <category>SpringBoot</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
         <category>Springmvc</category>
         <category>mybatisPlus</category>
@@ -34,13 +34,13 @@
         <category>Vim</category>
         <category>Jedis</category>
         <item>
-            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/</guid>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/09/linux/vim-bian-ji-qi/</guid>
             <title>Vim编辑器</title>
-            <link>https://prehitting.gitee.io/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/</link>
+            <link>https://prehitting.gitee.io/2022/05/09/linux/vim-bian-ji-qi/</link>
             <category>Linux</category>
             <category>Vim</category>
             <pubDate>Mon, 09 May 2022 16:34:45 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;&lt;img src=&#34;/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/image-20220509163720196-16520854463721.png&#34; alt=&#34;image-20220509163720196&#34;&gt;&lt;/p&gt;
+            <description><![CDATA[ &lt;p&gt;&lt;img src=&#34;/2022/05/09/linux/vim-bian-ji-qi/image-20220509163720196-16520854463721.png&#34; alt=&#34;image-20220509163720196&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;vivim-的使用&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#vivim-的使用&#34;&gt;#&lt;/a&gt; vi/vim 的使用&lt;/h2&gt;
 &lt;p&gt;基本上 vi/vim 共分为三种模式，分别是&lt;strong&gt;命令模式（Command mode）&lt;/strong&gt;，&lt;strong&gt;输入模式（Insert mode）&lt;strong&gt;和&lt;/strong&gt;底线命令模式（Last line mode）&lt;/strong&gt;。 这三种模式的作用分别是：&lt;/p&gt;
 &lt;h3 id=&#34;命令模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#命令模式&#34;&gt;#&lt;/a&gt; 命令模式：&lt;/h3&gt;

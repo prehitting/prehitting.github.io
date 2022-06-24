@@ -7,12 +7,12 @@
         <language>zh-CN</language>
         <pubDate>Wed, 18 May 2022 11:41:50 +0800</pubDate>
         <lastBuildDate>Wed, 18 May 2022 11:41:50 +0800</lastBuildDate>
-        <category>SpringBoot</category>
         <category>MybatisPlus</category>
+        <category>SpringBoot</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
         <category>Springmvc</category>
         <category>mybatisPlus</category>
@@ -34,9 +34,9 @@
         <category>Vim</category>
         <category>Jedis</category>
         <item>
-            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/18/Redis/%E4%BA%8B%E5%8A%A1/</guid>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/18/redis/shi-wu/</guid>
             <title>事务</title>
-            <link>https://prehitting.gitee.io/2022/05/18/Redis/%E4%BA%8B%E5%8A%A1/</link>
+            <link>https://prehitting.gitee.io/2022/05/18/redis/shi-wu/</link>
             <category>Redis</category>
             <pubDate>Wed, 18 May 2022 11:41:50 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;事务&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#事务&#34;&gt;#&lt;/a&gt; 事务&lt;/h2&gt;
@@ -58,7 +58,14 @@
 &lt;p&gt;所有命令在事务中，并没有立即执行。只有发起执行命令时才会执行&lt;/p&gt;
 &lt;p&gt;&lt;font color=&#34;red&#34;&gt;Redis 单条命令是保持原子性的，但是事务不保证原子性&lt;/font&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;multi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;开启事务&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k1 v1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k2 v2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k3 v3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;此时并未执行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;exec&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;执行事务&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; multi
+&lt;span class=&#34;token comment&#34;&gt;#开启事务&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; k1 v1
+&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; k2 v2
+&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; k3 v3
+&lt;span class=&#34;token comment&#34;&gt;#此时并未执行&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;exec&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#执行事务&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;异常&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#异常&#34;&gt;#&lt;/a&gt; 异常&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;编译型异常&lt;/p&gt;
