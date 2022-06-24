@@ -1,0 +1,413 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>不利索の鸣 • Posts by &#34;vim&#34; tag</title>
+        <link>https://prehitting.gitee.io</link>
+        <description>欢迎来到鸣崽的空间，这里不仅有学习，还有生活</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 09 May 2022 16:34:45 +0800</pubDate>
+        <lastBuildDate>Mon, 09 May 2022 16:34:45 +0800</lastBuildDate>
+        <category>SpringBoot</category>
+        <category>MybatisPlus</category>
+        <category>拦截器</category>
+        <category>Spring</category>
+        <category>SpringCache</category>
+        <category>Redis</category>
+        <category>Swagger</category>
+        <category>Springmvc</category>
+        <category>mybatisPlus</category>
+        <category>IDEA</category>
+        <category>Linux</category>
+        <category>设计模式</category>
+        <category>OOP</category>
+        <category>动态代理模式</category>
+        <category>单例模式</category>
+        <category>原型模式</category>
+        <category>工厂模式</category>
+        <category>建造者模式</category>
+        <category>静态代理模式</category>
+        <category>SLF4J</category>
+        <category>Redis命令</category>
+        <category>过滤器</category>
+        <category>瑞吉外卖</category>
+        <category>SpringMVC</category>
+        <category>Vim</category>
+        <category>Jedis</category>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/</guid>
+            <title>Vim编辑器</title>
+            <link>https://prehitting.gitee.io/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/</link>
+            <category>Linux</category>
+            <category>Vim</category>
+            <pubDate>Mon, 09 May 2022 16:34:45 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&lt;img src=&#34;/2022/05/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8/image-20220509163720196-16520854463721.png&#34; alt=&#34;image-20220509163720196&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;vivim-的使用&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#vivim-的使用&#34;&gt;#&lt;/a&gt; vi/vim 的使用&lt;/h2&gt;
+&lt;p&gt;基本上 vi/vim 共分为三种模式，分别是&lt;strong&gt;命令模式（Command mode）&lt;/strong&gt;，&lt;strong&gt;输入模式（Insert mode）&lt;strong&gt;和&lt;/strong&gt;底线命令模式（Last line mode）&lt;/strong&gt;。 这三种模式的作用分别是：&lt;/p&gt;
+&lt;h3 id=&#34;命令模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#命令模式&#34;&gt;#&lt;/a&gt; 命令模式：&lt;/h3&gt;
+&lt;p&gt;用户刚刚启动 vi/vim，便进入了命令模式。&lt;/p&gt;
+&lt;p&gt;此状态下敲击键盘动作会被 Vim 识别为命令，而非输入字符。比如我们此时按下 i，并不会输入一个字符，i 被当作了一个命令。&lt;/p&gt;
+&lt;p&gt;以下是常用的几个命令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;i&lt;/strong&gt; 切换到输入模式，以输入字符。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;x&lt;/strong&gt; 删除当前光标所在处的字符。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;:&lt;/strong&gt; 切换到底线命令模式，以在最底一行输入命令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;若想要编辑文本：启动 Vim，进入了命令模式，按下 i，切换到输入模式。&lt;/p&gt;
+&lt;p&gt;命令模式只有一些最基本的命令，因此仍要依靠底线命令模式输入更多命令。&lt;/p&gt;
+&lt;h3 id=&#34;输入模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#输入模式&#34;&gt;#&lt;/a&gt; 输入模式&lt;/h3&gt;
+&lt;p&gt;在命令模式下按下 i 就进入了输入模式。&lt;/p&gt;
+&lt;p&gt;在输入模式中，可以使用以下按键：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;字符按键以及 Shift 组合&lt;/strong&gt;，输入字符&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ENTER&lt;/strong&gt;，回车键，换行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BACK SPACE&lt;/strong&gt;，退格键，删除光标前一个字符&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DEL&lt;/strong&gt;，删除键，删除光标后一个字符&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;方向键&lt;/strong&gt;，在文本中移动光标&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HOME&lt;/strong&gt;/&lt;strong&gt;END&lt;/strong&gt;，移动光标到行首 / 行尾&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Page Up&lt;/strong&gt;/&lt;strong&gt;Page Down&lt;/strong&gt;，上 / 下翻页&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Insert&lt;/strong&gt;，切换光标为输入 / 替换模式，光标将变成竖线 / 下划线&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ESC&lt;/strong&gt;，退出输入模式，切换到命令模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;底线命令模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#底线命令模式&#34;&gt;#&lt;/a&gt; 底线命令模式&lt;/h3&gt;
+&lt;p&gt;在命令模式下按下:（英文冒号）就进入了底线命令模式。&lt;/p&gt;
+&lt;p&gt;底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。&lt;/p&gt;
+&lt;p&gt;在底线命令模式中，基本的命令有（已经省略了冒号）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;q 退出程序&lt;/li&gt;
+&lt;li&gt;w 保存文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;按 ESC 键可随时退出底线命令模式。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用  vim filename 命令&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;vivim-按键说明&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#vivim-按键说明&#34;&gt;#&lt;/a&gt; vi/vim 按键说明&lt;/h2&gt;
+&lt;p&gt;除了上面简易范例的 i, Esc, :wq 之外，其实 vim 还有非常多的按键可以使用。&lt;/p&gt;
+&lt;h3 id=&#34;第一部分一般模式可用的光标移动-复制粘贴-搜索替换等&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#第一部分一般模式可用的光标移动-复制粘贴-搜索替换等&#34;&gt;#&lt;/a&gt; 第一部分：一般模式可用的光标移动、复制粘贴、搜索替换等&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;移动光标的方法&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;h 或 向左箭头键 (←)&lt;/td&gt;
+&lt;td&gt;光标向左移动一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;j 或 向下箭头键 (↓)&lt;/td&gt;
+&lt;td&gt;光标向下移动一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;k 或 向上箭头键 (↑)&lt;/td&gt;
+&lt;td&gt;光标向上移动一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;l 或 向右箭头键 (→)&lt;/td&gt;
+&lt;td&gt;光标向右移动一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;如果你将右手放在键盘上的话，你会发现 hjkl 是排列在一起的，因此可以使用这四个按钮来移动光标。 如果想要进行多次移动的话，例如向下移动 30 行，可以使用 “30j” 或 “30↓” 的组合按键， 亦即加上想要进行的次数 (数字) 后，按下动作即可！&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;[Ctrl] + [f]&lt;/td&gt;
+&lt;td&gt;屏幕『向下』移动一页，相当于 [Page Down] 按键 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;[Ctrl] + [b]&lt;/td&gt;
+&lt;td&gt;屏幕『向上』移动一页，相当于 [Page Up] 按键 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;[Ctrl] + [d]&lt;/td&gt;
+&lt;td&gt;屏幕『向下』移动半页&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;[Ctrl] + [u]&lt;/td&gt;
+&lt;td&gt;屏幕『向上』移动半页&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;+&lt;/td&gt;
+&lt;td&gt;光标移动到非空格符的下一行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;-&lt;/td&gt;
+&lt;td&gt;光标移动到非空格符的上一行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;n&lt;space&gt;&lt;/space&gt;&lt;/td&gt;
+&lt;td&gt;那个 n 表示『数字』，例如 20 。按下数字后再按空格键，光标会向右移动这一行的 n 个字符。例如 20&lt;space&gt; 则光标会向后面移动 20 个字符距离。&lt;/space&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0 或功能键 [Home]&lt;/td&gt;
+&lt;td&gt;这是数字『 0 』：移动到这一行的最前面字符处 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;$ 或功能键 [End]&lt;/td&gt;
+&lt;td&gt;移动到这一行的最后面字符处 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;H&lt;/td&gt;
+&lt;td&gt;光标移动到这个屏幕的最上方那一行的第一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;M&lt;/td&gt;
+&lt;td&gt;光标移动到这个屏幕的中央那一行的第一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;L&lt;/td&gt;
+&lt;td&gt;光标移动到这个屏幕的最下方那一行的第一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;G&lt;/td&gt;
+&lt;td&gt;移动到这个档案的最后一行 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;nG&lt;/td&gt;
+&lt;td&gt;n 为数字。移动到这个档案的第 n 行。例如 20G 则会移动到这个档案的第 20 行 (可配合 :set nu)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;gg&lt;/td&gt;
+&lt;td&gt;移动到这个档案的第一行，相当于 1G 啊！ (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;n&lt;Enter&gt;&lt;/Enter&gt;&lt;/td&gt;
+&lt;td&gt;n 为数字。光标向下移动 n 行 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;搜索替换&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;/word&lt;/td&gt;
+&lt;td&gt;向光标之下寻找一个名称为 word 的字符串。例如要在档案内搜寻 vbird 这个字符串，就输入 /vbird 即可！ (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;?word&lt;/td&gt;
+&lt;td&gt;向光标之上寻找一个字符串名称为 word 的字符串。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;n&lt;/td&gt;
+&lt;td&gt;这个 n 是英文按键。代表重复前一个搜寻的动作。举例来说， 如果刚刚我们执行 /vbird 去向下搜寻 vbird 这个字符串，则按下 n 后，会向下继续搜寻下一个名称为 vbird 的字符串。如果是执行？vbird 的话，那么按下 n 则会向上继续搜寻名称为 vbird 的字符串！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;N&lt;/td&gt;
+&lt;td&gt;这个 N 是英文按键。与 n 刚好相反，为『反向』进行前一个搜寻动作。 例如 /vbird 后，按下 N 则表示『向上』搜寻 vbird 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;使用 /word 配合 n 及 N 是非常有帮助的！可以让你重复的找到一些你搜寻的关键词！&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:n1,n2s/word1/word2/g&lt;/td&gt;
+&lt;td&gt;n1 与 n2 为数字。在第 n1 与 n2 行之间寻找 word1 这个字符串，并将该字符串取代为 word2 ！举例来说，在 100 到 200 行之间搜寻 vbird 并取代为 VBIRD 则： 『:100,200s/vbird/VBIRD/g』。(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;:1,$s/word1/word2/g&lt;/strong&gt; 或 &lt;strong&gt;:%s/word1/word2/g&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2 ！(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;:1,$s/word1/word2/gc&lt;/strong&gt; 或 &lt;strong&gt;:%s/word1/word2/gc&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2 ！且在取代前显示提示字符给用户确认 (confirm) 是否需要取代！(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;删除、复制与贴上&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;x, X&lt;/td&gt;
+&lt;td&gt;在一行字当中，x 为向后删除一个字符 (相当于 [del] 按键)， X 为向前删除一个字符 (相当于 [backspace] 亦即是退格键) (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;nx&lt;/td&gt;
+&lt;td&gt;n 为数字，连续向后删除 n 个字符。举例来说，我要连续删除 10 个字符， 『10x』。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;dd&lt;/td&gt;
+&lt;td&gt;剪切游标所在的那一整行 (常用)，用 p/P 可以粘贴。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;ndd&lt;/td&gt;
+&lt;td&gt;n 为数字。剪切光标所在的向下 n 行，例如 20dd 则是剪切 20 行 (常用)，用 p/P 可以粘贴。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;d1G&lt;/td&gt;
+&lt;td&gt;删除光标所在到第一行的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;dG&lt;/td&gt;
+&lt;td&gt;删除光标所在到最后一行的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;d$&lt;/td&gt;
+&lt;td&gt;删除游标所在处，到该行的最后一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;d0&lt;/td&gt;
+&lt;td&gt;那个是数字的 0 ，删除游标所在处，到该行的最前面一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;yy&lt;/td&gt;
+&lt;td&gt;复制游标所在的那一行 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;nyy&lt;/td&gt;
+&lt;td&gt;n 为数字。复制光标所在的向下 n 行，例如 20yy 则是复制 20 行 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;y1G&lt;/td&gt;
+&lt;td&gt;复制游标所在行到第一行的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;yG&lt;/td&gt;
+&lt;td&gt;复制游标所在行到最后一行的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;y0&lt;/td&gt;
+&lt;td&gt;复制光标所在的那个字符到该行行首的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;y$&lt;/td&gt;
+&lt;td&gt;复制光标所在的那个字符到该行行尾的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;p, P&lt;/td&gt;
+&lt;td&gt;p 为将已复制的数据在光标下一行贴上，P 则为贴在游标上一行！ 举例来说，我目前光标在第 20 行，且已经复制了 10 行数据。则按下 p 后， 那 10 行数据会贴在原本的 20 行之后，亦即由 21 行开始贴。但如果是按下 P 呢？ 那么原本的第 20 行会被推到变成 30 行。 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;J&lt;/td&gt;
+&lt;td&gt;将光标所在行与下一行的数据结合成同一行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;c&lt;/td&gt;
+&lt;td&gt;重复删除多个数据，例如向下删除 10 行，[10cj]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;u&lt;/td&gt;
+&lt;td&gt;复原前一个动作。(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;[Ctrl]+r&lt;/td&gt;
+&lt;td&gt;重做上一个动作。(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;这个 u 与 [Ctrl]+r 是很常用的指令！一个是复原，另一个则是重做一次～ 利用这两个功能按键，你的编辑，嘿嘿！很快乐的啦！&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;.&lt;/td&gt;
+&lt;td&gt;不要怀疑！这就是小数点！意思是重复前一个动作的意思。 如果你想要重复删除、重复贴上等等动作，按下小数点『.』就好了！ (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;第二部分一般模式切换到编辑模式的可用的按钮说明&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#第二部分一般模式切换到编辑模式的可用的按钮说明&#34;&gt;#&lt;/a&gt; 第二部分：一般模式切换到编辑模式的可用的按钮说明&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;进入输入或取代的编辑模式&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;i, I&lt;/td&gt;
+&lt;td&gt;进入输入模式 (Insert mode)： i 为『从目前光标所在处输入』， I 为『在目前所在行的第一个非空格符处开始输入』。 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;a, A&lt;/td&gt;
+&lt;td&gt;进入输入模式 (Insert mode)： a 为『从目前光标所在的下一个字符处开始输入』， A 为『从光标所在行的最后一个字符处开始输入』。(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;o, O&lt;/td&gt;
+&lt;td&gt;进入输入模式 (Insert mode)： 这是英文字母 o 的大小写。o 为在目前光标所在的下一行处输入新的一行； O 为在目前光标所在的上一行处输入新的一行！(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;r, R&lt;/td&gt;
+&lt;td&gt;进入取代模式 (Replace mode)： r 只会取代光标所在的那一个字符一次；R 会一直取代光标所在的文字，直到按下 ESC 为止；(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;上面这些按键中，在 vi 画面的左下角处会出现『–INSERT–』或『–REPLACE–』的字样。 由名称就知道该动作了吧！！特别注意的是，我们上面也提过了，你想要在档案里面输入字符时， 一定要在左下角处看到 INSERT 或 REPLACE 才能输入喔！&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;[Esc]&lt;/td&gt;
+&lt;td&gt;退出编辑模式，回到一般模式中 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;第三部分一般模式切换到指令行模式的可用的按钮说明&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#第三部分一般模式切换到指令行模式的可用的按钮说明&#34;&gt;#&lt;/a&gt; 第三部分：一般模式切换到指令行模式的可用的按钮说明&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;指令行的储存、离开等指令&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:w&lt;/td&gt;
+&lt;td&gt;将编辑的数据写入硬盘档案中 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:w!&lt;/td&gt;
+&lt;td&gt;若文件属性为『只读』时，强制写入该档案。不过，到底能不能写入， 还是跟你对该档案的档案权限有关啊！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:q&lt;/td&gt;
+&lt;td&gt;离开 vi (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:q!&lt;/td&gt;
+&lt;td&gt;若曾修改过档案，又不想储存，使用！为强制离开不储存档案。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;注意一下啊，那个惊叹号 (!) 在 vi 当中，常常具有『强制』的意思～&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:wq&lt;/td&gt;
+&lt;td&gt;储存后离开，若为 :wq! 则为强制储存后离开 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;ZZ&lt;/td&gt;
+&lt;td&gt;这是大写的 Z 喔！如果修改过，保存当前文件，然后退出！效果等同于 (保存并退出)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;ZQ&lt;/td&gt;
+&lt;td&gt;不保存，强制退出。效果等同于 &lt;strong&gt;:q!&lt;/strong&gt;。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:w [filename]&lt;/td&gt;
+&lt;td&gt;将编辑的数据储存成另一个档案（类似另存新档）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:r [filename]&lt;/td&gt;
+&lt;td&gt;在编辑的数据中，读入另一个档案的数据。亦即将 『filename』 这个档案内容加到游标所在行后面&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:n1,n2 w [filename]&lt;/td&gt;
+&lt;td&gt;将 n1 到 n2 的内容储存成 filename 这个档案。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:! command&lt;/td&gt;
+&lt;td&gt;暂时离开 vi 到指令行模式下执行 command 的显示结果！例如 『:! ls /home』即可在 vi 当中察看 /home 底下以 ls 输出的档案信息！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;vim 环境的变更&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:set nu&lt;/td&gt;
+&lt;td&gt;显示行号，设定之后，会在每一行的前缀显示该行的行号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;:set nonu&lt;/td&gt;
+&lt;td&gt;与 set nu 相反，为取消行号！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>不利索の鸣 • Posts by &#34;springcache&#34; tag</title>
+        <link>https://prehitting.gitee.io</link>
+        <description>欢迎来到鸣崽的空间，这里不仅有学习，还有生活</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 24 Jun 2022 19:55:57 +0800</pubDate>
+        <lastBuildDate>Fri, 24 Jun 2022 19:55:57 +0800</lastBuildDate>
+        <category>SpringBoot</category>
+        <category>MybatisPlus</category>
+        <category>拦截器</category>
+        <category>Spring</category>
+        <category>SpringCache</category>
+        <category>Redis</category>
+        <category>Swagger</category>
+        <category>Springmvc</category>
+        <category>mybatisPlus</category>
+        <category>IDEA</category>
+        <category>Linux</category>
+        <category>设计模式</category>
+        <category>OOP</category>
+        <category>动态代理模式</category>
+        <category>单例模式</category>
+        <category>原型模式</category>
+        <category>工厂模式</category>
+        <category>建造者模式</category>
+        <category>静态代理模式</category>
+        <category>SLF4J</category>
+        <category>Redis命令</category>
+        <category>过滤器</category>
+        <category>瑞吉外卖</category>
+        <category>SpringMVC</category>
+        <category>Vim</category>
+        <category>Jedis</category>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/06/24/SpringCache%E5%85%A5%E9%97%A8/</guid>
+            <title>SpringCache入门</title>
+            <link>https://prehitting.gitee.io/2022/06/24/SpringCache%E5%85%A5%E9%97%A8/</link>
+            <category>SpringCache</category>
+            <category>Redis</category>
+            <pubDate>Fri, 24 Jun 2022 19:55:57 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;缓存的概念&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#缓存的概念&#34;&gt;#&lt;/a&gt; 缓存的概念&lt;/h2&gt;
+&lt;p&gt;我们可以将缓存定义为一种存储机制，它将数据保存在某个地方，并以一种更快的方式提供服务。&lt;/p&gt;
+&lt;p&gt;要理解缓存，我们先了解下基本概念&lt;/p&gt;
+&lt;h3 id=&#34;缓存命中率&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#缓存命中率&#34;&gt;#&lt;/a&gt; 缓存命中率&lt;/h3&gt;
+&lt;p&gt;即从缓存中读取数据的次数与总读取次数的比率。 一般来讲，命中率越高也好。&lt;/p&gt;
+&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;命中率 = 从缓存中读取的次数  / (总读取次数[从缓存中读取的次数+从慢速设备上读取的次数])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;复制&lt;/p&gt;
+&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;title class_&#34;&gt;Miss&lt;/span&gt;率 = 没从缓存中读取的次数/ (总读取次数[从缓存中读取的次数+从慢速设备上读取的次数])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;复制&lt;/p&gt;
+&lt;p&gt;这是一个非常重要的监控指标，如果要做缓存，就一定要监控这个指标，来看缓存是否工作良好。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;过期策略&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#过期策略&#34;&gt;#&lt;/a&gt; 过期策略&lt;/h3&gt;
+&lt;p&gt;即如果缓存满了，从缓存中移除数据的策略，常见的有 LFU 、LRU、FIFO&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;FIFO (First in First Out) &lt;strong&gt;先进先出策略&lt;/strong&gt;，即先放入缓存的数据先被移除&lt;/li&gt;
+&lt;li&gt;LRU (Least Recently Used) &lt;strong&gt;最久未使用策略&lt;/strong&gt;， 即使用时间距离现在最久的那个数据被移除&lt;/li&gt;
+&lt;li&gt;LFU (Leaset Frequently Used) &lt;strong&gt;最近最少使用策略&lt;/strong&gt;，即一定时间内使用次数（频率）最少的那个数据被移除&lt;/li&gt;
+&lt;li&gt;TTL（Time To Live）&lt;strong&gt;存活期&lt;/strong&gt;，即从缓存中创建时间点开始至到期的一个时间段（不管在这个时间段内有没被访问过都将过期）&lt;/li&gt;
+&lt;li&gt;TTI （Time To Idle）&lt;strong&gt;空闲期&lt;/strong&gt;，即一个数据多久没有被访问就从缓存中移除的时间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;至此，我们基本了解了缓存的一些基本知识。 在 Java 中一般会对调用方法进行缓存控制，比如 findUserById (Sting id),&lt;strong&gt; 先从缓存中查找有没有符合查询条件的数据，如果没有，则执行改方法从数据库中查找该用户，然后添加到缓存中，下次调用时将从缓存中获取。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;从 Spring3.1 开始，提供了缓存注解，并且提供了 Cache 层的抽象。 此外，JSR-107 也从 Spring4.0 开始得到全面支持。&lt;/p&gt;
+&lt;p&gt;Spring 提供可一种可以在方法级别进行缓存的缓存抽象。 通过使用 AOP 对方法机型织入，如果已经为特定方法入参执行过该方法，那么不必执行实际方法就可以返回被缓存的结果。&lt;/p&gt;
+&lt;p&gt;为了启用 AOP 缓存功能，需要使用缓存注解对类中的相关方法进行标记，以便 Spring 为其生成具备缓存功能的代理类。 需要注意的是，Spring Cache 仅提供了一种抽象而未提供具体的实现。 我们以便会自己使用 AIP 来做一定程度的封装实现。&lt;/p&gt;
+&lt;h2 id=&#34;通用缓存springcache&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#通用缓存springcache&#34;&gt;#&lt;/a&gt; 通用缓存 SpringCache&lt;/h2&gt;
+&lt;p&gt;Spring Cache 是 Spring 提供的通用缓存框架。它利用了 AOP，实现了基于注解的缓存功能，使开发者不用关心底层使用了什么缓存框架，只需要简单地加一个注解，就能实现缓存功能了。用户使用 Spring Cache，可以快速开发一个很不错的缓存功能。&lt;/p&gt;
+&lt;h4 id=&#34;问题分析&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#问题分析&#34;&gt;#&lt;/a&gt; 问题分析&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/24/SpringCache%E5%85%A5%E9%97%A8/1279412-20220113152236129-2034256100.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/24/SpringCache%E5%85%A5%E9%97%A8/1279412-20220113152509989-1902173257.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;spring-cache的好处&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spring-cache的好处&#34;&gt;#&lt;/a&gt; Spring Cache 的好处&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;支持开箱即用（Out Of The Box），并提供基本的 Cache 抽象，方便切换各种底层 Cache&lt;/li&gt;
+&lt;li&gt;通过 Cache 注解即可实现缓存逻辑透明化，让开发者关注业务逻辑&lt;/li&gt;
+&lt;li&gt;当事务回滚时，缓存也会自动回滚&lt;/li&gt;
+&lt;li&gt;支持比较复杂的缓存逻辑&lt;/li&gt;
+&lt;li&gt;提供缓存编程的一致性抽象，方便代码维护。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;spring-cache的缺点&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spring-cache的缺点&#34;&gt;#&lt;/a&gt; Spring Cache 的缺点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Spring Cache 并不针对多进程的应用环境进行专门的处理。&lt;/li&gt;
+&lt;li&gt;另外 Spring Cache 抽象的操作中没有锁的概念，当多线程并发操作（更新或者删除）同一个缓存项时，有可能读取到过期的数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;入门&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#入门&#34;&gt;#&lt;/a&gt; 入门&lt;/h2&gt;
+&lt;h3 id=&#34;maven依赖&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#maven依赖&#34;&gt;#&lt;/a&gt; maven 依赖&lt;/h3&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-boot-starter-cache&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;基于注解配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基于注解配置&#34;&gt;#&lt;/a&gt; 基于注解配置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;@EnableCaching：开启缓存功能&lt;/li&gt;
+&lt;li&gt;@Cacheable 主要针对注解配置，能够根据方法的请求参数对其进行缓存&lt;/li&gt;
+&lt;li&gt;@CachePut：定义更新缓存，触发缓存更新&lt;/li&gt;
+&lt;li&gt;@CacheEvict：定义清除缓存，触发缓存清除&lt;/li&gt;
+&lt;li&gt;@Caching：组合定义多种缓存功能&lt;/li&gt;
+&lt;li&gt;@CacheConfig：定义公共设置，位于 class 之上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;enablecaching&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#enablecaching&#34;&gt;#&lt;/a&gt; @EnableCaching&lt;/h4&gt;
+&lt;p&gt;该注解主要用于开启基于注解的缓存功能，使用方式为：&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@EnableCaching&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Configuration&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;CacheConfig&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Bean&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; CacheManager &lt;span class=&#34;title function_&#34;&gt;cacheManager&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;type&#34;&gt;SimpleCacheManager&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;cacheManager&lt;/span&gt; &lt;span class=&#34;operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;SimpleCacheManager&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        cacheManager.setCaches(Arrays.asList(&lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;ConcurrentMapCache&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;default&amp;quot;&lt;/span&gt;)));&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; cacheManager;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：在 SpringBoot 中使用 SpringCache 可以由自动配置功能来完成 CacheManager 的注册，SpringBoot 会自动发现项目中拥有的缓存系统，而注册对应的缓存管理器，当然我们也可以手动指定。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;使用该注解和如下 XML 配置具有一样的效果：&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;beans&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;cache:annotation-driven&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;bean&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;id&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;cacheManager&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;class&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;org.springframework.cache.support.SimpleCacheManager&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;tag&#34;&gt;        &amp;lt;property name=&amp;quot;&lt;/span&gt;&lt;span class=&#34;attr&#34;&gt;caches&lt;/span&gt;&amp;quot;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;set&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;bean&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;class&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;tag&#34;&gt;                    &amp;lt;property name=&amp;quot;&lt;/span&gt;&lt;span class=&#34;attr&#34;&gt;name&lt;/span&gt;&amp;quot; &lt;span class=&#34;attr&#34;&gt;value&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;default&amp;quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                &lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;bean&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;set&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;property&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;bean&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;beans&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;cacheable&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#cacheable&#34;&gt;#&lt;/a&gt; @Cacheable&lt;/h4&gt;
+&lt;p&gt;该注解用于标注于方法之上用于标识该方法的返回结果需要被缓存起来，标注于类之上标识该类中所有方法均需要将结果缓存起来。&lt;/p&gt;
+&lt;p&gt;该注解标注的方法每次被调用前都会触发缓存校验，校验指定参数的缓存是否已存在（已发生过相同参数的调用），若存在，直接返回缓存结果，否则执行方法内容，最后将方法执行结果保存到缓存中。&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Cacheable(value = &amp;quot;user&amp;quot;,key = &amp;quot;#userId&amp;quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; UserInfo &lt;span class=&#34;title function_&#34;&gt;queryById&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(Long userId)&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;//从数据库查询&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;type&#34;&gt;UserInfo&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;user&lt;/span&gt; &lt;span class=&#34;operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;UserInfo&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    user.setId(userId);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    user.setNickname(&lt;span class=&#34;string&#34;&gt;&amp;quot;ceshi&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; user;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注解属性中，&lt;mark&gt;value&lt;/mark&gt; 是必需的，它指定了你的缓存存放在哪块命名空间&lt;/p&gt;
+&lt;h4 id=&#34;cachevict&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#cachevict&#34;&gt;#&lt;/a&gt; @CachEvict&lt;/h4&gt;
+&lt;p&gt;该注解主要针对方法配置，能够根据一定的条件对缓存进行清空。&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;//根据id修改&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@CacheEvict(value = &amp;quot;user&amp;quot;,key = &amp;quot;#userId&amp;quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;update&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(Long userId)&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;//修改用户&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;type&#34;&gt;UserInfo&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;user&lt;/span&gt; &lt;span class=&#34;operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;UserInfo&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    user.setId(userId);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    user.setNickname(&lt;span class=&#34;string&#34;&gt;&amp;quot;itcast&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;cacheput&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#cacheput&#34;&gt;#&lt;/a&gt; @CachePut&lt;/h4&gt;
+&lt;p&gt;该注解用于更新缓存，无论结果是否已经缓存，都会在方法执行结束插入缓存，相当于更新缓存。一般用于更新方法之上。&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Service&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Log4j2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;AnimalService&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Autowired&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;private&lt;/span&gt; AnimalRepository animalRepository;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;//...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@CachePut(value = &amp;quot;animalById&amp;quot;, key = &amp;quot;#animal.id&amp;quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; ResponseEntity&amp;lt;Animal&amp;gt; &lt;span class=&#34;title function_&#34;&gt;updateAnimal&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;keyword&#34;&gt;final&lt;/span&gt; Animal animal)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        Wrapper&amp;lt;Animal&amp;gt; animalWrapper = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;UpdateWrapper&lt;/span&gt;&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        ((UpdateWrapper&amp;lt;Animal&amp;gt;) animalWrapper).eq(&lt;span class=&#34;string&#34;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;,animal.getId());&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        animalRepository.update(animal, animalWrapper);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; ResponseEntity.ok(&lt;span class=&#34;built_in&#34;&gt;this&lt;/span&gt;.getAnimalById(animal.getId()));&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;//...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;caching&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#caching&#34;&gt;#&lt;/a&gt; @Caching&lt;/h4&gt;
+&lt;p&gt;这个注解用于组个多个缓存操作，包括针对不用缓存名称的相同操作等&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Service&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Log4j2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;AnimalService&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Autowired&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;private&lt;/span&gt; AnimalRepository animalRepository;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;//...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Caching(&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;        evict = &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;            @CacheEvict(value = &amp;quot;animalById&amp;quot;, key = &amp;quot;#id&amp;quot;),&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;            @CacheEvict(value = &amp;quot;animals&amp;quot;, allEntries = true, beforeInvocation = true)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;        &amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; ResponseEntity&amp;lt;Integer&amp;gt; &lt;span class=&#34;title function_&#34;&gt;deleteAnimalById&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;keyword&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;type&#34;&gt;int&lt;/span&gt; id)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; ResponseEntity.ok(animalRepository.deleteById(id));&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Cacheable(&amp;quot;animals&amp;quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; ResponseEntity&amp;lt;Page&amp;lt;Animal&amp;gt;&amp;gt; &lt;span class=&#34;title function_&#34;&gt;getAnimalPage&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;keyword&#34;&gt;final&lt;/span&gt; Animal animal, &lt;span class=&#34;keyword&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;type&#34;&gt;int&lt;/span&gt; pageId, &lt;span class=&#34;keyword&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;type&#34;&gt;int&lt;/span&gt; pageSize)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        Page&amp;lt;Animal&amp;gt; page = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;Page&lt;/span&gt;&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        page.setCurrent(pageId);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        page.setSize(pageSize);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; ResponseEntity.ok((Page&amp;lt;Animal&amp;gt;) animalRepository.selectPage(page,packWrapper(animal, WrapperType.QUERY)));&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;//...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;cacheconfig&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#cacheconfig&#34;&gt;#&lt;/a&gt; @CacheConfig&lt;/h4&gt;
+&lt;p&gt;该注解标注于类之上，用于进行一些公共的缓存相关配置。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

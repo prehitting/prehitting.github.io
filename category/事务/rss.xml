@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>不利索の鸣 • Posts by &#34;事务&#34; category</title>
+        <link>https://prehitting.gitee.io</link>
+        <description>欢迎来到鸣崽的空间，这里不仅有学习，还有生活</description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 18 May 2022 11:41:50 +0800</pubDate>
+        <lastBuildDate>Wed, 18 May 2022 11:41:50 +0800</lastBuildDate>
+        <category>SpringBoot</category>
+        <category>MybatisPlus</category>
+        <category>拦截器</category>
+        <category>Spring</category>
+        <category>SpringCache</category>
+        <category>Redis</category>
+        <category>Swagger</category>
+        <category>Springmvc</category>
+        <category>mybatisPlus</category>
+        <category>IDEA</category>
+        <category>Linux</category>
+        <category>设计模式</category>
+        <category>OOP</category>
+        <category>动态代理模式</category>
+        <category>单例模式</category>
+        <category>原型模式</category>
+        <category>工厂模式</category>
+        <category>建造者模式</category>
+        <category>静态代理模式</category>
+        <category>SLF4J</category>
+        <category>Redis命令</category>
+        <category>过滤器</category>
+        <category>瑞吉外卖</category>
+        <category>SpringMVC</category>
+        <category>Vim</category>
+        <category>Jedis</category>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/18/Redis/%E4%BA%8B%E5%8A%A1/</guid>
+            <title>事务</title>
+            <link>https://prehitting.gitee.io/2022/05/18/Redis/%E4%BA%8B%E5%8A%A1/</link>
+            <category>Redis</category>
+            <pubDate>Wed, 18 May 2022 11:41:50 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;事务&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#事务&#34;&gt;#&lt;/a&gt; 事务&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Redis 事务的本质：一组命令的集合，一组事务中的所有命令都会被序列化，在事务执行过程中，会按照顺序进行&lt;/p&gt;
+&lt;p&gt;一次性，顺序性，排他性&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;批量操作在发送 EXEC 命令前被放入队列缓存。&lt;/li&gt;
+&lt;li&gt;收到 EXEC 命令后进入事务执行，事务中任意命令执行失败，其余的命令依然被执行。&lt;/li&gt;
+&lt;li&gt;在事务执行过程，其他客户端提交的命令请求不会插入到事务执行命令序列中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一个事务从开始到执行会经历以下三个阶段：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开始事务 (multi)。0&lt;/li&gt;
+&lt;li&gt;命令入队。&lt;/li&gt;
+&lt;li&gt;执行事务 (exec)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;Redis 事务没有隔离级别的概念&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;所有命令在事务中，并没有立即执行。只有发起执行命令时才会执行&lt;/p&gt;
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;Redis 单条命令是保持原子性的，但是事务不保证原子性&lt;/font&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;multi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;开启事务&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k1 v1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k2 v2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; k3 v3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;此时并未执行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;exec&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;执行事务&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;异常&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#异常&#34;&gt;#&lt;/a&gt; 异常&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;编译型异常&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（代码有误，命令有错），事务中所有的命令都不会执行&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;运行时异常&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果事务队列中存在错误，那么执行的时候，其他命令可以正常执行，错误命令抛出异常&lt;/p&gt;
+&lt;h3 id=&#34;监控&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#监控&#34;&gt;#&lt;/a&gt; 监控&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;悲观锁&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;认为什么时候都会出错，无论做什么都会加锁&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;乐观锁&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;认为什么时候都不会出问题，所以不会上锁。&lt;/p&gt;
+&lt;p&gt;使用 version 字段，更新数据的时候判断在此期间是否有人修改过数据&lt;/p&gt;
+&lt;h3 id=&#34;命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#命令&#34;&gt;#&lt;/a&gt; 命令&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;multi 		开启事务&lt;/li&gt;
+&lt;li&gt;exec          执行事务&lt;/li&gt;
+&lt;li&gt;discard    放弃事务&lt;/li&gt;
+&lt;li&gt;unwatch   取消 watch 命令对所有 key 的监视&lt;/li&gt;
+&lt;li&gt;watch key [key…]     监视一个（或多个）key，如果在事务执行之前这个（或这些）key 被其他命令所改动，那么事务将被打断
+&lt;ul&gt;
+&lt;li&gt;执行 watch 命令，相当于拿到了这个 key 的 version，每次执行完事务后要重新加锁，无论事务执行成功或失败，Redis 都会自动解锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

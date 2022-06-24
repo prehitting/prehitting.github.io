@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "不利索の鸣 • All posts by \"idea\" tag",
+    "description": "欢迎来到鸣崽的空间，这里不仅有学习，还有生活",
+    "home_page_url": "https://prehitting.gitee.io",
+    "items": [
+        {
+            "id": "https://prehitting.gitee.io/2022/05/18/IDEA/java%EF%BC%9A%E6%97%A0%E6%95%88%E7%9A%84%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88/",
+            "url": "https://prehitting.gitee.io/2022/05/18/IDEA/java%EF%BC%9A%E6%97%A0%E6%95%88%E7%9A%84%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88/",
+            "title": "java：无效的目标发行版",
+            "date_published": "2022-05-18T08:36:03.000Z",
+            "content_html": "<p>使用 IDEA 开发时碰到如下错误</p>\n<blockquote>\n<p>java: 错误：无效的目标发行版：16</p>\n</blockquote>\n<p>解决方案：<br>\n灵感来源：<a href=\"https://zhuanlan.zhihu.com/p/348660719\">知乎</a></p>\n<p><img src=\"/2022/05/18/IDEA/java%EF%BC%9A%E6%97%A0%E6%95%88%E7%9A%84%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88/image-20220518164104705-16528632683301.png\" alt=\"image-20220518164104705\"></p>\n<p>语言基本取默认值 8</p>\n<p><img src=\"/2022/05/18/IDEA/java%EF%BC%9A%E6%97%A0%E6%95%88%E7%9A%84%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88/image-20220518164221404.png\" alt=\"image-20220518164221404\"></p>\n",
+            "tags": [
+                "IDEA"
+            ]
+        }
+    ]
+}

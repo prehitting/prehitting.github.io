@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://prehitting.gitee.io</id>
+    <title>不利索の鸣 • Posts by &#34;拦截器&#34; tag</title>
+    <link href="https://prehitting.gitee.io" />
+    <updated>2022-05-06T05:29:28.000Z</updated>
+    <category term="SpringBoot" />
+    <category term="MybatisPlus" />
+    <category term="拦截器" />
+    <category term="Spring" />
+    <category term="SpringCache" />
+    <category term="Redis" />
+    <category term="Swagger" />
+    <category term="Springmvc" />
+    <category term="mybatisPlus" />
+    <category term="IDEA" />
+    <category term="Linux" />
+    <category term="设计模式" />
+    <category term="OOP" />
+    <category term="动态代理模式" />
+    <category term="单例模式" />
+    <category term="原型模式" />
+    <category term="工厂模式" />
+    <category term="建造者模式" />
+    <category term="静态代理模式" />
+    <category term="SLF4J" />
+    <category term="Redis命令" />
+    <category term="过滤器" />
+    <category term="瑞吉外卖" />
+    <category term="SpringMVC" />
+    <category term="Vim" />
+    <category term="Jedis" />
+    <entry>
+        <id>https://prehitting.gitee.io/2022/05/06/SpringBoot%E6%8B%A6%E6%88%AA%E5%99%A8%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/</id>
+        <title>SpringBoot拦截器配置方法</title>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/06/SpringBoot%E6%8B%A6%E6%88%AA%E5%99%A8%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/"/>
+        <content type="html">&lt;h2 id=&#34;项目需求&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#项目需求&#34;&gt;#&lt;/a&gt; 项目需求&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;在用户浏览部分页面前，检测用户是否已经登录过，若登录过，则允许访问，
+若未登陆过，则拦截目标页面的访问，并跳转至登录界面
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;配置方法&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#配置方法&#34;&gt;#&lt;/a&gt; 配置方法&lt;/h2&gt;
+&lt;h3 id=&#34;步骤一&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#步骤一&#34;&gt;#&lt;/a&gt; 步骤一&lt;/h3&gt;
+&lt;p&gt;创建 inteceptor 包，创建 LoginInteceptor 类&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;LoginInterceptor&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;HandlerInterceptor&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * 检测全局session对象中是否有uid数据，如果有则放行，若没有则重定向到登陆界面&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * &lt;span class=&#34;doctag&#34;&gt;@param&lt;/span&gt; request 请求对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * &lt;span class=&#34;doctag&#34;&gt;@param&lt;/span&gt; response 响应对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * &lt;span class=&#34;doctag&#34;&gt;@param&lt;/span&gt; handler 处理器（url+Controller，映射）&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * &lt;span class=&#34;doctag&#34;&gt;@return&lt;/span&gt; true则放行，false拦截&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * &lt;span class=&#34;doctag&#34;&gt;@throws&lt;/span&gt; Exception&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;type&#34;&gt;boolean&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;preHandle&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(HttpServletRequest request,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;params&#34;&gt;                             HttpServletResponse response,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;params&#34;&gt;                             Object handler)&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;throws&lt;/span&gt; Exception &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        Object obj=request.getSession().getAttribute(&lt;span class=&#34;string&#34;&gt;&amp;quot;uid&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (obj==&lt;span class=&#34;literal&#34;&gt;null&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;//用户没有登录过系统&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            response.sendRedirect(&lt;span class=&#34;string&#34;&gt;&amp;quot;/web/index.html&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;true&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;步骤二&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#步骤二&#34;&gt;#&lt;/a&gt; 步骤二&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;在config包下创建LoginInterceptorConfig类实现WebMvcConfigure类注册拦截器
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;registry.addInterceptor () 用于注册拦截器&lt;br&gt;
+ addPathPatterns (&amp;quot;/**&amp;quot;) 意为拦截所有页面，参数是需要拦截的页面&lt;br&gt;
+ excludePathPatterns () 参数是不需要拦截的页面&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * 拦截器注册&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Configuration&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;LoginInterceptorConfig&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;WebMvcConfigurer&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    HandlerInterceptor interceptor=&lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;LoginInterceptor&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;addInterceptors&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(InterceptorRegistry registry)&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        List&amp;lt;String&amp;gt; patterns = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;ArrayList&lt;/span&gt;&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/bootstrap3/**&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/css/**&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/images/**&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/js/**&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/web/register.html&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/web/index.html&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/web/login.html&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/web/product.html&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/users/reg&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        patterns.add(&lt;span class=&#34;string&#34;&gt;&amp;quot;/users/login&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        registry.addInterceptor(interceptor).addPathPatterns(&lt;span class=&#34;string&#34;&gt;&amp;quot;/**&amp;quot;&lt;/span&gt;).excludePathPatterns(patterns);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+        <category term="SpringBoot" />
+        <category term="拦截器" />
+        <updated>2022-05-06T05:29:28.000Z</updated>
+    </entry>
+</feed>

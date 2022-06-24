@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://prehitting.gitee.io</id>
+    <title>不利索の鸣 • Posts by &#34;redis命令&#34; tag</title>
+    <link href="https://prehitting.gitee.io" />
+    <updated>2022-05-16T14:46:07.000Z</updated>
+    <category term="SpringBoot" />
+    <category term="MybatisPlus" />
+    <category term="拦截器" />
+    <category term="Spring" />
+    <category term="SpringCache" />
+    <category term="Redis" />
+    <category term="Swagger" />
+    <category term="Springmvc" />
+    <category term="mybatisPlus" />
+    <category term="IDEA" />
+    <category term="Linux" />
+    <category term="设计模式" />
+    <category term="OOP" />
+    <category term="动态代理模式" />
+    <category term="单例模式" />
+    <category term="原型模式" />
+    <category term="工厂模式" />
+    <category term="建造者模式" />
+    <category term="静态代理模式" />
+    <category term="SLF4J" />
+    <category term="Redis命令" />
+    <category term="过滤器" />
+    <category term="瑞吉外卖" />
+    <category term="SpringMVC" />
+    <category term="Vim" />
+    <category term="Jedis" />
+    <entry>
+        <id>https://prehitting.gitee.io/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4/Redis%E5%91%BD%E4%BB%A4_%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
+        <title>Redis命令_服务器</title>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/16/Redis/Redis%E5%91%BD%E4%BB%A4/Redis%E5%91%BD%E4%BB%A4_%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+        <content type="html">&lt;h2 id=&#34;服务器&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#服务器&#34;&gt;#&lt;/a&gt; 服务器&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在远程 Redis 服务上执行命令&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;$ &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;redis-cli -h host -p port -a password&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;实例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;连接到主机 127.0.0.1，端口为 6379，密码为 mypass 的 redis 服务上&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;$ redis-cli -h 127.0.0.1 -p 6379 -a  “mypass”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;键key命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#键key命令&#34;&gt;#&lt;/a&gt; 键（key）命令&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;设置键值对&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;set (keyname) (keyvalue)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;删除键&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;del (key)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;序列化给定 key，并返回被序列化的值&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;dump (key)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;检查给定 key 是否存在&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;exists key&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;给 key 设置过期时间 (以秒为单位)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;expire (key) (seconds)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;expire (key) (timestamp)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pexpire (key) (milliseconds)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;设置key过期时间(以毫秒为单位)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;PEXPIREAT (key) (milliseconds-timestamp)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;设置 key 过期时间的时间戳(unix timestamp) 以毫秒计&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;查找所有符合给定模式 (pattern) 的 key&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;keys pattern&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;实例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;keys *&lt;/p&gt;
+&lt;p&gt;列出所有键&lt;/p&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;移动 key 到指定数据库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;move key db&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;移除 key 期间，key 将长久保持&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;persist (key)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;返回 key 剩余的过期时间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pttl (key)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#以毫秒为单位&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ttl (key)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#以秒为单位&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;从数据库中随机返回一个 key&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;randomkey&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;11&#34;&gt;
+&lt;li&gt;修改 key 名称&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;rename (key) (newkey)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;12&#34;&gt;
+&lt;li&gt;仅当 newkey 不存在时，将 key 改名为 newkey&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;renamenx (key) (newkey)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;13&#34;&gt;
+&lt;li&gt;返回 key 所存储的值的类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;type key&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;14&#34;&gt;
+&lt;li&gt;迭代数据库中的数据库键&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;scan cursor [MATCH pattern] [COUNT count]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;string命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#string命令&#34;&gt;#&lt;/a&gt; String 命令&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;获取 (设定) 值&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;set (key) (value)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;get (key)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;getrange (key) start end #范围获取&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;getset (keyvalue) #获取并设定，返回原值&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;对 key 所储存的字符串值，获取（设定）指定偏移量上的位 (bit)。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;getbit key offset&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;setbit key offset value&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;获取一个或多个给定 key 的值&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;mget key1[key2..]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;更改&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;incr key #将 key 中储存的数字值增&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;incrby key increament#将 key 所储存的值加上给定的增量值（increment）&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;incrbyfloat key increament#将 key 所储存的值加上给定的浮点增量值&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;decr key #将 key 中储存的数字值减一&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;decrby key decrement#key 所储存的值减去给定的减量值&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;append key value#如果 key 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;hash命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#hash命令&#34;&gt;#&lt;/a&gt; Hash 命令&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;查&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hexists key field#查看哈希表key中，指定字段是否存在&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hget key field#获取&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hgetall key#获取所有字段和值&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hkeys key#获取所有哈希表中的字段&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hlen key#获取哈希表中字段数量&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hmget key field1 [field2]#获取所有给定字段的值&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hscan key cursor [MATCH pattern] [COUNT count]#迭代键值对&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hvals key#获取哈希表中所有值&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;增&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hincrby key field increament#为哈希表 key 中的指定字段的整数值加上增量&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hincrbyfloat field increament#为哈希表 key 中的指定字段的浮点数值加上增量&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hmset key field1 value1 [field2] value2#设置多个键值对&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hsetnx key field value#字段不存在时设置字段的值&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;删&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hdel key field1 [field2]#删除一个或多个字段&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;改&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hset key field value&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;set命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#set命令&#34;&gt;#&lt;/a&gt; Set 命令&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;[SADD key member1 &lt;a href=&#34;https://www.runoob.com/redis/sets-sadd.html&#34;&gt;member2]&lt;/a&gt; 向集合添加一个或多个成员&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sets-scard.html&#34;&gt;SCARD key&lt;/a&gt; 获取集合的成员数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;[SDIFF key1 &lt;a href=&#34;https://www.runoob.com/redis/sets-sdiff.html&#34;&gt;key2]&lt;/a&gt; 返回第一个集合与其他集合之间的差异。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;[SDIFFSTORE destination key1 &lt;a href=&#34;https://www.runoob.com/redis/sets-sdiffstore.html&#34;&gt;key2]&lt;/a&gt; 返回给定所有集合的差集并存储在 destination 中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;[SINTER key1 &lt;a href=&#34;https://www.runoob.com/redis/sets-sinter.html&#34;&gt;key2]&lt;/a&gt; 返回给定所有集合的交集&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;[SINTERSTORE destination key1 &lt;a href=&#34;https://www.runoob.com/redis/sets-sinterstore.html&#34;&gt;key2]&lt;/a&gt; 返回给定所有集合的交集并存储在 destination 中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sets-sismember.html&#34;&gt;SISMEMBER key member&lt;/a&gt; 判断 member 元素是否是集合 key 的成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sets-smembers.html&#34;&gt;SMEMBERS key&lt;/a&gt; 返回集合中的所有成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sets-smove.html&#34;&gt;SMOVE source destination member&lt;/a&gt; 将 member 元素从 source 集合移动到 destination 集合&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sets-spop.html&#34;&gt;SPOP key&lt;/a&gt; 移除并返回集合中的一个随机元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;[SRANDMEMBER key &lt;a href=&#34;https://www.runoob.com/redis/sets-srandmember.html&#34;&gt;count]&lt;/a&gt; 返回集合中一个或多个随机数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;[SREM key member1 &lt;a href=&#34;https://www.runoob.com/redis/sets-srem.html&#34;&gt;member2]&lt;/a&gt; 移除集合中一个或多个成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;[SUNION key1 &lt;a href=&#34;https://www.runoob.com/redis/sets-sunion.html&#34;&gt;key2]&lt;/a&gt; 返回所有给定集合的并集&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;[SUNIONSTORE destination key1 &lt;a href=&#34;https://www.runoob.com/redis/sets-sunionstore.html&#34;&gt;key2]&lt;/a&gt; 所有给定集合的并集存储在 destination 集合中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;[SSCAN key cursor &lt;a href=&#34;https://www.runoob.com/redis/sets-sscan.html&#34;&gt;MATCH pattern] [COUNT count]&lt;/a&gt; 迭代集合中的元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;sortedlist&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#sortedlist&#34;&gt;#&lt;/a&gt; SortedList&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;[ZADD key score1 member1 &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zadd.html&#34;&gt;score2 member2]&lt;/a&gt; 向有序集合添加一个或多个成员，或者更新已存在成员的分数&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zcard.html&#34;&gt;ZCARD key&lt;/a&gt; 获取有序集合的成员数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zcount.html&#34;&gt;ZCOUNT key min max&lt;/a&gt; 计算在有序集合中指定区间分数的成员数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zincrby.html&#34;&gt;ZINCRBY key increment member&lt;/a&gt; 有序集合中对指定成员的分数加上增量 increment&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;[ZINTERSTORE destination numkeys key &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zinterstore.html&#34;&gt;key …]&lt;/a&gt; 计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合 destination 中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zlexcount.html&#34;&gt;ZLEXCOUNT key min max&lt;/a&gt; 在有序集合中计算指定字典区间内成员数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;[ZRANGE key start stop &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zrange.html&#34;&gt;WITHSCORES]&lt;/a&gt; 通过索引区间返回有序集合指定区间内的成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;[ZRANGEBYLEX key min max &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zrangebylex.html&#34;&gt;LIMIT offset count]&lt;/a&gt; 通过字典区间返回有序集合的成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;[ZRANGEBYSCORE key min max &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zrangebyscore.html&#34;&gt;WITHSCORES] [LIMIT]&lt;/a&gt; 通过分数返回有序集合指定区间内的成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zrank.html&#34;&gt;ZRANK key member&lt;/a&gt; 返回有序集合中指定成员的索引&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;[ZREM key member &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zrem.html&#34;&gt;member …]&lt;/a&gt; 移除有序集合中的一个或多个成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zremrangebylex.html&#34;&gt;ZREMRANGEBYLEX key min max&lt;/a&gt; 移除有序集合中给定的字典区间的所有成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zremrangebyrank.html&#34;&gt;ZREMRANGEBYRANK key start stop&lt;/a&gt; 移除有序集合中给定的排名区间的所有成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zremrangebyscore.html&#34;&gt;ZREMRANGEBYSCORE key min max&lt;/a&gt; 移除有序集合中给定的分数区间的所有成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;[ZREVRANGE key start stop &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zrevrange.html&#34;&gt;WITHSCORES]&lt;/a&gt; 返回有序集中指定区间内的成员，通过索引，分数从高到低&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;td&gt;[ZREVRANGEBYSCORE key max min &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zrevrangebyscore.html&#34;&gt;WITHSCORES]&lt;/a&gt; 返回有序集中指定分数区间内的成员，分数从高到低排序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zrevrank.html&#34;&gt;ZREVRANK key member&lt;/a&gt; 返回有序集合中指定成员的排名，有序集成员按分数值递减 (从大到小) 排序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;18&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zscore.html&#34;&gt;ZSCORE key member&lt;/a&gt; 返回有序集中，成员的分数值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;19&lt;/td&gt;
+&lt;td&gt;[ZUNIONSTORE destination numkeys key &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zunionstore.html&#34;&gt;key …]&lt;/a&gt; 计算给定的一个或多个有序集的并集，并存储在新的 key 中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;[ZSCAN key cursor &lt;a href=&#34;https://www.runoob.com/redis/sorted-sets-zscan.html&#34;&gt;MATCH pattern] [COUNT count]&lt;/a&gt; 迭代有序集合中的元素（包括元素成员和元素分值）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;list命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#list命令&#34;&gt;#&lt;/a&gt; List 命令&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;[BLPOP key1 &lt;a href=&#34;https://www.runoob.com/redis/lists-blpop.html&#34;&gt;key2 ] timeout&lt;/a&gt; 移出并获取列表的第一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;[BRPOP key1 &lt;a href=&#34;https://www.runoob.com/redis/lists-brpop.html&#34;&gt;key2 ] timeout&lt;/a&gt; 移出并获取列表的最后一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-brpoplpush.html&#34;&gt;BRPOPLPUSH source destination timeout&lt;/a&gt; 从列表中弹出一个值，将弹出的元素插入到另外一个列表中并返回它； 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-lindex.html&#34;&gt;LINDEX key index&lt;/a&gt; 通过索引获取列表中的元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-linsert.html&#34;&gt;LINSERT key BEFORE|AFTER pivot value&lt;/a&gt; 在列表的元素前或者后插入元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-llen.html&#34;&gt;LLEN key&lt;/a&gt; 获取列表长度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-lpop.html&#34;&gt;LPOP key&lt;/a&gt; 移出并获取列表的第一个元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;[LPUSH key value1 &lt;a href=&#34;https://www.runoob.com/redis/lists-lpush.html&#34;&gt;value2]&lt;/a&gt; 将一个或多个值插入到列表头部&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-lpushx.html&#34;&gt;LPUSHX key value&lt;/a&gt; 将一个值插入到已存在的列表头部&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-lrange.html&#34;&gt;LRANGE key start stop&lt;/a&gt; 获取列表指定范围内的元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-lrem.html&#34;&gt;LREM key count value&lt;/a&gt; 移除列表元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-lset.html&#34;&gt;LSET key index value&lt;/a&gt; 通过索引设置列表元素的值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-ltrim.html&#34;&gt;LTRIM key start stop&lt;/a&gt; 对一个列表进行修剪 (trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-rpop.html&#34;&gt;RPOP key&lt;/a&gt; 移除列表的最后一个元素，返回值为移除的元素。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-rpoplpush.html&#34;&gt;RPOPLPUSH source destination&lt;/a&gt; 移除列表的最后一个元素，并将该元素添加到另一个列表并返回&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;td&gt;[RPUSH key value1 &lt;a href=&#34;https://www.runoob.com/redis/lists-rpush.html&#34;&gt;value2]&lt;/a&gt; 在列表中添加一个或多个值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.runoob.com/redis/lists-rpushx.html&#34;&gt;RPUSHX key value&lt;/a&gt; 为已存在的列表添加值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+        <category term="Redis" />
+        <category term="Redis命令" />
+        <updated>2022-05-16T14:46:07.000Z</updated>
+    </entry>
+</feed>

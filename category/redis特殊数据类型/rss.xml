@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>不利索の鸣 • Posts by &#34;redis特殊数据类型&#34; category</title>
+        <link>https://prehitting.gitee.io</link>
+        <description>欢迎来到鸣崽的空间，这里不仅有学习，还有生活</description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 18 May 2022 11:28:33 +0800</pubDate>
+        <lastBuildDate>Wed, 18 May 2022 11:28:33 +0800</lastBuildDate>
+        <category>SpringBoot</category>
+        <category>MybatisPlus</category>
+        <category>拦截器</category>
+        <category>Spring</category>
+        <category>SpringCache</category>
+        <category>Redis</category>
+        <category>Swagger</category>
+        <category>Springmvc</category>
+        <category>mybatisPlus</category>
+        <category>IDEA</category>
+        <category>Linux</category>
+        <category>设计模式</category>
+        <category>OOP</category>
+        <category>动态代理模式</category>
+        <category>单例模式</category>
+        <category>原型模式</category>
+        <category>工厂模式</category>
+        <category>建造者模式</category>
+        <category>静态代理模式</category>
+        <category>SLF4J</category>
+        <category>Redis命令</category>
+        <category>过滤器</category>
+        <category>瑞吉外卖</category>
+        <category>SpringMVC</category>
+        <category>Vim</category>
+        <category>Jedis</category>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/18/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/BitMap/</guid>
+            <title>BitMap</title>
+            <link>https://prehitting.gitee.io/2022/05/18/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/BitMap/</link>
+            <category>Redis</category>
+            <pubDate>Wed, 18 May 2022 11:28:33 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;bitmaps&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#bitmaps&#34;&gt;#&lt;/a&gt; BitMaps&lt;/h2&gt;
+&lt;p&gt;相当于 map&amp;lt;Integer,Byte&amp;gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;位存储&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;统计用户信息，活跃 or 不活跃，登录 or 未登录，凡是只有两个状态的，都可以使用 BitMaps&lt;/p&gt;
+&lt;h2 id=&#34;命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#命令&#34;&gt;#&lt;/a&gt; 命令&lt;/h2&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;setbit （key） （offset） （value）&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;getbit (key) (offset)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bitcount (key) [start,end]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;实例：&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;setbit sign 0 0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;setbit sign 7 1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;getbit sign 7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bitcount sign&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/17/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/</guid>
+            <title>HyperLogLog</title>
+            <link>https://prehitting.gitee.io/2022/05/17/Redis/Redis%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/</link>
+            <category>Redis</category>
+            <pubDate>Tue, 17 May 2022 20:41:46 +0800</pubDate>
+            <description><![CDATA[ &lt;blockquote&gt;
+&lt;p&gt;什么是基数&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一个集合中不重复的元素个数，可以接收误差&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简介&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Redis 在 2.8.9 版本添加了 HyperLogLog 结构&lt;/li&gt;
+&lt;li&gt;基数统计算法&lt;/li&gt;
+&lt;li&gt;优点：占用内存固定，2^64 不同的元素只需要 12KB 内存！如果要从内存角度来比较，Hyperloglog 首选&lt;/li&gt;
+&lt;li&gt;存在 0.81% 的错误率，如果不允许容错，使用 set 即可&lt;/li&gt;
+&lt;li&gt;网站的 UV（一个人访问一个网站多次，但算作一个人）
+&lt;ul&gt;
+&lt;li&gt;传统统计方式：set 存储用户 id，然后就可以统计 set 中的元素作为标准判断&lt;/li&gt;
+&lt;li&gt;用传统方式保存大量用户 id 会比较麻烦&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;命令&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;[PFADD key element [element …]] 添加指定元素到 HyperLogLog 中。&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;[PFCOUNT key [key …]] 返回给定 HyperLogLog 的基数估算值。&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;[PFMERGE destkey sourcekey [sourcekey …]] 将多个 HyperLogLog 合并为一个 HyperLogLog&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

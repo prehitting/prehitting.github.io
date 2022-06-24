@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>不利索の鸣 • Posts by &#34;工厂模式&#34; tag</title>
+        <link>https://prehitting.gitee.io</link>
+        <description>欢迎来到鸣崽的空间，这里不仅有学习，还有生活</description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 08 May 2022 10:41:45 +0800</pubDate>
+        <lastBuildDate>Sun, 08 May 2022 10:41:45 +0800</lastBuildDate>
+        <category>SpringBoot</category>
+        <category>MybatisPlus</category>
+        <category>拦截器</category>
+        <category>Spring</category>
+        <category>SpringCache</category>
+        <category>Redis</category>
+        <category>Swagger</category>
+        <category>Springmvc</category>
+        <category>mybatisPlus</category>
+        <category>IDEA</category>
+        <category>Linux</category>
+        <category>设计模式</category>
+        <category>OOP</category>
+        <category>动态代理模式</category>
+        <category>单例模式</category>
+        <category>原型模式</category>
+        <category>工厂模式</category>
+        <category>建造者模式</category>
+        <category>静态代理模式</category>
+        <category>SLF4J</category>
+        <category>Redis命令</category>
+        <category>过滤器</category>
+        <category>瑞吉外卖</category>
+        <category>SpringMVC</category>
+        <category>Vim</category>
+        <category>Jedis</category>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</guid>
+            <title>工厂模式</title>
+            <link>https://prehitting.gitee.io/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</link>
+            <category>设计模式</category>
+            <category>工厂模式</category>
+            <pubDate>Sun, 08 May 2022 10:41:45 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;概述&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#概述&#34;&gt;#&lt;/a&gt; 概述&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;作用
+&lt;ul&gt;
+&lt;li&gt;实现了创建者和调用者的分离&lt;/li&gt;
+&lt;li&gt;详细分类
+&lt;ul&gt;
+&lt;li&gt;简单工厂模式&lt;/li&gt;
+&lt;li&gt;工厂方法模式&lt;/li&gt;
+&lt;li&gt;抽象工厂模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;OOP 满足
+&lt;ul&gt;
+&lt;li&gt;开闭原则&lt;/li&gt;
+&lt;li&gt;依赖倒转&lt;/li&gt;
+&lt;li&gt;迪米特&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;核心本质
+&lt;ul&gt;
+&lt;li&gt;实例化对象不使用 new，用工厂方法代替&lt;/li&gt;
+&lt;li&gt;将选择实现类，创建对象统一管理和控制，从而将调用者跟实现类解耦&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;三种模式
+&lt;ul&gt;
+&lt;li&gt;简单（静态）工厂模式
+&lt;ul&gt;
+&lt;li&gt;用来生产同一等级结构中的任意产品（对于增加的新的产品，需要覆盖已有的代码）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工厂方法模式
+&lt;ul&gt;
+&lt;li&gt;用来生产同一等级结构中的固定产品（支持增加任意产品）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;抽象工厂模式
+&lt;ul&gt;
+&lt;li&gt;围绕一个超级工厂创建其他工厂，该超级工厂又称为其他工厂的工厂&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;简单工厂模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#简单工厂模式&#34;&gt;#&lt;/a&gt; 简单工厂模式&lt;/h3&gt;
+&lt;p&gt;代码背景：有一个 consumer 前来买车&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;Car&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;TeSiLa&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;Car&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        System.out.println(&lt;span class=&#34;string&#34;&gt;&amp;quot;TeSiLa&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;WuLing&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;Car&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        System.out.println(&lt;span class=&#34;string&#34;&gt;&amp;quot;WuLing&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;CarFactory&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;static&lt;/span&gt; Car &lt;span class=&#34;title function_&#34;&gt;getCar&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(String car)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (car.equals(&lt;span class=&#34;string&#34;&gt;&amp;quot;WuLing&amp;quot;&lt;/span&gt;))&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;WuLing&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;&lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (car.equals(&lt;span class=&#34;string&#34;&gt;&amp;quot;TeSiLa&amp;quot;&lt;/span&gt;))&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;TeSiLa&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;&lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;Consumer&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(String[] args)&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;type&#34;&gt;Car&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;car&lt;/span&gt; &lt;span class=&#34;operator&#34;&gt;=&lt;/span&gt; CarFactory.getCar(&lt;span class=&#34;string&#34;&gt;&amp;quot;WuLing&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        car.name();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;模式组成&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#模式组成&#34;&gt;#&lt;/a&gt; 模式组成&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;组成（角色）&lt;/th&gt;
+&lt;th&gt;关系&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;抽象产品&lt;/td&gt;
+&lt;td&gt;具体产品的父类&lt;/td&gt;
+&lt;td&gt;描述产品的公共接口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;具体产品&lt;/td&gt;
+&lt;td&gt;抽象产品的子类；工厂类创建的目标类&lt;/td&gt;
+&lt;td&gt;描述生产的具体产品&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;工厂（Creator）&lt;/td&gt;
+&lt;td&gt;被外界调用&lt;/td&gt;
+&lt;td&gt;根据传入不同参数从而创建不同具体产品类的实例&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;uml类图&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#uml类图&#34;&gt;#&lt;/a&gt; UML 类图&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20220508111631047.png&#34; alt=&#34;image-20220508111631047&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;优点&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#优点&#34;&gt;#&lt;/a&gt; 优点&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;将创建实例的工作和使用实例的工作分开，使用者不必关心对象如何创建，实现解耦&lt;/li&gt;
+&lt;li&gt;将初始化实例时的工作放到工厂进行，使代码更易于维护，更符合面向对象的原则 &amp;amp; 面向接口编程，而不是面向实现编程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;缺点&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#缺点&#34;&gt;#&lt;/a&gt; 缺点：&lt;/h4&gt;
+&lt;p&gt;​	如果增加不同品牌的车，需要在工厂中修改或添加方法，不满足 OOP 开闭原则&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;工厂类集中了所有实例（产品）的创建逻辑，一旦这个工厂不能正常工作，整个系统都会受到影响&lt;/li&gt;
+&lt;li&gt;违背 “开放 - 关闭原则”，一旦添加新产品就不得不修改工厂类的逻辑，这样就会造成工厂逻辑过于复杂&lt;/li&gt;
+&lt;li&gt;简单工厂模式由于使用了静态工厂方法，静态方法不能被继承和重写，会造成工厂角色无法形成基于继承的等级结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;应用场景&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#应用场景&#34;&gt;#&lt;/a&gt; 应用场景&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;客户如果只知道传入工厂类的参数，对于如何创建对象的逻辑不关心时&lt;/li&gt;
+&lt;li&gt;当工厂类负责创建的对象（具体产品）比较少时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;方法工厂模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#方法工厂模式&#34;&gt;#&lt;/a&gt; 方法工厂模式&lt;/h2&gt;
+&lt;p&gt;概述：在简单工厂模式上改进，给每种车增加一个工厂类&lt;/p&gt;
+&lt;p&gt;实现：&lt;/p&gt;
+&lt;p&gt;Car 类，TeSiLa 类，WuLing 类同上&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * 工厂方法模式&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;CarFactory&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    Car &lt;span class=&#34;title function_&#34;&gt;getCar&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;TeSiLaFactory&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;CarFactory&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; Car &lt;span class=&#34;title function_&#34;&gt;getCar&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;TeSiLa&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;Consumer&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;type&#34;&gt;Car&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;car&lt;/span&gt; &lt;span class=&#34;operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;WuLingFactory&lt;/span&gt;().getCar();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;模式组成-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#模式组成-2&#34;&gt;#&lt;/a&gt; 模式组成&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;主要角色&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;抽象工厂&lt;/td&gt;
+&lt;td&gt;提供了创建产品的接口，调用者通过它访问具体工厂的工厂方法 newProduct () 来创建产品&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;具体工厂&lt;/td&gt;
+&lt;td&gt;主要是实现抽象工厂中的抽象方法，完成具体产品的创建&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;抽象产品&lt;/td&gt;
+&lt;td&gt;定义了产品的规范，描述了产品的主要特性和功能。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;具体产品&lt;/td&gt;
+&lt;td&gt;实现了抽象产品角色所定义的接口，由具体工厂来创建，它同具体工厂之间一一对应。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;uml类图-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#uml类图-2&#34;&gt;#&lt;/a&gt; UML 类图&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20220508113730740.png&#34; alt=&#34;image-20220508113730740&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简单工厂模式违背了开闭原则，而工厂方法模式是对简单工厂模式的进一步抽象化，其好处是可以使系统在不修改原来代码的情况下引进新的产品，即满足开闭原则&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;优点-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#优点-2&#34;&gt;#&lt;/a&gt; 优点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;用户只需要知道具体工厂的名称就可得到所要的产品，无须知道产品的具体创建过程。&lt;/li&gt;
+&lt;li&gt;灵活性增强，对于新产品的创建，只需多写一个相应的工厂类。&lt;/li&gt;
+&lt;li&gt;典型的解耦框架。高层模块只需要知道产品的抽象类，无须关心其他实现类，满足迪米特法则、依赖倒置原则和里氏替换原则。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;缺点-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#缺点-2&#34;&gt;#&lt;/a&gt; 缺点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;类的个数容易过多，增加复杂度&lt;/li&gt;
+&lt;li&gt;增加了系统的抽象性和理解难度&lt;/li&gt;
+&lt;li&gt;抽象产品只能生产一种产品，此弊端可使用&lt;a href=&#34;http://c.biancheng.net/view/1351.html&#34;&gt;抽象工厂模式&lt;/a&gt;解决。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;应用场景-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#应用场景-2&#34;&gt;#&lt;/a&gt; 应用场景&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;客户只知道创建产品的工厂名，而不知道具体的产品名。&lt;/li&gt;
+&lt;li&gt;创建对象的任务由多个具体子工厂中的某一个完成，而抽象工厂只提供创建产品的接口。&lt;/li&gt;
+&lt;li&gt;客户不关心创建产品的细节，只关心产品的品牌&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;抽象工厂模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#抽象工厂模式&#34;&gt;#&lt;/a&gt; 抽象工厂模式&lt;/h2&gt;
+&lt;p&gt;代码背景：产品 Phone，Router 交由小米工厂生产&lt;/p&gt;
+&lt;p&gt;首先定义产品接口以及小米产品实现类&lt;/p&gt;
+&lt;p&gt;然后定义抽象工厂&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;ProductFactory&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    Phone &lt;span class=&#34;title function_&#34;&gt;getPhoneProduct&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    Router &lt;span class=&#34;title function_&#34;&gt;getRouterProduct&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;小米工厂需要实现该抽象工厂&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;XiaoMiFactory&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;ProductFactory&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; Phone &lt;span class=&#34;title function_&#34;&gt;getPhoneProduct&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;XiaoMiPhone&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; Router &lt;span class=&#34;title function_&#34;&gt;getRouterProduct&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;XiaoMiRouter&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;概述-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#概述-2&#34;&gt;#&lt;/a&gt; 概述&lt;/h3&gt;
+&lt;h4 id=&#34;定义&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#定义&#34;&gt;#&lt;/a&gt; 定义&lt;/h4&gt;
+&lt;p&gt;提供了一个创建一系列相关或者相互依赖对象的接口，无需指定它们具体的类&lt;/p&gt;
+&lt;h4 id=&#34;适用场景&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#适用场景&#34;&gt;#&lt;/a&gt; 适用场景&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id=&#34;客户端应用层不依赖于产品实例如何被创建实现等细节&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#客户端应用层不依赖于产品实例如何被创建实现等细节&#34;&gt;#&lt;/a&gt; 客户端（应用层）不依赖于产品实例如何被创建，实现等细节&lt;/h3&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;强调一系列产品相关的产品对象（属于同一产品族）一起使用创建对象需要大量的重复代码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;提供一个产品类的库，所有的产品以同样的接口出现，从而使客户不依赖于具体的实现&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;优点缺点&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#优点缺点&#34;&gt;#&lt;/a&gt; 优点 &amp;amp; 缺点&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;优点-3&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#优点-3&#34;&gt;#&lt;/a&gt; 优点&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;具体产品在应用层的代码隔离，无需关心创建的细节&lt;/li&gt;
+&lt;li&gt;将一个系列的产品统一到一起创建&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;缺点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;规定了所有可能被创建的产品集合，产品簇中扩展新的产品困难&lt;/li&gt;
+&lt;li&gt;增加了系统的抽象性和理解难度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

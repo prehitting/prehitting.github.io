@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://prehitting.gitee.io</id>
+    <title>不利索の鸣 • Posts by &#34;spring&#34; tag</title>
+    <link href="https://prehitting.gitee.io" />
+    <updated>2022-06-19T12:32:01.000Z</updated>
+    <category term="SpringBoot" />
+    <category term="MybatisPlus" />
+    <category term="拦截器" />
+    <category term="Spring" />
+    <category term="SpringCache" />
+    <category term="Redis" />
+    <category term="Swagger" />
+    <category term="Springmvc" />
+    <category term="mybatisPlus" />
+    <category term="IDEA" />
+    <category term="Linux" />
+    <category term="设计模式" />
+    <category term="OOP" />
+    <category term="动态代理模式" />
+    <category term="单例模式" />
+    <category term="原型模式" />
+    <category term="工厂模式" />
+    <category term="建造者模式" />
+    <category term="静态代理模式" />
+    <category term="SLF4J" />
+    <category term="Redis命令" />
+    <category term="过滤器" />
+    <category term="瑞吉外卖" />
+    <category term="SpringMVC" />
+    <category term="Vim" />
+    <category term="Jedis" />
+    <entry>
+        <id>https://prehitting.gitee.io/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/</id>
+        <title>Spring如何解决循环依赖问题</title>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/"/>
+        <content type="html">&lt;h2 id=&#34;先上解决方案&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#先上解决方案&#34;&gt;#&lt;/a&gt; 先上解决方案：&lt;/h2&gt;
+&lt;p&gt;@Lazy&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Spring 高频面试题：如何解决循环依赖问题！&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;循环依赖问题全景图&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#循环依赖问题全景图&#34;&gt;#&lt;/a&gt; &lt;strong&gt;循环依赖问题全景图&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/1620.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;什么是循环依赖问题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#什么是循环依赖问题&#34;&gt;#&lt;/a&gt; &lt;strong&gt;什么是循环依赖问题？&lt;/strong&gt;&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;❝类与类之间的依赖关系形成了闭环，就会导致循环依赖问题的产生。 ❞&lt;/p&gt;
+&lt;p&gt;❝比如下图中 A 类依赖了 B 类，B 类依赖了 C 类，而最后 C 类又依赖了 A 类，这样就形成了循环依赖问题。 ❞&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/1620-16556419433531.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;循环依赖问题案例分析&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#循环依赖问题案例分析&#34;&gt;#&lt;/a&gt; &lt;strong&gt;循环依赖问题案例分析&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;演示代码：&lt;/p&gt;
+&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;public &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;ClassA&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; private &lt;span class=&#34;title class_&#34;&gt;ClassB&lt;/span&gt; classB;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; public &lt;span class=&#34;title class_&#34;&gt;ClassB&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;getClassB&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; classB;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; public &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;setClassB&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;ClassB classB&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;variable language_&#34;&gt;this&lt;/span&gt;.&lt;span class=&#34;property&#34;&gt;classB&lt;/span&gt; = classB;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;ClassB&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; private &lt;span class=&#34;title class_&#34;&gt;ClassA&lt;/span&gt; classA;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; public &lt;span class=&#34;title class_&#34;&gt;ClassA&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;getClassA&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; classA;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; public &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;setClassA&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;ClassA classA&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;variable language_&#34;&gt;this&lt;/span&gt;.&lt;span class=&#34;property&#34;&gt;classA&lt;/span&gt; = classA;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;复制&lt;/p&gt;
+&lt;p&gt;配置文件：&lt;/p&gt;
+&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;?xml version=&lt;span class=&#34;string&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt; encoding=&lt;span class=&#34;string&#34;&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;?&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;beans&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;xmlns&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;http://www.springframework.org/schema/beans&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt; &lt;span class=&#34;attr&#34;&gt;xmlns:xsi&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt; &lt;span class=&#34;attr&#34;&gt;xsi:schemaLocation&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;http://www.springframework.org/schema/beans&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt;        http://www.springframework.org/schema/beans/spring-beans.xsd&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt; &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;bean&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;id&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;classA&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;class&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;ioc.cd.ClassA&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt;  &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;property&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;name&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;classB&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;ref&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;classB&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;property&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt; &lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;bean&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt; &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;bean&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;id&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;classB&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;class&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;ioc.cd.ClassB&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt;  &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;property&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;name&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;classA&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;ref&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;classA&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;property&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt; &lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;bean&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;language-xml&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;beans&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;复制&lt;/p&gt;
+&lt;p&gt;测试代码：&lt;/p&gt;
+&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;@&lt;span class=&#34;title class_&#34;&gt;Test&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;test&lt;/span&gt;() throws &lt;span class=&#34;title class_&#34;&gt;Exception&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;span class=&#34;comment&#34;&gt;// 创建IoC容器，并进行初始化&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;span class=&#34;title class_&#34;&gt;String&lt;/span&gt; resource = &lt;span class=&#34;string&#34;&gt;&amp;quot;spring/spring-ioc-circular-dependency.xml&amp;quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;span class=&#34;title class_&#34;&gt;ApplicationContext&lt;/span&gt; context = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;ClassPathXmlApplicationContext&lt;/span&gt;(resource);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;span class=&#34;comment&#34;&gt;// 获取ClassA的实例（此时会发生循环依赖）&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;span class=&#34;title class_&#34;&gt;ClassA&lt;/span&gt; classA = (&lt;span class=&#34;title class_&#34;&gt;ClassA&lt;/span&gt;) context.&lt;span class=&#34;title function_&#34;&gt;getBean&lt;/span&gt;(&lt;span class=&#34;title class_&#34;&gt;ClassA&lt;/span&gt;.&lt;span class=&#34;property&#34;&gt;class&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;复制&lt;/p&gt;
+&lt;p&gt;通过 Spring IOC 流程的源码分析循环依赖问题：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/1620-16556419433542.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;以上案例有几种循环依赖问题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#以上案例有几种循环依赖问题&#34;&gt;#&lt;/a&gt; &lt;strong&gt;以上案例有几种循环依赖问题？&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;循环依赖问题在 Spring 中主要有三种情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过构造方法进行依赖注入时产生的循环依赖问题。&lt;/li&gt;
+&lt;li&gt;通过 setter 方法进行依赖注入且是在多例（原型）模式下产生的循环依赖问题。&lt;/li&gt;
+&lt;li&gt;通过 setter 方法进行依赖注入且是在单例模式下产生的循环依赖问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;❝注意：在 Spring 中，只有【第三种方式】的循环依赖问题被解决了，其他两种方式在遇到循环依赖问题时都会产生异常。 ❞&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其实也很好解释:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一种构造方法注入的情况下，在 new 对象的时候就会堵塞住了，其实也就是” 先有鸡还是先有蛋 “的历史难题。&lt;/li&gt;
+&lt;li&gt;第二种 setter 方法 &amp;amp;&amp;amp; 多例的情况下，每一次 getBean () 时，都会产生一个新的 Bean，如此反复下去就会有无穷无尽的 Bean 产生了，最终就会导致 OOM 问题的出现。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;如何解决循环依赖问题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#如何解决循环依赖问题&#34;&gt;#&lt;/a&gt; &lt;strong&gt;如何解决循环依赖问题？&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;那 Spring 到底是如何解决的 setter 方法依赖注入引起的循环依赖问题呢？请看下图（其实主要是通过两个缓存来解决的）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/1620-16556419433543.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;spring三大缓存介绍&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spring三大缓存介绍&#34;&gt;#&lt;/a&gt; &lt;strong&gt;Spring 三大缓存介绍&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Spring 中有三个缓存，用于存储单例的 Bean 实例，这三个缓存是彼此互斥的，不会针对同一个 Bean 的实例同时存储。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;❝如果调用 getBean，则需要从三个缓存中依次获取指定的 Bean 实例。读取顺序依次是一级缓存–&amp;gt; 二级缓存–&amp;gt; 三级缓存 ❞&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/1620-16556419433544.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;一级缓存：Map&amp;lt;String, Object&amp;gt; singletonObjects&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;第一级缓存的作用&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#第一级缓存的作用&#34;&gt;#&lt;/a&gt; &lt;strong&gt;第一级缓存的作用？&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;用于存储单例模式下创建的 Bean 实例（已经创建完毕）。&lt;/li&gt;
+&lt;li&gt;该缓存是对外使用的，指的就是使用 Spring 框架的程序员。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;存储什么数据&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#存储什么数据&#34;&gt;#&lt;/a&gt; &lt;strong&gt;存储什么数据？&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;K：bean 的名称&lt;/li&gt;
+&lt;li&gt;V：bean 的实例对象（有代理对象则指的是代理对象，已经创建完毕）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;第二级缓存：Map&amp;lt;String, Object&amp;gt; earlySingletonObjects&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;第二级缓存的作用&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#第二级缓存的作用&#34;&gt;#&lt;/a&gt; &lt;strong&gt;第二级缓存的作用？&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;用于存储单例模式下创建的 Bean 实例（该 Bean 被提前暴露的引用，该 Bean 还在创建中）。&lt;/li&gt;
+&lt;li&gt;该缓存是对内使用的，指的就是 Spring 框架内部逻辑使用该缓存。&lt;/li&gt;
+&lt;li&gt;为了解决第一个 classA 引用最终如何替换为代理对象的问题（如果有代理对象）请爬楼参考演示案例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;存储什么数据-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#存储什么数据-2&#34;&gt;#&lt;/a&gt; &lt;strong&gt;存储什么数据？&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;K：bean 的名称&lt;/li&gt;
+&lt;li&gt;V：bean 的实例对象（有代理对象则指的是代理对象，该 Bean 还在创建中）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;第三级缓存：Map&amp;lt;String, ObjectFactory&amp;lt;?&amp;gt;&amp;gt; singletonFactories&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;第三级缓存的作用&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#第三级缓存的作用&#34;&gt;#&lt;/a&gt; &lt;strong&gt;第三级缓存的作用？&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;通过 ObjectFactory 对象来存储单例模式下提前暴露的 Bean 实例的引用（正在创建中）。该缓存是对内使用的，指的就是 Spring 框架内部逻辑使用该缓存。此缓存是解决循环依赖最大的功臣&lt;/p&gt;
+&lt;h3 id=&#34;存储什么数据-3&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#存储什么数据-3&#34;&gt;#&lt;/a&gt; &lt;strong&gt;存储什么数据？&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;K：bean 的名称&lt;/li&gt;
+&lt;li&gt;V：ObjectFactory，该对象持有提前暴露的 bean 的引用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/1620-16556419433545.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;❝为什么第三级缓存要使用 ObjectFactory？需要提前产生代理对象。 ❞&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/1620-16556419433546.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;❝什么时候将 Bean 的引用提前暴露给第三级缓存的 ObjectFactory 持有？时机就是在第一步实例化之后，第二步依赖注入之前，完成此操作。 ❞&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/19/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98/1620-16556419433547.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;总结&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#总结&#34;&gt;#&lt;/a&gt; &lt;strong&gt;总结&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;以上就是 Spring 解决循环依赖的关键点！总结来说，就是要搞清楚以下几点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;搞清楚 Spring 三级缓存的作用？&lt;/li&gt;
+&lt;li&gt;搞清楚第三级缓存中 ObjectFactory 的作用？&lt;/li&gt;
+&lt;li&gt;搞清楚为什么需要第二级缓存？&lt;/li&gt;
+&lt;li&gt;搞清楚什么时候使用三级缓存（添加和查询操作）？&lt;/li&gt;
+&lt;li&gt;搞清楚什么时候使用二级缓存（添加和查询操作）？&lt;/li&gt;
+&lt;li&gt;当目标对象产生代理对象时，Spring&lt;a href=&#34;https://cloud.tencent.com/product/tke?from=10680&#34;&gt; 容器&lt;/a&gt;中（第一级缓存）到底存储的是谁？&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="Spring" />
+        <updated>2022-06-19T12:32:01.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://prehitting.gitee.io/2022/05/31/Spring%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E5%AD%97%E6%AE%B5%E6%B3%A8%E5%85%A5/</id>
+        <title>Spring中为什么不推荐使用字段注入</title>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/31/Spring%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E5%AD%97%E6%AE%B5%E6%B3%A8%E5%85%A5/"/>
+        <content type="html">&lt;blockquote&gt;
+&lt;p&gt;在使用 Idea 中通过注解注入字段时是否遇见过这样一个提示：&lt;/p&gt;
+&lt;p&gt;Field injection is not recommended（不推荐使用字段注入）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;一-什么是字段注入spring中依赖注入的方式有哪些&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-什么是字段注入spring中依赖注入的方式有哪些&#34;&gt;#&lt;/a&gt; 一。什么是字段注入，Spring 中依赖注入的方式有哪些？&lt;/h2&gt;
+&lt;p&gt;在 Spring 中依赖注入有三大类：字段注入、构造器注入、Setter 方法注入。&lt;/p&gt;
+&lt;p&gt;字段注入是将 Bean 作为字段注入到类中，也是最方便，用的最多的注入方式。&lt;/p&gt;
+&lt;h2 id=&#34;二-官方为什么不推荐使用字段注入&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-官方为什么不推荐使用字段注入&#34;&gt;#&lt;/a&gt; 二。官方为什么不推荐使用字段注入&lt;/h2&gt;
+&lt;h3 id=&#34;首先来看字段注入&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#首先来看字段注入&#34;&gt;#&lt;/a&gt; 首先来看字段注入&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;@RestController&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public class TestHandleController &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    @Autowired&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    TestHandleService testHandleService;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    public void helloTestService()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        testHandleService.hello();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;字段注入的非常的简便，通过以上代码我们就可以轻松的使用 TestHandleService 类，但是如果变成下面这样呢：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;TestHandleController testHandle = new TestHandleController();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;testHandle.helloTestService();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这样执行结果为空指针异常，这就是字段注入的第一个问题：** 对象的外部可见性，** 无法在容器外部实例化 TestHandleService（例如在测试类中无法注入该组件），类和容器的耦合度过高，无法脱离容器访问目标对象。&lt;/p&gt;
+&lt;p&gt;接下来看第二段代码：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;public class TestA()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    @Autowired&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    private TestB testB;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public class TestB()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    @Autowired&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    private TestA testA;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这段代码在 idea 中不会报任何错误，但是当你启动项目时会发现报错，大致意思是：创建 Bean 失败，原因是当前 Bean 已经作为循环引用的一部分注入到了其他 Bean 中。&lt;/p&gt;
+&lt;p&gt;这就是字段注入的第二个问题：&lt;strong&gt;可能导致循环依赖&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;字段注入还有第三个问题：** 无法设置注入的对象为 final，也无法注入静态变量，** 原因是变量必须在类实例化进行初始化。&lt;/p&gt;
+&lt;p&gt;整理一下，字段注入可能引起的三个问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;对象的外部可见性&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;可能导致循环依赖&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;无法设置注入的对象为 final，也无法注入静态变量&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;接下来看构造器注入官方推荐的注入方式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#接下来看构造器注入官方推荐的注入方式&#34;&gt;#&lt;/a&gt; 接下来看构造器注入–官方推荐的注入方式&lt;/h3&gt;
+&lt;p&gt;使用形式也很简单：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;private TestHandleService testHandleService;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;@Autowired&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public TestHandleController(TestHandleService testHandleService)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    this.testHandleService = testHandleService;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;通过构造器的方式将 Bean 注入到字段中。&lt;/p&gt;
+&lt;p&gt;构造器注入能够保证注入的组件不可变，并且确保需要的依赖不为空。&lt;/p&gt;
+&lt;p&gt;这样就可以将变量设置为 final，并且传递的肯定是一个对象，避免出现空指针异常。&lt;/p&gt;
+&lt;p&gt;若是出现字段注入中循环依赖的问题，在项目启动时 Spring 会非常形象的将错误抛出来：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Description:&lt;/p&gt;
+&lt;p&gt;The dependencies of some of the beans in the application context form a cycle:&lt;/p&gt;
+&lt;p&gt;testContrtoller (field private com.example.designstudy.service.TestService com.example.designstudy.controller.TestContrtoller.testService)&lt;br&gt;
+┌─────┐&lt;br&gt;
+| testService defined in file [D:\design-study\target\classes\com\example\designstudy\service\TestService.class]&lt;br&gt;
+↑ ↓&lt;br&gt;
+| testHandleServiceImpl defined in file [D:\design-study\target\classes\com\example\designstudy\service\impl\TestHandleServiceImpl.class]&lt;br&gt;
+└─────┘&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;显而易见的发现错误的地方。&lt;/p&gt;
+&lt;p&gt;由此可见，字段注入的三大问题都能解决，但是构造器注入就没有其他问题了吗？&lt;/p&gt;
+&lt;p&gt;答案肯定是否定的，当依赖的对象很多时，需要严格按照构造器的顺序去填写依赖的对象，这将导致代码可读性和可维护性变得很差。&lt;/p&gt;
+&lt;p&gt;这时候可以引入 Setter 方法进行注入，Setter 方法和构造器注入很像，不过 Setter 更具有可读性。&lt;/p&gt;
+&lt;p&gt;并且使用 Setter 方法注入可以实现按需注入，不使用的对象不需要想构造器注入一样强制注入。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;总结一下三种注入方式：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;构造器注入适用于强制对象注入&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Setter 注入适合可选对象注入&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;字段注入方式应该尽量避免，因为对象无法脱离容器独立运行（话虽这么说，但我还是字段注入用得多，因为方便啊 [/ 狗头]）&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+        <category term="Spring" />
+        <updated>2022-05-31T11:01:19.000Z</updated>
+    </entry>
+</feed>
