@@ -7,17 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Mon, 16 May 2022 22:46:07 +0800</pubDate>
         <lastBuildDate>Mon, 16 May 2022 22:46:07 +0800</lastBuildDate>
+        <category>mybatisPlus</category>
         <category>SpringBoot</category>
-        <category>MybatisPlus</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
-        <category>Springmvc</category>
-        <category>mybatisPlus</category>
-        <category>IDEA</category>
         <category>Linux</category>
+        <category>zookeeper</category>
+        <category>Springmvc</category>
+        <category>IDEA</category>
+        <category>操作系统</category>
         <category>设计模式</category>
         <category>OOP</category>
         <category>动态代理模式</category>
@@ -31,85 +32,9 @@
         <category>过滤器</category>
         <category>瑞吉外卖</category>
         <category>SpringMVC</category>
-        <category>Vim</category>
+        <category>RPC</category>
+        <category>微服务</category>
         <category>Jedis</category>
-        <item>
-            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/16/redis/redis-ming-ling/redis-ming-ling-jian-key/</guid>
-            <title>Redis命令_键(key)</title>
-            <link>https://prehitting.gitee.io/2022/05/16/redis/redis-ming-ling/redis-ming-ling-jian-key/</link>
-            <category>Redis</category>
-            <pubDate>Mon, 16 May 2022 22:46:07 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;键key命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#键key命令&#34;&gt;#&lt;/a&gt; 键（key）命令&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;设置键值对&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;set (keyname) (keyvalue)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;删除键&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;del (key)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;序列化给定 key，并返回被序列化的值&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;dump (key)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;检查给定 key 是否存在&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;exists key&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;给 key 设置过期时间 (以秒为单位)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;expire (key) (seconds)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;expire (key) (timestamp)
-EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;pexpire (key) (milliseconds)
-设置key过期时间(以毫秒为单位)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;PEXPIREAT (key) (milliseconds-timestamp)
-设置 key 过期时间的时间戳(unix timestamp) 以毫秒计&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;6&#34;&gt;
-&lt;li&gt;查找所有符合给定模式 (pattern) 的 key&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;keys pattern&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;实例&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;keys *&lt;/p&gt;
-&lt;p&gt;列出所有键&lt;/p&gt;
-&lt;ol start=&#34;7&#34;&gt;
-&lt;li&gt;移动 key 到指定数据库&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;move key db&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;8&#34;&gt;
-&lt;li&gt;移除 key 期间，key 将长久保持&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;persist (key)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;9&#34;&gt;
-&lt;li&gt;返回 key 剩余的过期时间&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;pttl (key)
-#以毫秒为单位
-ttl (key)
-#以秒为单位&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;10&#34;&gt;
-&lt;li&gt;从数据库中随机返回一个 key&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;randomkey&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;11&#34;&gt;
-&lt;li&gt;修改 key 名称&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;rename (key) (newkey)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;12&#34;&gt;
-&lt;li&gt;仅当 newkey 不存在时，将 key 改名为 newkey&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;renamenx (key) (newkey)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;13&#34;&gt;
-&lt;li&gt;返回 key 所存储的值的类型&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;type key&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;14&#34;&gt;
-&lt;li&gt;迭代数据库中的数据库键&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;scan cursor [MATCH pattern] [COUNT count]&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
- ]]></description>
-        </item>
         <item>
             <guid isPermalink="true">https://prehitting.gitee.io/2022/05/16/redis/redis-ming-ling/redis-ming-ling-fu-wu-qi/</guid>
             <title>Redis命令_服务器</title>
@@ -478,6 +403,83 @@ hsetnx key field value#字段不存在时设置字段的值&lt;span aria-hidden=
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/16/redis/redis-ming-ling/redis-ming-ling-jian-key/</guid>
+            <title>Redis命令_键(key)</title>
+            <link>https://prehitting.gitee.io/2022/05/16/redis/redis-ming-ling/redis-ming-ling-jian-key/</link>
+            <category>Redis</category>
+            <pubDate>Mon, 16 May 2022 22:46:07 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;键key命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#键key命令&#34;&gt;#&lt;/a&gt; 键（key）命令&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;设置键值对&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;set (keyname) (keyvalue)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;删除键&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;del (key)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;序列化给定 key，并返回被序列化的值&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;dump (key)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;检查给定 key 是否存在&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;exists key&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;给 key 设置过期时间 (以秒为单位)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;expire (key) (seconds)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;expire (key) (timestamp)
+EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;pexpire (key) (milliseconds)
+设置key过期时间(以毫秒为单位)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;PEXPIREAT (key) (milliseconds-timestamp)
+设置 key 过期时间的时间戳(unix timestamp) 以毫秒计&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;查找所有符合给定模式 (pattern) 的 key&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;keys pattern&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;实例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;keys *&lt;/p&gt;
+&lt;p&gt;列出所有键&lt;/p&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;移动 key 到指定数据库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;move key db&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;移除 key 期间，key 将长久保持&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;persist (key)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;返回 key 剩余的过期时间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;pttl (key)
+#以毫秒为单位
+ttl (key)
+#以秒为单位&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;从数据库中随机返回一个 key&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;randomkey&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;11&#34;&gt;
+&lt;li&gt;修改 key 名称&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;rename (key) (newkey)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;12&#34;&gt;
+&lt;li&gt;仅当 newkey 不存在时，将 key 改名为 newkey&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;renamenx (key) (newkey)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;13&#34;&gt;
+&lt;li&gt;返回 key 所存储的值的类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;type key&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;14&#34;&gt;
+&lt;li&gt;迭代数据库中的数据库键&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;scan cursor [MATCH pattern] [COUNT count]&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
  ]]></description>
         </item>
     </channel>

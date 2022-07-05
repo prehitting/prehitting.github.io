@@ -7,17 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Wed, 18 May 2022 16:44:06 +0800</pubDate>
         <lastBuildDate>Wed, 18 May 2022 16:44:06 +0800</lastBuildDate>
+        <category>mybatisPlus</category>
         <category>SpringBoot</category>
-        <category>MybatisPlus</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
-        <category>Springmvc</category>
-        <category>mybatisPlus</category>
-        <category>IDEA</category>
         <category>Linux</category>
+        <category>zookeeper</category>
+        <category>Springmvc</category>
+        <category>IDEA</category>
+        <category>操作系统</category>
         <category>设计模式</category>
         <category>OOP</category>
         <category>动态代理模式</category>
@@ -31,12 +32,13 @@
         <category>过滤器</category>
         <category>瑞吉外卖</category>
         <category>SpringMVC</category>
-        <category>Vim</category>
+        <category>RPC</category>
+        <category>微服务</category>
         <category>Jedis</category>
         <item>
-            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/18/slf4j/errors/error01/</guid>
-            <title>Error01</title>
-            <link>https://prehitting.gitee.io/2022/05/18/slf4j/errors/error01/</link>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/05/18/slf4j/errors/slf4j-no-slf4j-providers-were-found./</guid>
+            <title>SLF4J No SLF4J providers were found.</title>
+            <link>https://prehitting.gitee.io/2022/05/18/slf4j/errors/slf4j-no-slf4j-providers-were-found./</link>
             <category>SLF4J</category>
             <pubDate>Wed, 18 May 2022 16:44:06 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;错误明细&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#错误明细&#34;&gt;#&lt;/a&gt; 错误明细&lt;/h2&gt;

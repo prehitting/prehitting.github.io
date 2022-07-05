@@ -7,17 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Fri, 06 May 2022 13:29:28 +0800</pubDate>
         <lastBuildDate>Fri, 06 May 2022 13:29:28 +0800</lastBuildDate>
+        <category>mybatisPlus</category>
         <category>SpringBoot</category>
-        <category>MybatisPlus</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
-        <category>Springmvc</category>
-        <category>mybatisPlus</category>
-        <category>IDEA</category>
         <category>Linux</category>
+        <category>zookeeper</category>
+        <category>Springmvc</category>
+        <category>IDEA</category>
+        <category>操作系统</category>
         <category>设计模式</category>
         <category>OOP</category>
         <category>动态代理模式</category>
@@ -31,7 +32,8 @@
         <category>过滤器</category>
         <category>瑞吉外卖</category>
         <category>SpringMVC</category>
-        <category>Vim</category>
+        <category>RPC</category>
+        <category>微服务</category>
         <category>Jedis</category>
         <item>
             <guid isPermalink="true">https://prehitting.gitee.io/2022/05/06/springboot-lan-jie-qi-pei-zhi-fang-fa/</guid>

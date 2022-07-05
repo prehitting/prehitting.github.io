@@ -1,0 +1,19 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "不利索の鸣 • All posts by \"zookeeper\" tag",
+    "description": "欢迎来到鸣崽的空间，这里不仅有学习，还有生活",
+    "home_page_url": "https://prehitting.gitee.io",
+    "items": [
+        {
+            "id": "https://prehitting.gitee.io/2022/06/27/linux-zookeeper-huan-jing-an-zhuang/",
+            "url": "https://prehitting.gitee.io/2022/06/27/linux-zookeeper-huan-jing-an-zhuang/",
+            "title": "linux_zookeeper环境安装",
+            "date_published": "2022-06-27T05:45:10.000Z",
+            "content_html": "<h2 id=\"1安装前准备\"><a class=\"markdownIt-Anchor\" href=\"#1安装前准备\">#</a> 1. 安装前准备</h2>\n<h3 id=\"11需要有jdk7以上环境才可配置zookeeper\"><a class=\"markdownIt-Anchor\" href=\"#11需要有jdk7以上环境才可配置zookeeper\">#</a> 1.1 需要有 JDK7 以上环境才可配置 zookeeper</h3>\n<p>可参考 Linux 下 JDK 安装</p>\n<h3 id=\"12下载安装包\"><a class=\"markdownIt-Anchor\" href=\"#12下载安装包\">#</a> 1.2 下载安装包</h3>\n<p>[ZooKeeper 官网](<a href=\"https://zookeeper.apache.org/\">Apache ZooKeeper</a>)</p>\n<p><strong>注意：</strong></p>\n<p>需要下载 *-bin.gz, 而不是 tar.gz, 后者是源代码</p>\n<h2 id=\"2安装\"><a class=\"markdownIt-Anchor\" href=\"#2安装\">#</a> 2. 安装</h2>\n<p>将压缩包解压至 /opt/zooKeeper</p>\n<blockquote>\n<p>tar -zxf zookeeper-3.4.5-cdh5.14.2.tar.gz</p>\n</blockquote>\n<p>复制 zoo_sample.cfg，并更名为 zoo.cfg</p>\n<blockquote>\n<p>cp zoo_sample.cfg zoo.cfg</p>\n</blockquote>\n<p>在 /opt/zooKeeper 下创建目录 zkData</p>\n<p>修改 zoo.cfg</p>\n<blockquote>\n<p>vim zoo.cfg</p>\n<p>修改存储目录：dataDir=/opt/zookeeper/zkdata</p>\n</blockquote>\n<h2 id=\"3环境配置\"><a class=\"markdownIt-Anchor\" href=\"#3环境配置\">#</a> 3. 环境配置</h2>\n<pre class=\"line-numbers language-properties\" data-language=\"properties\"><code class=\"language-properties\"><span class=\"token comment\">#Zookeeper env</span>\n<span class=\"token key attr-name\">export</span> <span class=\"token value attr-value\">ZOOKEEPER_HOME=/opt/zooKeeper/zookeeper-bin</span>\n<span class=\"token key attr-name\">export</span> <span class=\"token value attr-value\">PATH=$PATH:$ZOOKEEPER_HOME/bin</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span></span></code></pre>\n<p>使环境变量生效</p>\n<blockquote>\n<p>source /etc/profile</p>\n</blockquote>\n<h2 id=\"4启动停止服务\"><a class=\"markdownIt-Anchor\" href=\"#4启动停止服务\">#</a> 4. 启动 / 停止服务</h2>\n<blockquote>\n<p><a href=\"http://zkServer.sh\">zkServer.sh</a>\tstart</p>\n<p><a href=\"http://zkServer.sh\">zkServer.sh</a>\tstop</p>\n</blockquote>\n<h2 id=\"5验证\"><a class=\"markdownIt-Anchor\" href=\"#5验证\">#</a> 5. 验证</h2>\n<p>最后输入命令 jps，如果存在进程 QuorumPeerMain 则安装 zookeeper 成功</p>\n",
+            "tags": [
+                "Linux",
+                "zookeeper"
+            ]
+        }
+    ]
+}

@@ -4,17 +4,18 @@
     <title>不利索の鸣 • Posts by &#34;idea&#34; tag</title>
     <link href="https://prehitting.gitee.io" />
     <updated>2022-05-18T08:36:03.000Z</updated>
+    <category term="mybatisPlus" />
     <category term="SpringBoot" />
-    <category term="MybatisPlus" />
     <category term="拦截器" />
-    <category term="Spring" />
     <category term="SpringCache" />
     <category term="Redis" />
+    <category term="Spring" />
     <category term="Swagger" />
-    <category term="Springmvc" />
-    <category term="mybatisPlus" />
-    <category term="IDEA" />
     <category term="Linux" />
+    <category term="zookeeper" />
+    <category term="Springmvc" />
+    <category term="IDEA" />
+    <category term="操作系统" />
     <category term="设计模式" />
     <category term="OOP" />
     <category term="动态代理模式" />
@@ -28,7 +29,8 @@
     <category term="过滤器" />
     <category term="瑞吉外卖" />
     <category term="SpringMVC" />
-    <category term="Vim" />
+    <category term="RPC" />
+    <category term="微服务" />
     <category term="Jedis" />
     <entry>
         <id>https://prehitting.gitee.io/2022/05/18/idea/java-wu-xiao-de-mu-biao-fa-xing-ban/</id>

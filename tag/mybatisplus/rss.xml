@@ -7,17 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Sat, 04 Jun 2022 17:16:23 +0800</pubDate>
         <lastBuildDate>Sat, 04 Jun 2022 17:16:23 +0800</lastBuildDate>
+        <category>mybatisPlus</category>
         <category>SpringBoot</category>
-        <category>MybatisPlus</category>
         <category>拦截器</category>
-        <category>Spring</category>
         <category>SpringCache</category>
         <category>Redis</category>
+        <category>Spring</category>
         <category>Swagger</category>
-        <category>Springmvc</category>
-        <category>mybatisPlus</category>
-        <category>IDEA</category>
         <category>Linux</category>
+        <category>zookeeper</category>
+        <category>Springmvc</category>
+        <category>IDEA</category>
+        <category>操作系统</category>
         <category>设计模式</category>
         <category>OOP</category>
         <category>动态代理模式</category>
@@ -31,7 +32,8 @@
         <category>过滤器</category>
         <category>瑞吉外卖</category>
         <category>SpringMVC</category>
-        <category>Vim</category>
+        <category>RPC</category>
+        <category>微服务</category>
         <category>Jedis</category>
         <item>
             <guid isPermalink="true">https://prehitting.gitee.io/2022/06/04/mybatisplus-gong-gong-zi-duan-zi-dong-tian-chong/</guid>
@@ -159,7 +161,7 @@
             <guid isPermalink="true">https://prehitting.gitee.io/2022/05/31/mybatisplus-fen-ye-cha-jian-pei-zhi/</guid>
             <title>MybatisPlus分页插件配置</title>
             <link>https://prehitting.gitee.io/2022/05/31/mybatisplus-fen-ye-cha-jian-pei-zhi/</link>
-            <category>MybatisPlus</category>
+            <category>mybatisPlus</category>
             <pubDate>Tue, 31 May 2022 18:54:38 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;&lt;strong&gt;创建 MybatisPlus 配置类&lt;/strong&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-java&#34; data-language=&#34;java&#34;&gt;&lt;code class=&#34;language-java&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;/**

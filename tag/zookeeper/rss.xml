@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>不利索の鸣 • Posts by &#34;zookeeper&#34; tag</title>
+        <link>https://prehitting.gitee.io</link>
+        <description>欢迎来到鸣崽的空间，这里不仅有学习，还有生活</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 27 Jun 2022 13:45:10 +0800</pubDate>
+        <lastBuildDate>Mon, 27 Jun 2022 13:45:10 +0800</lastBuildDate>
+        <category>mybatisPlus</category>
+        <category>SpringBoot</category>
+        <category>拦截器</category>
+        <category>SpringCache</category>
+        <category>Redis</category>
+        <category>Spring</category>
+        <category>Swagger</category>
+        <category>Linux</category>
+        <category>zookeeper</category>
+        <category>Springmvc</category>
+        <category>IDEA</category>
+        <category>操作系统</category>
+        <category>设计模式</category>
+        <category>OOP</category>
+        <category>动态代理模式</category>
+        <category>单例模式</category>
+        <category>原型模式</category>
+        <category>工厂模式</category>
+        <category>建造者模式</category>
+        <category>静态代理模式</category>
+        <category>SLF4J</category>
+        <category>Redis命令</category>
+        <category>过滤器</category>
+        <category>瑞吉外卖</category>
+        <category>SpringMVC</category>
+        <category>RPC</category>
+        <category>微服务</category>
+        <category>Jedis</category>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/06/27/linux-zookeeper-huan-jing-an-zhuang/</guid>
+            <title>linux_zookeeper环境安装</title>
+            <link>https://prehitting.gitee.io/2022/06/27/linux-zookeeper-huan-jing-an-zhuang/</link>
+            <category>Linux</category>
+            <category>zookeeper</category>
+            <pubDate>Mon, 27 Jun 2022 13:45:10 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;1安装前准备&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1安装前准备&#34;&gt;#&lt;/a&gt; 1. 安装前准备&lt;/h2&gt;
+&lt;h3 id=&#34;11需要有jdk7以上环境才可配置zookeeper&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#11需要有jdk7以上环境才可配置zookeeper&#34;&gt;#&lt;/a&gt; 1.1 需要有 JDK7 以上环境才可配置 zookeeper&lt;/h3&gt;
+&lt;p&gt;可参考 Linux 下 JDK 安装&lt;/p&gt;
+&lt;h3 id=&#34;12下载安装包&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#12下载安装包&#34;&gt;#&lt;/a&gt; 1.2 下载安装包&lt;/h3&gt;
+&lt;p&gt;[ZooKeeper 官网](&lt;a href=&#34;https://zookeeper.apache.org/&#34;&gt;Apache ZooKeeper&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;需要下载 *-bin.gz, 而不是 tar.gz, 后者是源代码&lt;/p&gt;
+&lt;h2 id=&#34;2安装&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2安装&#34;&gt;#&lt;/a&gt; 2. 安装&lt;/h2&gt;
+&lt;p&gt;将压缩包解压至 /opt/zooKeeper&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tar -zxf zookeeper-3.4.5-cdh5.14.2.tar.gz&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;复制 zoo_sample.cfg，并更名为 zoo.cfg&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cp zoo_sample.cfg zoo.cfg&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在 /opt/zooKeeper 下创建目录 zkData&lt;/p&gt;
+&lt;p&gt;修改 zoo.cfg&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vim zoo.cfg&lt;/p&gt;
+&lt;p&gt;修改存储目录：dataDir=/opt/zookeeper/zkdata&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;3环境配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3环境配置&#34;&gt;#&lt;/a&gt; 3. 环境配置&lt;/h2&gt;
+&lt;pre class=&#34;line-numbers language-properties&#34; data-language=&#34;properties&#34;&gt;&lt;code class=&#34;language-properties&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;#Zookeeper env&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;ZOOKEEPER_HOME=/opt/zooKeeper/zookeeper-bin&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;PATH=$PATH:$ZOOKEEPER_HOME/bin&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使环境变量生效&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;source /etc/profile&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;4启动停止服务&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#4启动停止服务&#34;&gt;#&lt;/a&gt; 4. 启动 / 停止服务&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://zkServer.sh&#34;&gt;zkServer.sh&lt;/a&gt;	start&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://zkServer.sh&#34;&gt;zkServer.sh&lt;/a&gt;	stop&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;5验证&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#5验证&#34;&gt;#&lt;/a&gt; 5. 验证&lt;/h2&gt;
+&lt;p&gt;最后输入命令 jps，如果存在进程 QuorumPeerMain 则安装 zookeeper 成功&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

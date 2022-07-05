@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>不利索の鸣 • Posts by &#34;操作系统&#34; category</title>
+        <link>https://prehitting.gitee.io</link>
+        <description>欢迎来到鸣崽的空间，这里不仅有学习，还有生活</description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 03 Jul 2022 12:01:29 +0800</pubDate>
+        <lastBuildDate>Sun, 03 Jul 2022 12:01:29 +0800</lastBuildDate>
+        <category>mybatisPlus</category>
+        <category>SpringBoot</category>
+        <category>拦截器</category>
+        <category>SpringCache</category>
+        <category>Redis</category>
+        <category>Spring</category>
+        <category>Swagger</category>
+        <category>Linux</category>
+        <category>zookeeper</category>
+        <category>Springmvc</category>
+        <category>IDEA</category>
+        <category>操作系统</category>
+        <category>设计模式</category>
+        <category>OOP</category>
+        <category>动态代理模式</category>
+        <category>单例模式</category>
+        <category>原型模式</category>
+        <category>工厂模式</category>
+        <category>建造者模式</category>
+        <category>静态代理模式</category>
+        <category>SLF4J</category>
+        <category>Redis命令</category>
+        <category>过滤器</category>
+        <category>瑞吉外卖</category>
+        <category>SpringMVC</category>
+        <category>RPC</category>
+        <category>微服务</category>
+        <category>Jedis</category>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/07/03/cao-zuo-xi-tong/cao-zuo-xi-tong-de-zu-zhi-jie-gou/</guid>
+            <title>操作系统的组织结构</title>
+            <link>https://prehitting.gitee.io/2022/07/03/cao-zuo-xi-tong/cao-zuo-xi-tong-de-zu-zhi-jie-gou/</link>
+            <category>操作系统</category>
+            <pubDate>Sun, 03 Jul 2022 12:01:29 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;计算机体系结构冯诺伊曼结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#计算机体系结构冯诺伊曼结构&#34;&gt;#&lt;/a&gt; 计算机体系结构–冯・诺伊曼结构&lt;/h2&gt;
+&lt;p&gt;数学家冯・诺依曼提出了计算机制造的三个基本原则，即采用&lt;strong&gt;二进制逻辑、程序存储执行&lt;/strong&gt;以及计算机由五个部分组成（&lt;strong&gt;运算器、控制器、存储器、输入设备、输出设备&lt;/strong&gt;），这套理论被称为冯・诺依曼&lt;a href=&#34;https://so.csdn.net/so/search?q=%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84&amp;amp;spm=1001.2101.3001.7020&#34;&gt;体系结构&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/07/03/cao-zuo-xi-tong/cao-zuo-xi-tong-de-zu-zhi-jie-gou/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzIyMDc5,size_16,color_FFFFFF,t_70#pic_center.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;一些概念&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一些概念&#34;&gt;#&lt;/a&gt; 一些概念&lt;/h2&gt;
+&lt;h3 id=&#34;中断和陷入&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#中断和陷入&#34;&gt;#&lt;/a&gt; 中断和陷入&lt;/h3&gt;
+&lt;p&gt;（1）陷入（自陷 陷阱 trap） 是由软件产生的中断，通常是由于执行了错误的指令 或者 用户请求而产生。 （所以它也是中断，特殊的中断）&lt;/p&gt;
+&lt;p&gt;（2）硬件通过系统发送信号到 CPU 触发中断，软件则执行特别操作，即系统调用，去触发陷入。&lt;/p&gt;
+&lt;p&gt;（3）事件是由中断（硬件）或陷入（软件）引起的。也可以说 操作系统也是由中断或陷入驱动的。&lt;/p&gt;
+&lt;p&gt;（4）中断服务程序用于处理中断。&lt;/p&gt;
+&lt;p&gt;（5）中断其实是对控制权的转移。&lt;/p&gt;
+&lt;h3 id=&#34;双操作模式内核模式和用户模式&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#双操作模式内核模式和用户模式&#34;&gt;#&lt;/a&gt; 双操作模式（内核模式和用户模式）&lt;/h3&gt;
+&lt;p&gt;（1）双操作模式 ： 内核模式（系统模式 / 内核态 / 系统态） and 用户模式（用户态）&lt;/p&gt;
+&lt;p&gt;（2）目的： 为了对 操作系统的程序 和 用户的程序 进行区分。&lt;/p&gt;
+&lt;p&gt;（3）内核模式：OS 进行工作； 用户模式：用户程序进行工作。&lt;/p&gt;
+&lt;p&gt;（4）当系统启动之后，硬件从内核模式开始。操作系统接着加载，然后开始在用户模式下执行用户程序； 一旦有陷入或中断，硬件会从用户模式切换到内核模式（OS 进行工作）。&lt;/p&gt;
+&lt;h3 id=&#34;特权指令与非特权指令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#特权指令与非特权指令&#34;&gt;#&lt;/a&gt; 特权指令与非特权指令&lt;/h3&gt;
+&lt;p&gt;（1）将可能引起损害的机器指令设为 特权指令（privileged instruction)&lt;/p&gt;
+&lt;p&gt;（2）特权指令包括：切换到用户模式的指令、I/O 控制、定时器管理、中断管理等。&lt;/p&gt;
+&lt;p&gt;（3）只有在内核模式下才允许执行。&lt;/p&gt;
+&lt;p&gt;（4）用户模式下通过 系统调用（system call） 请求 OS 执行特权指令。&lt;/p&gt;
+&lt;h3 id=&#34;系统调用&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#系统调用&#34;&gt;#&lt;/a&gt; 系统调用&lt;/h3&gt;
+&lt;p&gt;（1）因为特权指令只能在内核态被执行，因此操作系统有必要提供接口来为应用程序提供诸如读取磁盘某位置的数据的接口，这些接口就被称为系统调用。&lt;/p&gt;
+&lt;p&gt;（2）当操作系统接收到系统调用请求后，会让处理器进入内核模式，而当处理完系统调用内容后，操作系统会让处理器返回用户模式，来执行用户代码。&lt;/p&gt;
+&lt;h3 id=&#34;硬件保护定时器timer&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#硬件保护定时器timer&#34;&gt;#&lt;/a&gt; 硬件保护–定时器（timer）&lt;/h3&gt;
+&lt;p&gt;（1）设置目的： 防止用户程序陷入死循环 或 霸占控制权（不将控制返给操作系统）。&lt;/p&gt;
+&lt;p&gt;（2）简单来说就是：在交给用户程序之前就设置好时间，然后倒计时，时间一到中断计算机。&lt;/p&gt;
+&lt;p&gt;（3）详细介绍：&lt;/p&gt;
+&lt;p&gt;定时器可设置为在指定周期后中断计算机，指定周期可以是固定或可变的。&lt;/p&gt;
+&lt;p&gt;可变定时器（variable timer）— 般通过一个固定速率的时钟和计数器来实现。操作系统设置计数器每次时钟滴答时，计数器都要递减。当计数器的值为 0 时，就会产生中断 。&lt;/p&gt;
+&lt;p&gt;（4）修改定时器的指令是特权指令。&lt;/p&gt;
+&lt;h2 id=&#34;操作系统的结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#操作系统的结构&#34;&gt;#&lt;/a&gt; 操作系统的结构&lt;/h2&gt;
+&lt;h3 id=&#34;单一体结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#单一体结构&#34;&gt;#&lt;/a&gt; 单一体结构&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/07/03/cao-zuo-xi-tong/cao-zuo-xi-tong-de-zu-zhi-jie-gou/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzIyMDc5,size_16,color_FFFFFF,t_70#pic_center-16568213685712.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;层次结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#层次结构&#34;&gt;#&lt;/a&gt; 层次结构&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/07/03/cao-zuo-xi-tong/cao-zuo-xi-tong-de-zu-zhi-jie-gou/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzIyMDc5,size_16,color_FFFFFF,t_70#pic_center-16568213904524.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;微内核结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#微内核结构&#34;&gt;#&lt;/a&gt; 微内核结构&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/07/03/cao-zuo-xi-tong/cao-zuo-xi-tong-de-zu-zhi-jie-gou/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzIyMDc5,size_16,color_FFFFFF,t_70#pic_center-16568214107936.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（1）四个要点&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;① 内核要足够小&lt;br&gt;
+微内核并非是一个完整的 OS，而只是将操作系统中最基本的部分放入内核。&lt;br&gt;
+通常包含有：1）与硬件紧密相关的部分 2）一些较为基本的功能 3）客户和服务器之间的通信&lt;/p&gt;
+&lt;p&gt;② 基于客户 / 服务器模式&lt;br&gt;
+（其实一看到这个词，我想到的就是一排排很大的那个服务器的机器，然后就很疑惑，操作系统怎么还跟服务器扯上关系了呢。但是仔细看了下，并不是那个实体的服务器机器，这里指的是一组与服务器功能相似的进程，能够提供服务、传递信息，所以还是在系统内部的）&lt;/p&gt;
+&lt;p&gt;操作系统最基本的部分放在内核，其它绝大部分功能都放在微内核外的一组服务器（进程）中实现。它们运行在用户态。&lt;/p&gt;
+&lt;p&gt;服务器进程举例：管理线程的、管理虚拟存储器的、管理 I/O 设备的 ……&lt;/p&gt;
+&lt;p&gt;客户与服务器之间通过微内核来进行信息交互，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/07/03/cao-zuo-xi-tong/cao-zuo-xi-tong-de-zu-zhi-jie-gou/image-20220703121136207.png&#34; alt=&#34;image-20220703121136207&#34;&gt;&lt;/p&gt;
+&lt;p&gt;③ 应用 “机制与策略分离” 原理&lt;/p&gt;
+&lt;p&gt;说白了就是 食材 与 炒菜方法…… 机制是食材，策略是炒菜方法，可以把食材炒成各种不同的菜肴。&lt;/p&gt;
+&lt;p&gt;机制： 实现某一功能的具体执行机构。通常在微内核中，正因如此，微内核才可以做的如此小。&lt;br&gt;
+策略： 借助算法或参数，利用机制去实现想要的功能。&lt;/p&gt;
+&lt;p&gt;④ 采用面向对象技术&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（2）微内核的基本功能&lt;/strong&gt;&lt;br&gt;
+① 进程（线程）管理&lt;br&gt;
+② 低级存储器管理&lt;br&gt;
+③ 中断和陷入处理&lt;/p&gt;
+&lt;h2 id=&#34;虚拟机&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#虚拟机&#34;&gt;#&lt;/a&gt; 虚拟机&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/07/03/cao-zuo-xi-tong/cao-zuo-xi-tong-de-zu-zhi-jie-gou/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzIyMDc5,size_16,color_FFFFFF,t_70#pic_center-16568215163428.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://prehitting.gitee.io/2022/07/02/cao-zuo-xi-tong/cao-zuo-xi-tong-si-da-te-zheng/</guid>
+            <title>操作系统四大特征</title>
+            <link>https://prehitting.gitee.io/2022/07/02/cao-zuo-xi-tong/cao-zuo-xi-tong-si-da-te-zheng/</link>
+            <category>操作系统</category>
+            <pubDate>Sat, 02 Jul 2022 13:04:11 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;1操作系统四大特征&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1操作系统四大特征&#34;&gt;#&lt;/a&gt; 1. 操作系统四大特征&lt;/h2&gt;
+&lt;h3 id=&#34;11并发性&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#11并发性&#34;&gt;#&lt;/a&gt; 1.1 并发性&lt;/h3&gt;
+&lt;p&gt;** 并发：** 指两个或多个事件在同一时间间隔内发生，这些事件宏观上时同时发生的，但在微观上是交替发生的。&lt;/p&gt;
+&lt;p&gt;** 并行：** 指两个或多个事件在同一时刻发生。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;操作系统和程序并发使一起诞生的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们的计算机的 CPU 有单核的，双核的，四核的，八核的！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;单核 CPU&lt;/strong&gt; 同一时刻&lt;strong&gt;只能运行一个程序&lt;/strong&gt;，各个程序只能&lt;strong&gt;并发&lt;/strong&gt;的执行 (交替的使用 CPU)！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;多核 CPU&lt;/strong&gt; 同一时刻&lt;strong&gt;可以执行多个程序&lt;/strong&gt;，多个程序可以&lt;strong&gt;并行&lt;/strong&gt;的执行 (同时发生运行)&lt;/p&gt;
+&lt;h3 id=&#34;12共享性&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#12共享性&#34;&gt;#&lt;/a&gt; 1.2 共享性&lt;/h3&gt;
+&lt;p&gt;** 共享：** 即资源共享，是指系统中的资源可供内存中多个并发执行的进程中同时使用。&lt;/p&gt;
+&lt;p&gt;所谓 &amp;quot;同时&amp;quot;，往往是宏观上的，而在微观上，这些进程可能是交替的对资源进行访问的 (即分时共享)。&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;两种资源共享方式：互斥共享方式和同时共享方式！&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;互斥共享方式：&lt;strong&gt;系统中的某些资源，虽然可以提供给多个进程使用，但一个时间段内&lt;/strong&gt;只允许一个进程&lt;/strong&gt;访问该资源&lt;/p&gt;
+&lt;p&gt;** 同时共享方式：** 系统中的某些资源，&lt;strong&gt;允许一个时间段内由&lt;/strong&gt;多个进程 “同时” 对它们进行访问！&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;并发性和共享性互为存在条件的&lt;/mark&gt;&lt;/p&gt;
+&lt;h3 id=&#34;13虚拟性&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#13虚拟性&#34;&gt;#&lt;/a&gt; 1.3 虚拟性&lt;/h3&gt;
+&lt;p&gt;** 虚拟：** 是指一个物理上的实体变为若干个逻辑上的对应物，物理实体 (前者) 是实际存在的，而逻辑上对应物 (后者) 是用户感受到的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/07/02/cao-zuo-xi-tong/cao-zuo-xi-tong-si-da-te-zheng/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDY0NTkyNw==,size_16,color_FFFFFF,t_70.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;没有并发性就谈不上虚拟性&lt;/mark&gt;&lt;/p&gt;
+&lt;h3 id=&#34;14异步性&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#14异步性&#34;&gt;#&lt;/a&gt; 1.4 异步性&lt;/h3&gt;
+&lt;p&gt;** 异步：** 再多道程序环境下，允许多个程序并发的执行，但由于资源有限，进程的执行不是一管到底的，而是走走停停已不可预知的速度向前推进，这就是进程的异步性&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;只有系统拥有并发性，才有可能导致异步性&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;没有并发和共享，就谈不上虚拟和异步&lt;/mark&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

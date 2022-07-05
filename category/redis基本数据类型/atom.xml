@@ -4,17 +4,18 @@
     <title>不利索の鸣 • Posts by &#34;redis基本数据类型&#34; category</title>
     <link href="https://prehitting.gitee.io" />
     <updated>2022-05-17T09:19:26.000Z</updated>
+    <category term="mybatisPlus" />
     <category term="SpringBoot" />
-    <category term="MybatisPlus" />
     <category term="拦截器" />
-    <category term="Spring" />
     <category term="SpringCache" />
     <category term="Redis" />
+    <category term="Spring" />
     <category term="Swagger" />
-    <category term="Springmvc" />
-    <category term="mybatisPlus" />
-    <category term="IDEA" />
     <category term="Linux" />
+    <category term="zookeeper" />
+    <category term="Springmvc" />
+    <category term="IDEA" />
+    <category term="操作系统" />
     <category term="设计模式" />
     <category term="OOP" />
     <category term="动态代理模式" />
@@ -28,7 +29,8 @@
     <category term="过滤器" />
     <category term="瑞吉外卖" />
     <category term="SpringMVC" />
-    <category term="Vim" />
+    <category term="RPC" />
+    <category term="微服务" />
     <category term="Jedis" />
     <entry>
         <id>https://prehitting.gitee.io/2022/05/17/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-lie-biao-list/</id>
@@ -284,40 +286,6 @@
         <updated>2022-05-17T09:13:14.000Z</updated>
     </entry>
     <entry>
-        <id>https://prehitting.gitee.io/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-zi-fu-chuan-string/</id>
-        <title>Redis命令_字符串(String)</title>
-        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-zi-fu-chuan-string/"/>
-        <content type="html">&lt;h2 id=&#34;string命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#string命令&#34;&gt;#&lt;/a&gt; String 命令&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;获取 (设定) 值&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;set (key) (value)
-get (key)
-getrange (key) start end #范围获取
-getset (keyvalue) #获取并设定，返回原值&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;对 key 所储存的字符串值，获取（设定）指定偏移量上的位 (bit)。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;getbit key offset
-setbit key offset value&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;获取一个或多个给定 key 的值&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;mget key1[key2..]&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;更改&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;incr key #将 key 中储存的数字值增
-incrby key increament#将 key 所储存的值加上给定的增量值（increment）
-incrbyfloat key increament#将 key 所储存的值加上给定的浮点增量值
-decr key #将 key 中储存的数字值减一
-decrby key decrement#key 所储存的值减去给定的减量值
-append key value#如果 key 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-</content>
-        <category term="Redis" />
-        <updated>2022-05-16T14:46:07.000Z</updated>
-    </entry>
-    <entry>
         <id>https://prehitting.gitee.io/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-ha-xi-hash/</id>
         <title>Redis命令_哈希(Hash)</title>
         <link rel="alternate" href="https://prehitting.gitee.io/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-ha-xi-hash/"/>
@@ -348,6 +316,40 @@ hsetnx key field value#字段不存在时设置字段的值&lt;span aria-hidden=
 &lt;li&gt;改&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;hset key field value&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+</content>
+        <category term="Redis" />
+        <updated>2022-05-16T14:46:07.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://prehitting.gitee.io/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-zi-fu-chuan-string/</id>
+        <title>Redis命令_字符串(String)</title>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/05/16/redis/redis-ji-ben-shu-ju-lei-xing/redis-ming-ling-zi-fu-chuan-string/"/>
+        <content type="html">&lt;h2 id=&#34;string命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#string命令&#34;&gt;#&lt;/a&gt; String 命令&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;获取 (设定) 值&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;set (key) (value)
+get (key)
+getrange (key) start end #范围获取
+getset (keyvalue) #获取并设定，返回原值&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;对 key 所储存的字符串值，获取（设定）指定偏移量上的位 (bit)。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;getbit key offset
+setbit key offset value&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;获取一个或多个给定 key 的值&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;mget key1[key2..]&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;更改&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;incr key #将 key 中储存的数字值增
+incrby key increament#将 key 所储存的值加上给定的增量值（increment）
+incrbyfloat key increament#将 key 所储存的值加上给定的浮点增量值
+decr key #将 key 中储存的数字值减一
+decrby key decrement#key 所储存的值减去给定的减量值
+append key value#如果 key 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 </content>
         <category term="Redis" />
         <updated>2022-05-16T14:46:07.000Z</updated>

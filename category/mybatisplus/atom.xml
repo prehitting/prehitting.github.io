@@ -4,17 +4,18 @@
     <title>不利索の鸣 • Posts by &#34;mybatisplus&#34; category</title>
     <link href="https://prehitting.gitee.io" />
     <updated>2022-06-04T09:16:23.000Z</updated>
+    <category term="mybatisPlus" />
     <category term="SpringBoot" />
-    <category term="MybatisPlus" />
     <category term="拦截器" />
-    <category term="Spring" />
     <category term="SpringCache" />
     <category term="Redis" />
+    <category term="Spring" />
     <category term="Swagger" />
-    <category term="Springmvc" />
-    <category term="mybatisPlus" />
-    <category term="IDEA" />
     <category term="Linux" />
+    <category term="zookeeper" />
+    <category term="Springmvc" />
+    <category term="IDEA" />
+    <category term="操作系统" />
     <category term="设计模式" />
     <category term="OOP" />
     <category term="动态代理模式" />
@@ -28,7 +29,8 @@
     <category term="过滤器" />
     <category term="瑞吉外卖" />
     <category term="SpringMVC" />
-    <category term="Vim" />
+    <category term="RPC" />
+    <category term="微服务" />
     <category term="Jedis" />
     <entry>
         <id>https://prehitting.gitee.io/2022/06/04/mybatisplus-gong-gong-zi-duan-zi-dong-tian-chong/</id>
@@ -199,7 +201,7 @@
         &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;pageInfo&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
     &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 </content>
-        <category term="MybatisPlus" />
+        <category term="mybatisPlus" />
         <updated>2022-05-31T10:54:38.000Z</updated>
     </entry>
 </feed>

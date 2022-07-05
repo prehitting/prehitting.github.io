@@ -1,0 +1,363 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://prehitting.gitee.io</id>
+    <title>不利索の鸣 • Posts by &#34;rpc&#34; tag</title>
+    <link href="https://prehitting.gitee.io" />
+    <updated>2022-06-28T03:00:41.000Z</updated>
+    <category term="mybatisPlus" />
+    <category term="SpringBoot" />
+    <category term="拦截器" />
+    <category term="SpringCache" />
+    <category term="Redis" />
+    <category term="Spring" />
+    <category term="Swagger" />
+    <category term="Linux" />
+    <category term="zookeeper" />
+    <category term="Springmvc" />
+    <category term="IDEA" />
+    <category term="操作系统" />
+    <category term="设计模式" />
+    <category term="OOP" />
+    <category term="动态代理模式" />
+    <category term="单例模式" />
+    <category term="原型模式" />
+    <category term="工厂模式" />
+    <category term="建造者模式" />
+    <category term="静态代理模式" />
+    <category term="SLF4J" />
+    <category term="Redis命令" />
+    <category term="过滤器" />
+    <category term="瑞吉外卖" />
+    <category term="SpringMVC" />
+    <category term="RPC" />
+    <category term="微服务" />
+    <category term="Jedis" />
+    <entry>
+        <id>https://prehitting.gitee.io/2022/06/28/rpc-kuang-jia/</id>
+        <title>RPC框架</title>
+        <link rel="alternate" href="https://prehitting.gitee.io/2022/06/28/rpc-kuang-jia/"/>
+        <content type="html">&lt;h2 id=&#34;rpc&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#rpc&#34;&gt;#&lt;/a&gt; RPC&lt;/h2&gt;
+&lt;h3 id=&#34;什么是rpc&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#什么是rpc&#34;&gt;#&lt;/a&gt; 什么是 RPC&lt;/h3&gt;
+&lt;p&gt;RPC（Remote Procedure Call Protocol）远程过程调用协议。一个通俗的描述是：客户端在不知道调用细节的情况下，调用存在于远程计算机上的某个对象，就像调用本地应用程序中的对象一样。&lt;/p&gt;
+&lt;p&gt;比较正式的描述是：一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。&lt;/p&gt;
+&lt;p&gt;那么我们至少从这样的描述中挖掘出几个要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RPC 是协议：既然是协议就只是一套规范，那么就需要有人遵循这套规范来进行实现。目前典型的 RPC 实现包括：Dubbo、Thrift、GRPC、Hetty 等。&lt;/li&gt;
+&lt;li&gt;网络协议和网络 IO 模型对其透明：既然 RPC 的客户端认为自己是在调用本地对象。那么传输层使用的是 TCP/UDP 还是 HTTP 协议，又或者是一些其他的网络协议它就不需要关心了。&lt;/li&gt;
+&lt;li&gt;信息格式对其透明：我们知道在本地应用程序中，对于某个对象的调用需要传递一些参数，并且会返回一个调用结果。至于被调用的对象内部是如何使用这些参数，并计算出处理结果的，调用方是不需要关心的。那么对于远程调用来说，这些参数会以某种信息格式传递给网络上的另外一台计算机，这个信息格式是怎样构成的，调用方是不需要关心的。&lt;/li&gt;
+&lt;li&gt;应该有跨语言能力：为什么这样说呢？因为调用方实际上也不清楚远程服务器的应用程序是使用什么语言运行的。那么对于调用方来说，无论服务器方使用的是什么语言，本次调用都应该成功，并且返回值也应该按照调用方程序语言所能理解的形式进行描述。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;rpc主要组成&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#rpc主要组成&#34;&gt;#&lt;/a&gt; RPC 主要组成&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/70.png&#34; alt=&#34;这里写图片描述&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Client：RPC 协议的调用方。就像上文所描述的那样，最理想的情况是 RPC Client 在完全不知道有 RPC 框架存在的情况下发起对远程服务的调用。但实际情况来说 Client 或多或少的都需要指定 RPC 框架的一些细节。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Server：在 RPC 规范中，这个 Server 并不是提供 RPC 服务器 IP、端口监听的模块。而是远程服务方法的具体实现（在 JAVA 中就是 RPC 服务接口的具体实现）。其中的代码是最普通的和业务相关的代码，甚至其接口实现类本身都不知道将被某一个 RPC 远程客户端调用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Stub/Proxy：RPC 代理存在于客户端，因为要实现客户端对 RPC 框架 “透明” 调用，那么客户端不可能自行去管理消息格式、不可能自己去管理网络传输协议，也不可能自己去判断调用过程是否有异常。这一切工作在客户端都是交给 RPC 框架中的 “代理” 层来处理的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Message Protocol：在上文我们已经说到，一次完整的 client-server 的交互肯定是携带某种两端都能识别的，共同约定的消息格式。RPC 的消息管理层专门对网络传输所承载的消息信息进行编码和解码操作。目前流行的技术趋势是不同的 RPC 实现，为了加强自身框架的效率都有一套（或者几套）私有的消息格式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Transfer/Network Protocol：传输协议层负责管理 RPC 框架所使用的网络协议、网络 IO 模型。例如 Hessian 的传输协议基于 HTTP（应用层协议）；而 Thrift 的传输协议基于 TCP（传输层协议）。传输层还需要统一 RPC 客户端和 RPC 服务端所使用的 IO 模型；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Selector/Processor：存在于 RPC 服务端，用于服务器端某一个 RPC 接口的实现的特性（它并不知道自己是一个将要被 RPC 提供给第三方系统调用的服务）。所以在 RPC 框架中应该有一种 “负责执行 RPC 接口实现” 的角色。包括：管理 RPC 接口的注册、判断客户端的请求权限、控制接口实现类的执行在内的各种工作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IDL：实际上 IDL（接口定义语言）并不是 RPC 实现中所必须的。但是需要跨语言的 RPC 框架一定会有 IDL 部分的存在。这是因为要找到一个各种语言能够理解的消息结构、接口定义的描述形式。如果您的 RPC 实现没有考虑跨语言性，那么 IDL 部分就不需要包括，例如 JAVA RMI 因为就是为了在 JAVA 语言间进行使用，所以 JAVA RMI 就没有相应的 IDL。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一定要说明一点，不同的 RPC 框架实现都有一定设计差异。例如生成 Stub 的方式不一样，IDL 描述语言不一样、服务注册的管理方式不一样、运行服务实现的方式不一样、采用的消息格式封装不一样、采用的网络协议不一样。但是基本的思路都是一样的，上图中的所列出的要素也都是具有的。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要用rpc&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#为什么要用rpc&#34;&gt;#&lt;/a&gt; 为什么要用 RPC&lt;/h3&gt;
+&lt;p&gt;其实这是应用开发到一定的阶段的强烈需求驱动的。如果我们开发简单的单一应用，逻辑简单、用户不多、流量不大，那我们用不着。当我们的系统访问量增大、业务增多时，我们会发现一台单机运行此系统已经无法承受。此时，我们可以将业务拆分成几个互不关联的应用，分别部署在各自机器上，以划清逻辑并减小压力。此时，我们也可以不需要 RPC，因为应用之间是互不关联的。&lt;/p&gt;
+&lt;p&gt;当我们的业务越来越多、应用也越来越多时，自然的，我们会发现有些功能已经不能简单划分开来或者划分不出来。此时，可以将公共业务逻辑抽离出来，将之组成独立的服务 Service 应用 。而原有的、新增的应用都可以与那些独立的 Service 应用 交互，以此来完成完整的业务功能。&lt;/p&gt;
+&lt;p&gt;所以此时，我们急需一种高效的应用程序之间的通讯手段来完成这种需求，所以你看，RPC 大显身手的时候来了！&lt;/p&gt;
+&lt;p&gt;其实描述的场景也是服务化 、微服务和分布式系统架构的基础场景。即 RPC 框架就是实现以上结构的有力方式。&lt;/p&gt;
+&lt;h3 id=&#34;常用的rpc框架&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#常用的rpc框架&#34;&gt;#&lt;/a&gt; 常用的 RPC 框架&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Thrift：thrift 是一个软件框架，用来进行可扩展且跨语言的服务的开发。它结合了功能强大的软件堆栈和代码生成引擎，以构建在 C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, and OCaml 这些编程语言间无缝结合的、高效的服务。&lt;/li&gt;
+&lt;li&gt;gRPC：一开始由 google 开发，是一款语言中立、平台中立、开源的远程过程调用 (RPC) 系统。&lt;/li&gt;
+&lt;li&gt;Dubbo：Dubbo 是一个分布式服务框架，以及 SOA 治理方案。其功能主要包括：高性能 NIO 通讯及多协议集成，服务动态寻址与路由，软负载均衡与容错，依赖分析与降级等。Dubbo 是阿里巴巴内部的 SOA 服务化治理方案的核心框架，Dubbo 自 2011 年开源后，已被许多非阿里系公司使用。&lt;/li&gt;
+&lt;li&gt;Spring Cloud：Spring Cloud 由众多子项目组成，如 Spring Cloud Config、Spring Cloud Netflix、Spring Cloud Consul 等，提供了搭建分布式系统及微服务常用的工具，如配置管理、服务发现、断路器、智能路由、微代理、控制总线、一次性 token、全局锁、选主、分布式会话和集群状态等，满足了构建微服务所需的所有解决方案。Spring Cloud 基于 Spring Boot, 使得开发部署极其简单。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rpc原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#rpc原理&#34;&gt;#&lt;/a&gt; RPC 原理&lt;/h3&gt;
+&lt;h4 id=&#34;rpc调用流程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#rpc调用流程&#34;&gt;#&lt;/a&gt; RPC 调用流程&lt;/h4&gt;
+&lt;p&gt;要让网络通信细节对使用者透明，我们需要对通信细节进行封装，我们先看下一个 RPC 调用的流程涉及到哪些通信细节：&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478511.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;服务消费方（client）调用以本地调用方式调用服务；&lt;/li&gt;
+&lt;li&gt;client stub 接收到调用后负责将方法、参数等组装成能够进行网络传输的消息体；&lt;/li&gt;
+&lt;li&gt;client stub 找到服务地址，并将消息发送到服务端；&lt;/li&gt;
+&lt;li&gt;server stub 收到消息后进行解码；&lt;/li&gt;
+&lt;li&gt;server stub 根据解码结果调用本地的服务；&lt;/li&gt;
+&lt;li&gt;本地服务执行并将结果返回给 server stub；&lt;/li&gt;
+&lt;li&gt;server stub 将返回结果打包成消息并发送至消费方；&lt;/li&gt;
+&lt;li&gt;client stub 接收到消息，并进行解码；&lt;/li&gt;
+&lt;li&gt;服务消费方得到最终结果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;RPC 的目标就是要 2~8 这些步骤都封装起来，让用户对这些细节透明。&lt;/p&gt;
+&lt;p&gt;下面是网上的另外一幅图，感觉一目了然：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478512.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如何做到透明化远程服务调用&lt;/p&gt;
+&lt;p&gt;怎么封装通信细节才能让用户像以本地调用方式调用远程服务呢？对 java 来说就是使用代理！java 代理有两种方式：1） jdk 动态代理；2）字节码生成。尽管字节码生成方式实现的代理更为强大和高效，但代码维护不易，大部分公司实现 RPC 框架时还是选择动态代理方式。&lt;/p&gt;
+&lt;p&gt;下面简单介绍下动态代理怎么实现我们的需求。我们需要实现 RPCProxyClient 代理类，代理类的 invoke 方法中封装了与远端服务通信的细节，消费方首先从 RPCProxyClient 获得服务提供方的接口，当执行 helloWorldService.sayHello (“test”) 方法时就会调用 invoke 方法。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-java&#34; data-language=&#34;java&#34;&gt;&lt;code class=&#34;language-java&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;RPCProxyClient&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;&lt;span class=&#34;token namespace&#34;&gt;java&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;lang&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;reflect&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;/span&gt;InvocationHandler&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt; obj&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;RPCProxyClient&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt; obj&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;obj&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;obj&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;
+    &lt;span class=&#34;token comment&#34;&gt;/**
+     * 得到被代理对象;
+     */&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;getProxy&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt; obj&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;&lt;span class=&#34;token namespace&#34;&gt;java&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;lang&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;reflect&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;/span&gt;Proxy&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;newProxyInstance&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;obj&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getClass&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getClassLoader&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+                obj&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getClass&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getInterfaces&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;RPCProxyClient&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;obj&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;
+    &lt;span class=&#34;token comment&#34;&gt;/**
+     * 调用此方法执行
+     */&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;invoke&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt; proxy&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Method&lt;/span&gt; method&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; args&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Throwable&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;
+        &lt;span class=&#34;token comment&#34;&gt;//结果参数;&lt;/span&gt;
+        &lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt; result &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;token comment&#34;&gt;// ...执行通信相关逻辑&lt;/span&gt;
+        &lt;span class=&#34;token comment&#34;&gt;// ...&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; result&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Test&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;
+     &lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; args&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;         
+     &lt;span class=&#34;token class-name&#34;&gt;HelloWorldService&lt;/span&gt; helloWorldService &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;HelloWorldService&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;RPCProxyClient&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getProxy&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;HelloWorldService&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+     helloWorldService&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;sayHello&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;test&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;其实就是通过动态代理模式，在执行该方法的前后对数据进行封装和解码等，让用于感觉就像是直接调用该方法一样，殊不知，我们对方法前后都经过了复杂的处理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;如何对消息进行编码和解码&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#如何对消息进行编码和解码&#34;&gt;#&lt;/a&gt; 如何对消息进行编码和解码&lt;/h4&gt;
+&lt;h5 id=&#34;确定消息数据结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#确定消息数据结构&#34;&gt;#&lt;/a&gt; 确定消息数据结构&lt;/h5&gt;
+&lt;p&gt;客户端的请求消息结构一般需要包括以下内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;接口名称：在我们的例子里接口名是 “HelloWorldService”，如果不传，服务端就不知道调用哪个接口了；&lt;/li&gt;
+&lt;li&gt;方法名：一个接口内可能有很多方法，如果不传方法名服务端也就不知道调用哪个方法；&lt;/li&gt;
+&lt;li&gt;参数类型 &amp;amp; 参数值：参数类型有很多，比如有 bool、int、long、double、string、map、list，甚至如 struct 等，以及相应的参数值；&lt;/li&gt;
+&lt;li&gt;超时时间 + requestID（标识唯一请求 id）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;服务端返回的消息结构一般包括以下内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;状态 code + 返回值&lt;/li&gt;
+&lt;li&gt;requestID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;序列化&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#序列化&#34;&gt;#&lt;/a&gt; 序列化&lt;/h5&gt;
+&lt;p&gt;一旦确定了消息的数据结构后，下一步就是要考虑序列化与反序列化了。&lt;/p&gt;
+&lt;p&gt;什么是序列化？序列化就是将数据结构或对象转换成二进制串的过程，也就是编码的过程。&lt;/p&gt;
+&lt;p&gt;什么是反序列化？将在序列化过程中所生成的二进制串转换成数据结构或者对象的过程。&lt;/p&gt;
+&lt;p&gt;为什么需要序列化？转换为二进制串后才好进行网络传输嘛！&lt;/p&gt;
+&lt;p&gt;为什么需要反序列化？将二进制转换为对象才好进行后续处理！&lt;/p&gt;
+&lt;p&gt;现如今序列化的方案越来越多，每种序列化方案都有优点和缺点，它们在设计之初有自己独特的应用场景，那到底选择哪种呢？从 RPC 的角度上看，主要看三点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通用性：比如是否能支持 Map 等复杂的数据结构；&lt;/li&gt;
+&lt;li&gt;性能：包括时间复杂度和空间复杂度，由于 RPC 框架将会被公司几乎所有服务使用，如果序列化上能节约一点时间，对整个公司的收益都将非常可观，同理如果序列化上能节约一点内存，网络带宽也能省下不少；&lt;/li&gt;
+&lt;li&gt;可扩展性：对互联网公司而言，业务变化飞快，如果序列化协议具有良好的可扩展性，支持自动增加新的业务字段，而不影响老的服务，这将大大提供系统的灵活度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;目前互联网公司广泛使用 Protobuf、Thrift、Avro 等成熟的序列化解决方案来搭建 RPC 框架，这些都是久经考验的解决方案。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;消息里为什么要有 requestID？这个问题很简单，就不说明了，你能回答出来么？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;如何发布自己的服务&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#如何发布自己的服务&#34;&gt;#&lt;/a&gt; 如何发布自己的服务&lt;/h4&gt;
+&lt;p&gt;这个我前面的很多文章都提到过，Java 常用 zookeeper，Go 常用 ETCD，服务端进行注册和心跳，客户端获取机器列表，没啥高深的，比如 zookeeper：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478523.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;grpc-thrift&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#grpc-thrift&#34;&gt;#&lt;/a&gt; gRPC &amp;amp; Thrift&lt;/h2&gt;
+&lt;h3 id=&#34;grpc&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#grpc&#34;&gt;#&lt;/a&gt; gRPC&lt;/h3&gt;
+&lt;h4 id=&#34;grpc-简介&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#grpc-简介&#34;&gt;#&lt;/a&gt; gRPC 简介&lt;/h4&gt;
+&lt;p&gt;gRPC 是一个高性能、通用的开源 RPC 框架，其由 Google 2015 年主要面向移动应用开发并基于 HTTP/2 协议标准而设计，基于 ProtoBuf 序列化协议开发，且支持众多开发语言。&lt;/p&gt;
+&lt;p&gt;由于是开源框架，通信的双方可以进行二次开发，所以客户端和服务器端之间的通信会更加专注于业务层面的内容，减少了对由 gRPC 框架实现的底层通信的关注。&lt;/p&gt;
+&lt;p&gt;如下图，DATA 部分即业务层面内容，下面所有的信息都由 gRPC 进行封装。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478524.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;grpc-特点&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#grpc-特点&#34;&gt;#&lt;/a&gt; gRPC 特点&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;语言中立，支持多种语言；&lt;/li&gt;
+&lt;li&gt;基于 IDL 文件定义服务，通过 proto3 工具生成指定语言的数据结构、服务端接口以及客户端 Stub；&lt;/li&gt;
+&lt;li&gt;通信协议基于标准的 HTTP/2 设计，支持双向流、消息头压缩、单 TCP 的多路复用、服务端推送等特性，这些特性使得 gRPC 在移动端设备上更加省电和节省网络流量；&lt;/li&gt;
+&lt;li&gt;序列化支持 PB（Protocol Buffer）和 JSON，PB 是一种语言无关的高性能序列化框架，基于 HTTP/2 + PB, 保障了 RPC 调用的高性能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;grpc-交互过程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#grpc-交互过程&#34;&gt;#&lt;/a&gt; gRPC 交互过程&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478525.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;交换机在开启 gRPC 功能后充当 gRPC 客户端的角色，采集服务器充当 gRPC 服务器角色；&lt;/li&gt;
+&lt;li&gt;交换机会根据订阅的事件构建对应数据的格式（GPB/JSON），通过 Protocol Buffers 进行编写 proto 文件，交换机与服务器建立 gRPC 通道，通过 gRPC 协议向服务器发送请求消息；&lt;/li&gt;
+&lt;li&gt;服务器收到请求消息后，服务器会通过 Protocol Buffers 解译 proto 文件，还原出最先定义好格式的数据结构，进行业务处理；&lt;/li&gt;
+&lt;li&gt;数据处理完后，服务器需要使用 Protocol Buffers 重编译应答数据，通过 gRPC 协议向交换机发送应答消息；&lt;/li&gt;
+&lt;li&gt;交换机收到应答消息后，结束本次的 gRPC 交互。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简单地说，gRPC 就是在客户端和服务器端开启 gRPC 功能后建立连接，将设备上配置的订阅数据推送给服务器端。我们可以看到整个过程是需要用到 Protocol Buffers 将所需要处理数据的结构化数据在 proto 文件中进行定义。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;什么是protocol-buffers&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#什么是protocol-buffers&#34;&gt;#&lt;/a&gt; 什么是 Protocol Buffers?&lt;/h4&gt;
+&lt;p&gt;你可以理解 ProtoBuf 是一种更加灵活、高效的数据格式，与 XML、JSON 类似，在一些高性能且对响应速度有要求的数据传输场景非常适用。ProtoBuf 在 gRPC 的框架中主要有三个作用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义数据结构&lt;/li&gt;
+&lt;li&gt;定义服务接口&lt;/li&gt;
+&lt;li&gt;通过序列化和反序列化，提升传输效率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为什么 ProtoBuf 会提高传输效率呢？&lt;/p&gt;
+&lt;p&gt;我们知道使用 XML、JSON 进行数据编译时，数据文本格式更容易阅读，但进行数据交换时，设备就需要耗费大量的 CPU 在 I/O 动作上，自然会影响整个传输速率。Protocol Buffers 不像前者，它会将字符串进行序列化后再进行传输，即二进制数据。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478526.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到其实两者内容相差不大，并且内容非常直观，但是 Protocol Buffers 编码的内容只是提供给操作者阅读的，实际上传输的并不会以这种文本形式，而是序列化后的二进制数据。字节数会比 JSON、XML 的字节数少很多，速率更快。&lt;/p&gt;
+&lt;p&gt;如何支撑跨平台，多语言呢？&lt;/p&gt;
+&lt;p&gt;Protocol Buffers 自带一个编译器也是一个优势点。前面提到的 proto 文件就是通过编译器进行编译的，proto 文件需要编译生成一个类似库文件，基于库文件才能真正开发数据应用。具体用什么编程语言编译生成这个库文件呢？由于现网中负责网络设备和服务器设备的运维人员往往不是同一组人，运维人员可能会习惯使用不同的编程语言进行运维开发，那么 Protocol Buffers 其中一个优势就能发挥出来 —— 跨语言。&lt;/p&gt;
+&lt;p&gt;从上面的介绍，我们得出在编码方面 Protocol Buffers 对比 JSON、XML 的优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;简单，体积小，数据描述文件大小只有 1/10 至 1/3；&lt;/li&gt;
+&lt;li&gt;传输和解析的速率快，相比 XML 等，解析速度提升 20 倍甚至更高；&lt;/li&gt;
+&lt;li&gt;可编译性强。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;基于http-20标准设计&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基于http-20标准设计&#34;&gt;#&lt;/a&gt; 基于 HTTP 2.0 标准设计&lt;/h4&gt;
+&lt;p&gt;除了 Protocol Buffers 之外，从交互图中和分层框架可以看到， gRPC 还有另外一个优势 —— 它是基于 HTTP 2.0 协议的。&lt;/p&gt;
+&lt;p&gt;由于 gRPC 基于 HTTP 2.0 标准设计，带来了更多强大功能，如多路复用、二进制帧、头部压缩、推送机制。这些功能给设备带来重大益处，如节省带宽、降低 TCP 连接次数、节省 CPU 使用等。gRPC 既能够在客户端应用，也能够在服务器端应用，从而以透明的方式实现两端的通信和简化通信系统的构建。&lt;/p&gt;
+&lt;p&gt;HTTP 版本分为 HTTP 1.X、 HTTP 2.0，其中 HTTP 1.X 是当前使用最广泛的 HTTP 协议，HTTP 2.0 称为超文本传输协议第二代。HTTP 1.X 定义了四种与服务器交互的方式，分别为：GET、POST、PUT、DELETE，这些在 HTTP 2.0 中均保留。HTTP 2.0 的新特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;双向流、多路复用&lt;/li&gt;
+&lt;li&gt;二进制帧&lt;/li&gt;
+&lt;li&gt;头部压缩&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;thrift&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#thrift&#34;&gt;#&lt;/a&gt; Thrift&lt;/h3&gt;
+&lt;h4 id=&#34;thrift-简介&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#thrift-简介&#34;&gt;#&lt;/a&gt; Thrift 简介&lt;/h4&gt;
+&lt;p&gt;thrift 是一种可伸缩的跨语言服务的 RPC 软件框架。它结合了功能强大的软件堆栈的代码生成引擎，以建设服务，高效、无缝地在多种语言间结合使用。2007 年由 facebook 贡献到 apache 基金，是 apache 下的顶级项目，具备如下特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持多语言：C、C++ 、C# 、D 、Delphi 、Erlang 、Go 、Haxe 、Haskell 、Java 、JavaScript、node.js 、OCaml 、Perl 、PHP 、Python 、Ruby 、SmallTalk&lt;/li&gt;
+&lt;li&gt;消息定义文件支持注释，数据结构与传输表现的分离，支持多种消息格式&lt;/li&gt;
+&lt;li&gt;包含完整的客户端 / 服务端堆栈，可快速实现 RPC，支持同步和异步通信&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;thrift框架结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#thrift框架结构&#34;&gt;#&lt;/a&gt; Thrift 框架结构&lt;/h4&gt;
+&lt;p&gt;Thrift 是一套包含序列化功能和支持服务通信的 RPC（远程服务调用）框架，也是一种微服务框架。其主要特点是可以跨语言使用，这也是这个框架最吸引人的地方。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478537.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;p&gt;图中 code 是用户实现的业务逻辑，接下来的 Service.Client 和 write ()/read () 是 thrift 根据 IDL 生成的客户端和服务端的代码，对应于 RPC 中 Client stub 和 Server stub。TProtocol 用来对数据进行序列化与反序列化，具体方法包括二进制，JSON 或者 Apache Thrift 定义的格式。TTransport 提供数据传输功能，使用 Apache Thrift 可以方便地定义一个服务并选择不同的传输协议。&lt;/p&gt;
+&lt;h4 id=&#34;thrift网络栈结构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#thrift网络栈结构&#34;&gt;#&lt;/a&gt; Thrift 网络栈结构&lt;/h4&gt;
+&lt;p&gt;thirft 使用 socket 进行数据传输，数据以特定的格式发送，接收方进行解析。我们定义好 thrift 的 IDL 文件后，就可以使用 thrift 的编译器来生成双方语言的接口、model，在生成的 model 以及接口代码中会有解码编码的代码。thrift 网络栈结构如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478538.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;transport层&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#transport层&#34;&gt;#&lt;/a&gt; Transport 层&lt;/h5&gt;
+&lt;p&gt;代表 Thrift 的数据传输方式，Thrift 定义了如下几种常用数据传输方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TSocket: 阻塞式 socket；&lt;/li&gt;
+&lt;li&gt;TFramedTransport: 以 frame 为单位进行传输，非阻塞式服务中使用；&lt;/li&gt;
+&lt;li&gt;TFileTransport: 以文件形式进行传输。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;tprotocol层&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#tprotocol层&#34;&gt;#&lt;/a&gt; TProtocol 层&lt;/h5&gt;
+&lt;p&gt;代表 thrift 客户端和服务端之间传输数据的协议，通俗来讲就是客户端和服务端之间传输数据的格式 (例如 json 等)，thrift 定义了如下几种常见的格式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TBinaryProtocol: 二进制格式；&lt;/li&gt;
+&lt;li&gt;TCompactProtocol: 压缩格式；&lt;/li&gt;
+&lt;li&gt;TJSONProtocol: JSON 格式；&lt;/li&gt;
+&lt;li&gt;TSimpleJSONProtocol: 提供只写的 JSON 协议。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;server模型&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#server模型&#34;&gt;#&lt;/a&gt; Server 模型&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5 id=&#34;tsimpleserver-简单的单线程服务模型常用于测试&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#tsimpleserver-简单的单线程服务模型常用于测试&#34;&gt;#&lt;/a&gt; TSimpleServer: 简单的单线程服务模型，常用于测试；&lt;/h5&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TThreadPoolServer: 多线程服务模型，使用标准的阻塞式 IO；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TNonBlockingServer: 多线程服务模型，使用非阻塞式 IO (需要使用 TFramedTransport 数据传输方式);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;THsHaServer: THsHa 引入了线程池去处理，其模型读写任务放到线程池去处理，Half-sync/Half-async 处理模式，Half-async 是在处理 IO 事件上 (accept/read/write io)，Half-sync 用于 handler 对 rpc 的同步处理；&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;grpc-vs-thrift&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#grpc-vs-thrift&#34;&gt;#&lt;/a&gt; gRPC VS Thrift&lt;/h3&gt;
+&lt;h4 id=&#34;功能比较&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#功能比较&#34;&gt;#&lt;/a&gt; 功能比较&lt;/h4&gt;
+&lt;p&gt;直接贴上网上的两幅截图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-16563853478539.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-165638534785310.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;性能比较&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#性能比较&#34;&gt;#&lt;/a&gt; 性能比较&lt;/h4&gt;
+&lt;p&gt;也是基于网上测试的结果，仅供参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;整体上看，长连接性能优于短连接，性能差距在两倍以上；&lt;/li&gt;
+&lt;li&gt;对比 Go 语言的两个 RPC 框架，Thrift 性能明显优于 gRPC，性能差距也在两倍以上；&lt;/li&gt;
+&lt;li&gt;对比 Thrift 框架下的的两种语言，长连接下 Go 与 C&lt;ins&gt; 的 RPC 性能基本在同一个量级，在短连接下，Go 性能大概是 C&lt;/ins&gt; 的二倍；&lt;/li&gt;
+&lt;li&gt;对比 Thrift&amp;amp;C++ 下的 TSimpleServer 与 TNonblockingServer，在单进程客户端长连接的场景下，TNonblockingServer 因为存在线程管理开销，性能较 TSimpleServer 差一些；但在短连接时，主要开销在连接建立上，线程池管理开销可忽略；&lt;/li&gt;
+&lt;li&gt;两套 RPC 框架，以及两大语言运行都非常稳定，5w 次请求耗时约是 1w 次的 5 倍；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;如何选型&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#如何选型&#34;&gt;#&lt;/a&gt; 如何选型&lt;/h4&gt;
+&lt;p&gt;什么时候应该选择 gRPC 而不是 Thrift：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要良好的文档、示例&lt;/li&gt;
+&lt;li&gt;喜欢、习惯 HTTP/2、ProtoBuf&lt;/li&gt;
+&lt;li&gt;对网络传输带宽敏感&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;什么时候应该选择 Thrift 而不是 gRPC：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要在非常多的语言间进行数据交换&lt;/li&gt;
+&lt;li&gt;对 CPU 敏感&lt;/li&gt;
+&lt;li&gt;协议层、传输层有多种控制要求&lt;/li&gt;
+&lt;li&gt;需要稳定的版本&lt;/li&gt;
+&lt;li&gt;不需要良好的文档和示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小节&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#小节&#34;&gt;#&lt;/a&gt; 小节&lt;/h3&gt;
+&lt;p&gt;上面详细介绍 gRPC 和 Thrift 的特点和区别，小节如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GRPC 主要就是搞了个 ProtoBuf，然后采用 HTTP 协议，所以协议部分没有重复造轮子，重点就在 ProtoBuf 上。&lt;/li&gt;
+&lt;li&gt;Thrift 的数据格式是用的现成的，没有单独搞一套，但是它在传输层和服务端全部是自己造轮子，所以可以对协议层、传输层有多种控制要求。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;grpc示例&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#grpc示例&#34;&gt;#&lt;/a&gt; gRPC 示例&lt;/h2&gt;
+&lt;p&gt;除了理论，我们还需注重实践，gPRC 的使用姿势看这篇文章 &lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=Mzg3OTU5NzQ1Mw==&amp;amp;mid=2247485097&amp;amp;idx=1&amp;amp;sn=59a7a21f47cbec1532de839e49cb9abf&amp;amp;chksm=cf03444bf874cd5d3ecd724f779d5ee2fc3a2e23d6a1541ac219e72f25dd8cdb9ac5928e2a9a&amp;amp;token=1404035328&amp;amp;lang=zh_CN&amp;amp;scene=21#wechat_redirect&#34;&gt;【RPC 基础系列 3】gRPC 简单示例&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;dubbo-spring-cloud&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#dubbo-spring-cloud&#34;&gt;#&lt;/a&gt; Dubbo &amp;amp; Spring Cloud&lt;/h2&gt;
+&lt;h3 id=&#34;dubbo&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#dubbo&#34;&gt;#&lt;/a&gt; Dubbo&lt;/h3&gt;
+&lt;p&gt;Dubbo 是一个分布式服务框架，致力于提供高性能和透明化的 RPC 远程服务调用方案，以及 SOA 服务治理方案。简单的说，Dubbo 就是个服务框架，说白了就是个远程服务调用的分布式框架。&lt;/p&gt;
+&lt;p&gt;Dubbo 总体架构：&lt;/p&gt;
+&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/image-20220626163327014.png&#34; alt=&#34;image-20220626163327014&#34; style=&#34;zoom:80%;&#34;&gt;
+&lt;p&gt;Dubbo 特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;远程通讯：提供对多种基于长连接的 NIO 框架抽象封装（非阻塞 I/O 的通信方式，Mina/Netty/Grizzly），包括多种线程模型，序列化（Hessian2/ProtoBuf），以及 “请求 - 响应” 模式的信息交换方式。&lt;/li&gt;
+&lt;li&gt;集群容错：提供基于接口方法的透明远程过程调用（RPC），包括多协议支持（自定义 RPC 协议），以及软负载均衡（Random/RoundRobin），失败容错（Failover/Failback），地址路由，动态配置等集群支持。&lt;/li&gt;
+&lt;li&gt;自动发现：基于注册中心目录服务，使服务消费方能动态的查找服务提供方，使地址透明，使服务提供方可以平滑增加或减少机器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;spring-cloud&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spring-cloud&#34;&gt;#&lt;/a&gt; Spring Cloud&lt;/h3&gt;
+&lt;p&gt;Spring Cloud 基于 Spring Boot，为微服务体系开发中的架构问题，提供了一整套的解决方案 —— 服务注册与发现，服务消费，服务保护与熔断，网关，分布式调用追踪，分布式配置管理等。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-165638534785312.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-165638534785313.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dubbo-vs-spring-cloud&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#dubbo-vs-spring-cloud&#34;&gt;#&lt;/a&gt; Dubbo vs Spring Cloud&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/640-165638534785314.png&#34; alt=&#34;图片&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用 Dubbo 构建的微服务架构就像组装电脑，各环节我们的选择自由度很高，但是最终结果很有可能因为一条内存质量不行就点不亮了，总是让人不怎么放心，但是如果你是一名高手，那这些都不是问题；而 Spring Cloud 就像品牌机，在 Spring Source 的整合下，做了大量的兼容性测试，保证了机器拥有更高的稳定性，但是如果要在使用非原装组件外的东西，就需要对其基础有足够的了解。&lt;/p&gt;
+&lt;p&gt;关于 Dubbo 和 Spring Cloud 的相关概念和对比，我个人比较倾向于 Spring Cloud，原因就是真正的微服务框架、提供整套的组件支持、使用简单方便、强大的社区支持等等，另外，因为考虑到 .NET/.NET Core 的兼容处理，RPC 并不能很好的实现跨语言（需要借助跨语言库，比如 gRPC、Thrift，但因为 Dubbo 本身就是 “gRPC”，在 Dubbo 之上再包一层 gRPC，有点重复封装了），而 HTTP REST 本身就是支持跨语言实现，所以，Spring Cloud 这一点还是非常好的（Dubbox 也支持，但性能相比要差一些）。&lt;/p&gt;
+&lt;p&gt;但凡事无绝对，每件事物有好的地方也有不好的地方，总的来说，Dubbo 和 Spring Cloud 的主要不同体现在两个方面：服务调用方式不同和专注点不同（生态不同）。&lt;/p&gt;
+&lt;h2 id=&#34;影响rpc框架性能的因素&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#影响rpc框架性能的因素&#34;&gt;#&lt;/a&gt; 影响 RPC 框架性能的因素&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/06/28/rpc-kuang-jia/70-16563864189122.png&#34; alt=&#34;这里写图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在物理服务器性能相同的情况下，以下几个因素会对一款 RPC 框架的性能产生直接影响：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用的网络 IO 模型：RPC 服务器可以只支持传统的阻塞式同步 IO，也可以做一些改进让 RPC 服务器支持非阻塞式同步 IO，或者在服务器上实现对多路 IO 模型的支持。这样的 RPC 服务器的性能在高并发状态下，会有很大的差别。特别是单位处理性能下对内存、CPU 资源的使用率。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;基于的网络协议：一般来说您可以选择让您的 RPC 使用应用层协议，例如 HTTP 或者 HTTP/2 协议，或者使用 TCP 协议，让您的 RPC 框架工作在传输层。工作在哪一层网络上会对 RPC 框架的工作性能产生一定的影响，但是对 RPC 最终的性能影响并不大。但是至少从各种主流的 RPC 实现来看，没有采用 UDP 协议做为主要的传输协议的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;消息封装格式：选择或者定义一种消息格式的封装，要考虑的问题包括：消息的易读性、描述单位内容时的消息体大小、编码难度、解码难度、解决半包 / 粘包问题的难易度。当然如果您只是想定义一种 RPC 专用的消息格式，那么消息的易读性可能不是最需要考虑的。消息封装格式的设计是目前各种 RPC 框架性能差异的最重要原因，这就是为什么几乎所有主流的 RPC 框架都会设计私有的消息封装格式的原因。dubbo 中消息体数据包含 dubbo 版本号、接口名称、接口版本、方法名称、参数类型列表、参数、附加信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Schema 和序列化（Schema &amp;amp; Data Serialization）：序列化和反序列化，是对象到二进制数据的转换，程序是可以理解对象的，对象一般含有 schema 或者结构，基于这些语义来做特定的业务逻辑处理。考察一个序列化框架一般会关注以下几点：&lt;br&gt;
+Encoding format 。是 human readable（是否能直观看懂 json） 还是 binary (二进制)。&lt;br&gt;
+Schema declaration 。也叫作契约声明，基于 IDL，比如 Protocol Buffers/Thrift，还是自描述的，比如 JSON、XML。另外还需要看是否是强类型的。&lt;br&gt;
+语言平台的中立性 。比如 Java 的 Native Serialization 就只能自己玩，而 Protocol Buffers 可以跨各种语言和平台。&lt;br&gt;
+新老契约的兼容性 。比如 IDL 加了一个字段，老数据是否还可以反序列化成功。&lt;br&gt;
+和压缩算法的契合度 。跑 benchmark (基准) 和实际应用都会结合各种压缩算法，例如 gzip、snappy。&lt;br&gt;
+性能 。这是最重要的，序列化、反序列化的时间，序列化后数据的字节大小是考察重点。&lt;br&gt;
+序列化方式非常多，常见的有 Protocol Buffers， Avro，Thrift，XML，JSON，MessagePack，Kyro，Hessian，Protostuff，Java Native Serialize，FST 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实现的服务处理管理方式：在高并发请求下，如何管理注册的服务也是一个性能影响点。您可以让 RPC 的 Selector/Processor 使用单个线程运行服务的具体实现（这意味着上一个客户端的请求没有处理完，下一个客户端的请求就需要等待）、您也可以为每一个 RPC 具体服务的实现开启一个独立的线程运行（可以一次处理多个请求，但是操作系统对于 “可运行的最大线程数” 是有限制的）、您也可以线程池来运行 RPC 具体的服务实现（目前看来，在单个服务节点的情况下，这种方式是比较好的）、您还可以通过注册代理的方式让多个服务节点来运行具体的 RPC 服务实现。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="RPC" />
+        <category term="微服务" />
+        <updated>2022-06-28T03:00:41.000Z</updated>
+    </entry>
+</feed>
